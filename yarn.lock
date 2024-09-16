@@ -541,10 +541,10 @@
   dependencies:
     "@babel/runtime" "^7.21.0"
 
-"@trionesdev/browser-commons@^0.0.1-beta.2":
-  version "0.0.1-beta.2"
-  resolved "https://moensun-npm.pkg.coding.net/npm/moensun/@trionesdev/browser-commons/-/@trionesdev/browser-commons-0.0.1-beta.2.tgz#bdad70f2519d91df64b342fcd7edc65755b4e998"
-  integrity sha512-DZoIFnB/hGzBGmUKU53Sa4tNXARpDxu2h+R786b+ba3OaJNtD1R2a7us22lBFXHGjW4gmQW2VRd3Io3P3Zb3Vw==
+"@trionesdev/browser-commons@^0.0.1-beta.3":
+  version "0.0.1-beta.3"
+  resolved "https://moensun-npm.pkg.coding.net/npm/moensun/@trionesdev/browser-commons/-/browser-commons-0.0.1-beta.3.tgz#dac03a9dd634e6b13cd178d634e25beab69bf88a"
+  integrity sha512-C9mh4h/uDCPrv/cacSbaqZOk2tUulr7+hW/ILwof6O6Ctp6+rsEObgVbdure2LqhEZ0GLmli/kzu06QaRbIRbw==
   dependencies:
     js-cookie "^3.0.5"
     lodash "^4.17.21"
@@ -559,10 +559,10 @@
     react-dom "^18.2.0"
     react-router-dom "^6.9.0"
 
-"@trionesdev/commons@^0.0.1-beta.2":
-  version "0.0.1-beta.2"
-  resolved "https://moensun-npm.pkg.coding.net/npm/moensun/@trionesdev/commons/-/commons-0.0.1-beta.2.tgz#d2c1a589103e12b981752c2085a050f512f1e1a0"
-  integrity sha512-+CxaFcnxk8B12uob4T+LZCgzq7TJPMCTM5a03CTAYjk7tevWNhSj9lagCZQdg0GVr6m9omZD5T3sIbwOdPkGRQ==
+"@trionesdev/commons@^0.0.1-beta.3":
+  version "0.0.1-beta.3"
+  resolved "https://moensun-npm.pkg.coding.net/npm/moensun/@trionesdev/commons/-/commons-0.0.1-beta.3.tgz#2ce247d46e8c3b2ada11087f01d6154d1052982a"
+  integrity sha512-ZdJYW+TkIMaOsmEyJXD42md4VKSI0I05tdLpDyqtXvROQsAgtDTY2RWmdjgxQLdvi+p28XH5FzN0omEG34pGOg==
   dependencies:
     axios "^1.7.7"
     dayjs "^1.11.13"

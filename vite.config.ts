@@ -12,5 +12,22 @@ export default defineConfig({
             '@components': path.resolve(__dirname, './src/components'),
         }
     },
-    css: {}
+    css: {},
+    server: {
+        // port: 3000,
+        proxy: {
+            "/api": {
+                target: "http://localhost:8080/",
+                // target: "http://dubhe-gateway.moensun.cn/",
+                changeOrigin: true,
+                secure: false,
+            },
+            "/boss-api": {
+                target: "http://localhost:8080/",
+                // target: "http://dubhe-gateway.moensun.cn/",
+                changeOrigin: true,
+                secure: false
+            },
+        }
+    }
 })
