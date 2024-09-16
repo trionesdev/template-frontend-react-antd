@@ -1,0 +1,190 @@
+# Default values for ithere-admin-ui.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: registry-vpc.cn-shanghai.aliyuncs.com/moensun/ithere.ithere-boss-ui
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart11 appVersion.
+  tag: ""
+  ports:
+    name: "http"
+    containerPort: 80
+  envs:
+    - name: SERVER_PROXY_PASS
+      value: "http://ithere-backend-prod"
+  livenessProbe:
+    httpGet:
+      path: /health.txt
+      port: 80
+      scheme: HTTP
+  readinessProbe:
+    httpGet:
+      path: /health.txt
+      port: 80
+      scheme: HTTP
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+     kubernetes.io/ingress.class: nginx
+     kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: boss.ithere.net
+      paths:
+        - path: /
+  tls:
+    - secretName: ithere-boss-ui-prod-tls
+      hosts:
+        - boss.ithere.net
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+secret:
+  tls:
+    enabled: true
+    crt: |-
+      -----BEGIN CERTIFICATE-----
+      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
+      -----END CERTIFICATE-----
+      -----BEGIN CERTIFICATE-----
+      MIIEqjCCA5KgAwIBAgIQAnmsRYvBskWr+YBTzSybsTANBgkqhkiG9w0BAQsFADBh
+      MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3
+      d3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBD
+      QTAeFw0xNzExMjcxMjQ2MTBaFw0yNzExMjcxMjQ2MTBaMG4xCzAJBgNVBAYTAlVT
+      MRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j
+      b20xLTArBgNVBAMTJEVuY3J5cHRpb24gRXZlcnl3aGVyZSBEViBUTFMgQ0EgLSBH
+      MTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALPeP6wkab41dyQh6mKc
+      oHqt3jRIxW5MDvf9QyiOR7VfFwK656es0UFiIb74N9pRntzF1UgYzDGu3ppZVMdo
+      lbxhm6dWS9OK/lFehKNT0OYI9aqk6F+U7cA6jxSC+iDBPXwdF4rs3KRyp3aQn6pj
+      pp1yr7IB6Y4zv72Ee/PlZ/6rK6InC6WpK0nPVOYR7n9iDuPe1E4IxUMBH/T33+3h
+      yuH3dvfgiWUOUkjdpMbyxX+XNle5uEIiyBsi4IvbcTCh8ruifCIi5mDXkZrnMT8n
+      wfYCV6v6kDdXkbgGRLKsR4pucbJtbKqIkUGxuZI2t7pfewKRc5nWecvDBZf3+p1M
+      pA8CAwEAAaOCAU8wggFLMB0GA1UdDgQWBBRVdE+yck/1YLpQ0dfmUVyaAYca1zAf
+      BgNVHSMEGDAWgBQD3lA1VtFMu2bwo+IbG8OXsj3RVTAOBgNVHQ8BAf8EBAMCAYYw
+      HQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMBIGA1UdEwEB/wQIMAYBAf8C
+      AQAwNAYIKwYBBQUHAQEEKDAmMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdp
+      Y2VydC5jb20wQgYDVR0fBDswOTA3oDWgM4YxaHR0cDovL2NybDMuZGlnaWNlcnQu
+      Y29tL0RpZ2lDZXJ0R2xvYmFsUm9vdENBLmNybDBMBgNVHSAERTBDMDcGCWCGSAGG
+      /WwBAjAqMCgGCCsGAQUFBwIBFhxodHRwczovL3d3dy5kaWdpY2VydC5jb20vQ1BT
+      MAgGBmeBDAECATANBgkqhkiG9w0BAQsFAAOCAQEAK3Gp6/aGq7aBZsxf/oQ+TD/B
+      SwW3AU4ETK+GQf2kFzYZkby5SFrHdPomunx2HBzViUchGoofGgg7gHW0W3MlQAXW
+      M0r5LUvStcr82QDWYNPaUy4taCQmyaJ+VB+6wxHstSigOlSNF2a6vg4rgexixeiV
+      4YSB03Yqp2t3TeZHM9ESfkus74nQyW7pRGezj+TC44xCagCQQOzzNmzEAP2SnCrJ
+      sNE2DpRVMnL8J6xBRdjmOsC3N6cQuKuRXbzByVBjCqAA8t1L0I+9wXJerLPyErjy
+      rMKWaBFLmfK/AHNF4ZihwPGOc7w6UHczBZXH5RFzJNnww+WnKuTPI0HfnVH8lg==
+      -----END CERTIFICATE-----
+    key: |-
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEogIBAAKCAQEAscVb3jWTcqn4NkUVbB+wqo/O1XAi5IOBop/4aQiZuqpuX3jI
+      Q160399wam3ryVBl968bkGbAnPmqeiQWTuxA8Zkr1S+RdZjiyERqHObB84jlsSO+
+      N/ZG0YnXo1B+H7M3VdY/AS7wp4/1Z0Nnz8+ePeXwqdtJ1BlGxHSEFyYJNMIfj47X
+      JO2789/tiDD1DcQnNBkbUy9CL9vTJI8r4/KAWRbbbfem2pg10IkSyvgcQx8gxjU+
+      73xU7YQCO5iZccHaHZEROE2KqrjgTHIdLx1YhVKgjjM+Xk5suD9jXFUx9oq8uHCE
+      xm9aEvHnritR2B0i0IfF+PKp8tM6UZxJW8pa8QIDAQABAoIBABlVEWlR4ygU1n0N
+      TScyQN+dTJEXwLElmESPXTvCcP2rqbzLHmaTSV0ZnxBbh50RauZnuprSOaJk5Ykw
+      OUmX2w1SkW94rta+KZr2PNTPgVXt7SVX/ZRF8QONDACGyOJFjJ4bwLCverW2Cvdj
+      IJj5cghKCwh5akTiMTZvkB8oWWl9/0pT1jRZGSECYPd13Put1y5r2G9UXgHxup5I
+      4/wsrvzYhegH8uf2k91+YTB+IqTTOj26wd9VpyoBfEu25hyikQokfwGRYP6Q1Z/V
+      C2CMu6Se5YPsUBmBdBc/EWt97ucKTh3cjMxMMKslvnr4utfES4QlHFCVlhO/Usom
+      lhXpeD0CgYEA44dRPKa9SwB88wAYULac2j2adjmJguDkSIdJnAJEl/BXYwi9F4Ow
+      pf05k61d8/rLbcVABMdJojtRNg9KYR3skmRPuFvRnbxOaETGLcI6c/HA7gVnOVwk
+      LFCJ4/pmjn310LOWw7ahswoIXjMyNKq7UeKIddNZ6XtMUUrHoLEQafsCgYEAyAQZ
+      E4LzWrd6R4lAkah2Tj56SlWhUyHosjllaEUAd9deVEdajSYgHglcMmupliaPGVxu
+      eyXvlHhXaV//xZgK9i5fKs62dkQ/UTlL2cfyGekNWVBAN9XMIU0BYglTwBb9VGYl
+      CWDqYZBQ3OAQAg2iozjQkCl97MFkIyCBX/v1xwMCgYAA24az2tEF0lemNs7gpv+K
+      VwcZAPiCtMRHfbMKUnvdsrsxlVvZFdb5mS25X8Ll44EWxdKK8hFV+jFBKeeW3B0D
+      JDukrzvoA0isXe39SCkePMAEZaLQ9YbxX9BVOqFeUh02Dyc3T53mZdhIOpsq1aXl
+      Fhx7jTNejOdpuwVrlp9ANwKBgHIQVDSaUymCxMsS7K2kQoNwgdDucGe2SLuKm9gQ
+      sammOncZkfw4p8w5Tki6uSWVq7msypyUD8K9tiuzwWrvwCCQZVlGNSvQ08MAR89U
+      hS5dh21NpLGyzQyYm5dK9mXvNlzxO2HT0RX+dP7hEH/7QqqOdfIgl11zFCYsHVud
+      lpX9AoGAByuaqh0EhvPq9NcdnqqRsD+Ry8KAHF9ri8cz+dFBieRYSyxUohgHoi7s
+      hN572TxBVi2nKBYEHsqQCHHadIcLyeKn/2b/aKR1JjfSL9FLy33n+gHi/j9KeVHl
+      +ttMctrj7Ozmn5+LD5iuRbg+suw9kZxmNfYpwofao2Yw8WsRupM=
+      -----END RSA PRIVATE KEY-----
