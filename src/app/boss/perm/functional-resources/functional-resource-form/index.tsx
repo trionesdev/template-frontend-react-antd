@@ -22,6 +22,8 @@ export const FunctionalResourceForm: FC<FunctionalResourceDrawerProps> = ({
     const [open, setOpen] = useState<boolean>(false)
     const [form] = Form.useForm()
     const actions = Form.useWatch('actions', {preserve: true, form})
+    console.log(actions)
+
     const handleQueryById = () => {
         functionalResourceApi.queryFunctionalResourceDraftById(id!).then(data => {
             form.setFieldsValue(data)
