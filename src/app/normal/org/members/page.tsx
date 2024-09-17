@@ -4,7 +4,7 @@ import {GridTable, Layout, TableToolbar} from "@trionesdev/antd-react-ext";
 import {Button, Space} from "antd";
 import {PlusCircleOutlined} from "@ant-design/icons";
 import {TenantMemberForm} from "./TenantMemberForm";
-import {PageResult} from "../../../../apis/types.ts";
+import {PageResult} from "@apis";
 import {tenantApi} from "@apis";
 
 export const TenantMembersPage = () => {
@@ -13,7 +13,7 @@ export const TenantMembersPage = () => {
     const [result, setResult] = useState<PageResult<any>>({rows: [], total: 0})
 
     const {run: handleQuery, loading} = useRequest(() => {
-        let params = {...pageParams}
+        const params = {...pageParams}
         return tenantApi.queryTenantMembersPage(params)
     }, {
         manual: true,

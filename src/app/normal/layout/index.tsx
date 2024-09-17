@@ -13,6 +13,11 @@ export const NormalLayout = () => {
             label: '组织管理',
             children: [
                 {
+                    key: RouteConstants.ORG.MEMBERS.id,
+                    label: '成员管理',
+                    onClick: () => navigate(RouteConstants.ORG.MEMBERS.path!())
+                },
+                {
                     key: RouteConstants.ORG.DEPARTMENTS.id,
                     label: '部门管理',
                     onClick: () => navigate(RouteConstants.ORG.DEPARTMENTS.path!())

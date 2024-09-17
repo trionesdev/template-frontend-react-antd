@@ -17,10 +17,10 @@ export class DepartmentApi extends BackendApi{
     }
 
     queryDepartmentsTree(params?: any){
-        return this.request.get(`${this.baseUri}/departments/tree`,{params});
+        return this.request.get(`${this.baseUri}/department/tree`,{params});
     }
 
     queryDepartmentMembers(params: PageQueryParams) {
-        return this.request.get(`${this.baseUri}/members/page`, {params});
+        return this.request.get(`${this.baseUri}/department/member/page`, {params});
     }
 }
