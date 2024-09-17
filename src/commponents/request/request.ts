@@ -25,13 +25,11 @@ export const createRequest = (options: RequestOptions): AxiosInstance => {
 
   request.interceptors.response.use(
     function (response) {
-      debugger
       console.log("response", response)
       return response.data;
     },
     function (error) {
       console.log("error", error)
-      debugger
       if (!error || !error.response) {
         return Promise.reject(new TrionesErr(500, "服务器异常，请稍后再试"));
       }

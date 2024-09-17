@@ -3,8 +3,9 @@ import {useState} from "react";
 import {useRequest} from "ahooks";
 import {functionalResourceApi} from "../../../../apis/boss";
 import {ClientType} from "@app/boss/perm/internal/perm.enum.ts";
-import {Button, Space} from "antd";
+import {Button, Space, Tag} from "antd";
 import {FunctionalResourceForm} from "@app/boss/perm/functional-resources/functional-resource-form/index.tsx";
+import _ from "lodash";
 
 
 export const FunctionalResourcesPage = () => {
@@ -20,15 +21,32 @@ export const FunctionalResourcesPage = () => {
         }
     })
 
-
     const columns = [
         {
-            title: '名称',
+            title: '资源对象名称',
             dataIndex: 'name',
+            with: 200
+        },
+        {
+            title: '标识',
+            dataIndex: 'identifier',
+            with: 200
+        },
+        {
+            title: '操作',
+            dataIndex: 'actions',
+            render: (_text: any, _record: any) => {
+                return <Space>
+                    {_.map(_text, (action: any) => {
+                        return <Tag key={action.identifier} bordered={false}>{action.name}</Tag>
+                    })}
+                </Space>
+            }
         },
         {
             title: '操作',
             dataIndex: 'id',
+            with: 100,
             render: (_text: any, record: any) => {
                 return <Space>
                     <FunctionalResourceForm id={record.id} onRefresh={() => {
@@ -39,8 +57,8 @@ export const FunctionalResourcesPage = () => {
         }
     ]
     return <Layout direction={`vertical`}>
-        <Layout.Item>
-            <GridTable toolbar={<TableToolbar extra={<Space>
+        <Layout.Item auto={true}>
+            <GridTable fit={true} toolbar={<TableToolbar extra={<Space>
                 <FunctionalResourceForm clientType={ClientType.PC_WEB}>
                     <Button type={`primary`}>新建功能资源</Button>
                 </FunctionalResourceForm>
