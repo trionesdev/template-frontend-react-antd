@@ -1,0 +1,44 @@
+.orgStructure {
+  .departmentPanel {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    border-right: 1px solid #d9d9d9;
+
+    &Header {
+
+    }
+
+    &Body {
+      flex: 1 auto;
+      overflow-y: auto;
+
+      :global {
+        .ant-tree {
+          .ant-tree-treenode {
+            .tree-node-extra {
+              visibility: hidden;
+            }
+
+            &:hover {
+              .tree-node-extra {
+                visibility: visible;
+              }
+            }
+          }
+        }
+
+      }
+
+      .departmentRoot {
+        margin-left: -24px;
+      }
+
+    }
+  }
+
+  .membersPanel {
+    background-color: white;
+  }
+}

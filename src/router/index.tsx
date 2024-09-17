@@ -7,6 +7,8 @@ import {FunctionalResourcesPage} from "@app/boss/perm/functional-resources/page.
 import {DepartmentsPage} from "@app/normal/org/departments/page.tsx";
 import {NormalLayout} from "@app/normal/layout";
 import {BossLayout} from "@app/boss/layout";
+import {OrgStructurePage} from "@app/normal/org/org-structure/page.tsx";
+import {TenantMembersPage} from "@app/normal/org/members/page.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -18,7 +20,9 @@ const routes: RouteObject[] = [
                     {
                         path: () => '/', anonymous: true, element: <div>Home</div>
                     },
-                    {...RouteConstants.ORG.DEPARTMENTS, element: <DepartmentsPage/>}
+                    {...RouteConstants.ORG.DEPARTMENTS, element: <DepartmentsPage/>},
+                    {...RouteConstants.ORG.ORG_STRUCTURE, element: <OrgStructurePage/>},
+                    {...RouteConstants.ORG.MEMBERS, element: <TenantMembersPage/>},
                 ]
             },
             {

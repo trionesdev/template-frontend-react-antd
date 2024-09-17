@@ -1914,6 +1914,11 @@ react-is@^18.2.0:
   resolved "https://mirrors.cloud.tencent.com/npm/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
 
+react-resizable-panels@^2.1.3:
+  version "2.1.3"
+  resolved "https://mirrors.cloud.tencent.com/npm/react-resizable-panels/-/react-resizable-panels-2.1.3.tgz#4a8255c9293d6dffacada553c27249d266a482b4"
+  integrity sha512-Zz0sCro6aUubL+hYh67eTnn5vxAu+HUZ7+IXvGjsBCBaudDEpIyZyDGE3vcgKi2w6IN3rYH+WXO+MwpgMSOpaQ==
+
 react-router-dom@^6.9.0:
   version "6.26.2"
   resolved "https://mirrors.cloud.tencent.com/npm/react-router-dom/-/react-router-dom-6.26.2.tgz#a6e3b0cbd6bfd508e42b9342099d015a0ac59680"

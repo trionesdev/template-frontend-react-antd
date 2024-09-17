@@ -1,4 +1,5 @@
 import {BackendApi} from "../backend.api.ts";
+import {PageQueryParams} from "../../types.ts";
 
 export class DepartmentApi extends BackendApi{
     private baseUri = '/org';
@@ -17,5 +18,9 @@ export class DepartmentApi extends BackendApi{
 
     queryDepartmentsTree(params?: any){
         return this.request.get(`${this.baseUri}/departments/tree`,{params});
+    }
+
+    queryDepartmentMembers(params: PageQueryParams) {
+        return this.request.get(`${this.baseUri}/members/page`, {params});
     }
 }

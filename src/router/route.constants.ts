@@ -14,7 +14,17 @@ export namespace RouteConstants {
             id: 'departments',
             path: () => "/org/departments",
             anonymous: true,
-        } as RouteItem
+        } as RouteItem,
+        ORG_STRUCTURE:{
+            id:'org-structure',
+            anonymous: true,
+            path: () => "/org/structure",
+        },
+        MEMBERS:{
+            id:'org-members',
+            anonymous: true,
+            path: () => "/org/members",
+        }
     }
 
     export namespace BOSS {
