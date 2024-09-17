@@ -1,18 +1,20 @@
-import {GridTable, Layout, TableToolbar} from "@trionesdev/antd-react-ext";
+import {GridTable, Layout, PageHeader} from "@trionesdev/antd-react-ext";
 import {useState} from "react";
 import {useRequest} from "ahooks";
-import {functionalResourceApi} from "../../../../apis/boss";
+import {functionalResourceApi} from "@apis";
 import {ClientType} from "@app/boss/perm/internal/perm.enum.ts";
 import {Button, Space, Tag} from "antd";
-import {FunctionalResourceForm} from "@app/boss/perm/functional-resources/functional-resource-form/index.tsx";
 import _ from "lodash";
-
+import {RedoOutlined} from "@ant-design/icons";
+import {useNavigate} from "@trionesdev/commons-react";
+import {RouteConstants} from "../../../../router/route.constants.ts";
 
 export const FunctionalResourcesPage = () => {
+    const navigate = useNavigate()
     const [treeData, setTreeData] = useState<any[] | undefined>()
 
     const {run: handleQuery, loading} = useRequest(() => {
-        return functionalResourceApi.queryFunctionalResourceDraftTree({clientType: ClientType.PC_WEB})
+        return functionalResourceApi.queryFunctionalResourceTree({clientType: ClientType.PC_WEB})
     }, {
         onSuccess: (res: any) => {
             if (res) {
@@ -25,12 +27,12 @@ export const FunctionalResourcesPage = () => {
         {
             title: '资源对象名称',
             dataIndex: 'name',
-            with: 200
+            width: 200
         },
         {
             title: '标识',
             dataIndex: 'identifier',
-            with: 200
+            width: 200
         },
         {
             title: '操作',
@@ -42,29 +44,28 @@ export const FunctionalResourcesPage = () => {
                     })}
                 </Space>
             }
-        },
-        {
-            title: '操作',
-            dataIndex: 'id',
-            with: 100,
-            render: (_text: any, record: any) => {
-                return <Space>
-                    <FunctionalResourceForm id={record.id} onRefresh={() => {
-                        handleQuery()
-                    }}><Button size={`small`} type={`link`}>编辑</Button></FunctionalResourceForm>
-                </Space>
-            }
         }
     ]
+
     return <Layout direction={`vertical`}>
+        <Layout.Item>
+            <PageHeader backIcon={false} extra={<Space>
+                <Button icon={<RedoOutlined/>} type={`text`} onClick={handleQuery}/>
+                <Button type={`primary`} onClick={() => {
+                    navigate(RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCE_DRAFTS.path!())
+                }}>资源编辑</Button>
+            </Space>}/>
+        </Layout.Item>
         <Layout.Item auto={true}>
-            <GridTable fit={true} toolbar={<TableToolbar extra={<Space>
-                <FunctionalResourceForm clientType={ClientType.PC_WEB}>
-                    <Button type={`primary`}>新建功能资源</Button>
-                </FunctionalResourceForm>
-            </Space>}/>} size={`small`} columns={columns}
-                       dataSource={treeData}
-                       pagination={false} loading={loading} rowKey={`id`}/>
+            <GridTable
+                fit={true}
+                size={`small`} columns={columns}
+                dataSource={treeData}
+                expandable={{
+                    defaultExpandAllRows: true,
+                    defaultExpandedRowKeys: ["0"],
+                }}
+                pagination={false} loading={loading} rowKey={`id`}/>
         </Layout.Item>
     </Layout>
-}
+};

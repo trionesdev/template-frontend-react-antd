@@ -1,18 +1,19 @@
 import {DrawerForm} from "@trionesdev/antd-react-ext";
 import React, {FC, useEffect, useState} from "react";
-import {functionalResourceApi} from "../../../../../apis/boss";
+import {functionalResourceApi} from "@apis";
 import {Button, Form, Input, message, Space, Table} from "antd";
 import {ClientType} from "@app/boss/perm/internal/perm.enum.ts";
 import {MinusCircleOutlined} from "@ant-design/icons";
+import _ from "lodash";
 
-type FunctionalResourceDrawerProps = {
+type FunctionalResourceDraftProps = {
     children?: React.ReactElement
     id?: string
     parentId?: string
     clientType?: ClientType
     onRefresh?: () => void
 }
-export const FunctionalResourceForm: FC<FunctionalResourceDrawerProps> = ({
+export const FunctionalResourceDraftForm: FC<FunctionalResourceDraftProps> = ({
                                                                               children,
                                                                               id,
                                                                               clientType,
@@ -22,11 +23,14 @@ export const FunctionalResourceForm: FC<FunctionalResourceDrawerProps> = ({
     const [open, setOpen] = useState<boolean>(false)
     const [form] = Form.useForm()
     const actions = Form.useWatch('actions', {preserve: true, form})
-    console.log(actions)
 
     const handleQueryById = () => {
-        functionalResourceApi.queryFunctionalResourceDraftById(id!).then(data => {
-            form.setFieldsValue(data)
+        functionalResourceApi.queryFunctionalResourceDraftById(id!).then((data: any) => {
+            form.setFieldsValue({
+                ...data, actions: _.map(data?.actions, (action: any) => {
+                    return {...action, id: `${Math.random()}`}
+                })
+            })
         }).catch(async (ex: any) => {
             message.error(ex.message)
         })
@@ -98,12 +102,10 @@ export const FunctionalResourceForm: FC<FunctionalResourceDrawerProps> = ({
         <Form.Item label={`资源操作`}>
             <div style={{padding: 4}}>
                 <Button type={`primary`} onClick={() => {
-                    form.setFieldsValue({actions: (actions || []).concat({})})
+                    form.setFieldsValue({actions: (actions || []).concat({id: `${Math.random()}`})})
                 }}>新增操作</Button>
             </div>
-            <Table size={`small`} columns={actionsColumns} dataSource={actions} pagination={false} rowKey={() => {
-                return `${Math.random()}`
-            }}/>
+            <Table size={`small`} columns={actionsColumns} dataSource={actions} pagination={false} rowKey={`id`}/>
         </Form.Item>
     </DrawerForm>
 }
