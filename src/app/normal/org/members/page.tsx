@@ -5,7 +5,7 @@ import {Button, Space} from "antd";
 import {PlusCircleOutlined} from "@ant-design/icons";
 import {TenantMemberForm} from "./TenantMemberForm";
 import {PageResult} from "@apis";
-import {tenantApi} from "@apis";
+import {tenantApi} from "@apis/backend";
 
 export const TenantMembersPage = () => {
 

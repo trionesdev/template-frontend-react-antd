@@ -1,7 +1,7 @@
 
 import {FC} from "react";
 import {FetchTreeSelect, FetchTreeSelectProps} from "../../../../../commponents/fetch-tree-select";
-import {departmentApi} from "@apis";
+import {departmentApi} from "@apis/backend";
 
 
 export type DepartmentSelectProps = Omit<FetchTreeSelectProps, 'fetchRequest'>

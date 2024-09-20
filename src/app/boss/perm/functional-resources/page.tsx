@@ -1,7 +1,7 @@
 import {GridTable, Layout, PageHeader} from "@trionesdev/antd-react-ext";
 import {useState} from "react";
 import {useRequest} from "ahooks";
-import {functionalResourceApi} from "@apis";
+import {functionalResourceApi} from "@apis/boss";
 import {ClientType} from "@app/boss/perm/internal/perm.enum.ts";
 import {Button, Space, Tag} from "antd";
 import _ from "lodash";

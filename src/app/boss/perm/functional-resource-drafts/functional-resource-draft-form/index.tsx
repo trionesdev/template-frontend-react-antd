@@ -1,6 +1,6 @@
 import {DrawerForm} from "@trionesdev/antd-react-ext";
 import React, {FC, useEffect, useState} from "react";
-import {functionalResourceApi} from "@apis";
+import {functionalResourceApi} from "@apis/boss";
 import {Button, Form, Input, message, Space, Table} from "antd";
 import {ClientType} from "@app/boss/perm/internal/perm.enum.ts";
 import {MinusCircleOutlined} from "@ant-design/icons";

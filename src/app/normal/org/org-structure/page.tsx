@@ -6,7 +6,7 @@ import styles from "./org-structure.module.less"
 import classNames from "classnames";
 import {EllipsisOutlined} from "@ant-design/icons";
 import {DepartmentMembers} from "./DepartmentMembers";
-import {departmentApi} from "@apis";
+import {departmentApi} from "@apis/backend";
 
 export const OrgStructurePage = () => {
 

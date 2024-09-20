@@ -4,7 +4,7 @@ import {Button, message, Popconfirm, Space} from "antd";
 import {DepartmentForm} from "@app/normal/org/departments/DepartmentForm.tsx";
 import {ApartmentOutlined} from "@ant-design/icons";
 import {useRequest} from "ahooks";
-import {departmentApi} from "@apis";
+import {departmentApi} from "@apis/backend";
 
 export const DepartmentsPage = () => {
     const [result, setResult] = useState<any>()

@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import {GridTable, Layout, PageHeader} from "@trionesdev/antd-react-ext";
 import {useRequest} from "ahooks";
-import {departmentApi} from "@apis";
+import {departmentApi} from "@apis/backend";
 import {Space} from "antd";
 
 type DepartmentMembersProps = {
@@ -12,7 +12,7 @@ export const DepartmentMembers: FC<DepartmentMembersProps> = ({department}) => {
     const [pageResult, setPageResult] = useState<{ rows: any[], total: number }>({rows: [], total: 0})
 
     const {run, loading} = useRequest(() => {
-        let params = {...pageParams, departmentId: department?.id}
+        const params = {...pageParams, departmentId: department?.id}
         return departmentApi.queryDepartmentMembers(params)
     }, {
         onSuccess(data: any) {

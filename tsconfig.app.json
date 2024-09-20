@@ -23,6 +23,9 @@
       "@apis": [
         "src/apis"
       ],
+      "@apis/*": [
+        "src/apis/*"
+      ],
       "@components": [
         "src/components"
       ],
