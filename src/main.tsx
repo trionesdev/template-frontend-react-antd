@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
                     <PermissionProvider
                         policyRequest={async () => {
                             console.log("permissionRequest");
-                            return {};
+                            return {master:true};
                         }}>
                         <AppRouter/>
                     </PermissionProvider>

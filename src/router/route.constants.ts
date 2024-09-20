@@ -24,6 +24,11 @@ export namespace RouteConstants {
             id:'org-members',
             anonymous: true,
             path: () => "/org/members",
+        },
+        ROLES:{
+            id:'roles',
+            anonymous: true,
+            path: () => "/org/roles",
         }
     }
 

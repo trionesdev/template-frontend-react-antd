@@ -26,6 +26,11 @@ export const NormalLayout = () => {
                     key: RouteConstants.ORG.ORG_STRUCTURE.id,
                     label: '组织结构',
                     onClick: () => navigate(RouteConstants.ORG.ORG_STRUCTURE.path())
+                },
+                {
+                    key: RouteConstants.ORG.ROLES.id,
+                    label: '角色管理',
+                    onClick: () => navigate(RouteConstants.ORG.ROLES.path())
                 }
             ]
         }
