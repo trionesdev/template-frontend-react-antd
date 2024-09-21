@@ -1,4 +1,5 @@
 import {BackendApi} from "@apis/backend/backend.api.ts";
+import {PageQueryParams} from "@apis";
 
 export class RoleApi extends BackendApi {
     private baseUri = '/perm';
@@ -21,6 +22,14 @@ export class RoleApi extends BackendApi {
 
     queryRoleTree() {
         return this.request.get(`${this.baseUri}/role/tree`);
+    }
+
+    grantRole(roleId: string, data: { grantObjType: string, grantObjIds: string }) {
+        return this.request.put(`${this.baseUri}/roles/${roleId}/grant`, data);
+    }
+
+    queryRoleMemberPage(id: string, params: PageQueryParams) {
+        return this.request.get(`${this.baseUri}/roles/${id}/member/page`, {params});
     }
 
 }
