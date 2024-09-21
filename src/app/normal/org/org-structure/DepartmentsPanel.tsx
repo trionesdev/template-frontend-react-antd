@@ -42,7 +42,7 @@ export const DepartmentsPanel: FC<DepartmentsPanelProps> = ({onDepartmentChange}
 
     return <Layout direction={`vertical`}>
         <Layout.Item auto={true}>
-            <Spin spinning={loading}>
+            <Spin style={{minHeight: 300}} spinning={loading}>
                 <Tree treeData={departments} defaultSelectedKeys={["0"]} selectedKeys={[department?.id]}
                       fieldNames={{title: 'name', key: 'id'}}
                       titleRender={(nodeData: any) => {

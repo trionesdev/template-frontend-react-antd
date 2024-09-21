@@ -69,7 +69,7 @@ export const RolesPanel: FC<RolesPanelProps> = ({onRoleChange}) => {
             </Flex>
         </Layout.Item>
         <Layout.Item auto={true}>
-            <Spin spinning={loading}>
+            <Spin style={{minHeight: 300}} spinning={loading}>
                 <Tree treeData={roles} defaultSelectedKeys={["0"]} selectedKeys={[selectedRole?.id]}
                       fieldNames={{title: 'name', key: 'id'}}
                       titleRender={(nodeData: any) => {
