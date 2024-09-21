@@ -12,7 +12,7 @@ export const NormalLayout = () => {
         {
             key: 'org',
             label: '组织管理',
-            icon: <ApartmentOutlined />,
+            icon: <ApartmentOutlined/>,
             children: [
                 {
                     key: RouteConstants.ORG.MEMBERS.id,
@@ -39,8 +39,25 @@ export const NormalLayout = () => {
         {
             key: 'dic',
             label: '数据字典',
-            icon: <DatabaseOutlined />,
-            children: []
+            icon: <DatabaseOutlined/>,
+            children: [
+                {
+                    key: 'dic-type-manage',
+                    label: '字典类型管理',
+                },
+                {
+                    key: 'dic-manage',
+                    label: '字典管理',
+                },
+                {
+                    key: 'country-manage',
+                    label: '国家管理',
+                },
+                {
+                    key: 'district-manage',
+                    label: '地区管理',
+                },
+            ]
         }
     ]
 
