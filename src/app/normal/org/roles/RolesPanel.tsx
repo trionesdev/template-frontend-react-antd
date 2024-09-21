@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {Button, Dropdown, Flex, Spin, Tree} from "antd";
 import {EllipsisOutlined} from "@ant-design/icons";
 import {useRequest} from "ahooks";
@@ -6,7 +6,10 @@ import {roleApi} from "@apis/backend";
 import styles from "./roles.module.less"
 import {RoleForm} from "@app/normal/org/roles/RoleForm.tsx";
 
-export const RolesPanel = () => {
+type RolesPanelProps = {
+    onRoleChange?: (role: any) => void
+}
+export const RolesPanel: FC<RolesPanelProps> = ({onRoleChange}) => {
     const [roles, setRoles] = useState<any[]>([])
     const [selectedRole, setSelectedRole] = useState<any | undefined>()
 
@@ -32,6 +35,9 @@ export const RolesPanel = () => {
         ]
     }
 
+    useEffect(() => {
+        onRoleChange?.(selectedRole)
+    }, [selectedRole]);
 
     return <div className={styles.rolesPanel}>
         <Flex gap="small">
