@@ -1,15 +1,16 @@
 import {useState} from "react";
-import {Avatar, Button, Dropdown, Flex, Space, Spin, Tree} from "antd";
+import {Button, Dropdown, Flex, Spin, Tree} from "antd";
 import {EllipsisOutlined} from "@ant-design/icons";
 import {useRequest} from "ahooks";
 import {roleApi} from "@apis/backend";
 import styles from "./roles.module.less"
+import {RoleForm} from "@app/normal/org/roles/RoleForm.tsx";
 
 export const RolesPanel = () => {
     const [roles, setRoles] = useState<any[]>([])
     const [selectedRole, setSelectedRole] = useState<any | undefined>()
 
-    const {loading} = useRequest(() => {
+    const {run: handleQueryRoles, loading} = useRequest(() => {
         return roleApi.queryRoleTree()
     }, {
         onSuccess: (res: any) => {
@@ -22,10 +23,20 @@ export const RolesPanel = () => {
         }
     })
 
+    const handleNodeMenuItems = (nodeData: any) => {
+        return [
+            {
+                key: nodeData.id,
+                label: <RoleForm id={nodeData.id} onRefresh={handleQueryRoles}><span>编辑</span></RoleForm>
+            }
+        ]
+    }
+
+
     return <div className={styles.rolesPanel}>
         <Flex gap="small">
             <Flex gap="small" flex={1}>
-                <Button block={true}>新建角色</Button>
+                <RoleForm onRefresh={handleQueryRoles}><Button block={true}>新建角色</Button></RoleForm>
             </Flex>
             {/*<Button type={`link`}>展开</Button>*/}
         </Flex>
@@ -35,13 +46,10 @@ export const RolesPanel = () => {
                   titleRender={(nodeData: any) => {
                       return <Flex justify={'space-between'} align={'baseline'}>
                           <div>
-                              {nodeData.id == "0" ? <Space>
-                                  <Avatar size={`small`} shape={`square`}/>
-                                  <>{nodeData.name}</>
-                              </Space> : <>{nodeData.name}</>}
+                              {nodeData.name}
                           </div>
                           <div className={`tree-node-extra`}>
-                              <Dropdown menu={{items: []}}>
+                              <Dropdown menu={{items: handleNodeMenuItems(nodeData)}}>
                                   <Button size={`small`} type={`text`} icon={<EllipsisOutlined/>}/>
                               </Dropdown>
                           </div>
@@ -49,7 +57,7 @@ export const RolesPanel = () => {
                   }}
                   onSelect={(_keys, info) => {
                       if (info.selectedNodes?.[0]) {
-                          selectedRole(info.selectedNodes?.[0])
+                          setSelectedRole(info.selectedNodes?.[0])
                       }
                   }}
             />

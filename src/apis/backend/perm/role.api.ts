@@ -15,6 +15,10 @@ export class RoleApi extends BackendApi {
         return this.request.put(`${this.baseUri}/roles/${id}`, role);
     }
 
+    queryRoleById(id: string) {
+        return this.request.get(`${this.baseUri}/roles/${id}`);
+    }
+
     queryRoleTree() {
         return this.request.get(`${this.baseUri}/role/tree`);
     }
