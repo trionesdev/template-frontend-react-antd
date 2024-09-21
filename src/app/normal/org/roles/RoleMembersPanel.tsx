@@ -1,10 +1,11 @@
 import {FC, useEffect, useState} from "react";
 import {GridTable, Layout, PageHeader, TableToolbar} from "@trionesdev/antd-react-ext";
-import {Button, message} from "antd";
+import {Avatar, Button, message, Popconfirm, Space} from "antd";
 import OrgSelectModal from "../../../../commponents/org-select-modal";
 import {departmentApi, PageResult, roleApi} from "@apis";
 import {RoleGrantObjType} from "@app/normal/org/internal/org.enums.ts";
 import {useRequest} from "ahooks";
+import {UserAddOutlined, UserOutlined} from "@ant-design/icons";
 
 type RoleMembersPanelProps = {
     role?: any
@@ -28,6 +29,7 @@ export const RoleMembersPanel: FC<RoleMembersPanelProps> = ({role}) => {
         const memberIds = members.map((member: any) => member.id)
         roleApi.grantRole(role?.id, {grantObjType: RoleGrantObjType.MEMBER, grantObjIds: memberIds}).then(async () => {
             message.success('添加成功')
+            handleQueryPage()
         }).catch(async (ex) => {
             message.error(ex.message)
         })
@@ -42,21 +44,52 @@ export const RoleMembersPanel: FC<RoleMembersPanelProps> = ({role}) => {
     const columns: any[] = [
         {
             title: '姓名',
-            dataIndex: 'name'
+            dataIndex: 'nickname',
+            render: (text: any, record: any) => {
+                return <Space>
+                    <Avatar size={`small`} icon={<UserOutlined/>} src={record?.avatar} shape={`square`}/>
+                    <span>{text}</span>
+                </Space>
+            }
+        },
+        {
+            title: '操作',
+            dataIndex: 'id',
+            width: 100,
+            render: (_id: string, record: any) => {
+                return <Space>
+                    <Popconfirm title={`确定删除该成员`} onConfirm={async () => {
+                        roleApi.removeRoleGrantsBatch(role?.id, {
+                            grantObjType: RoleGrantObjType.MEMBER,
+                            grantObjIds: [record?.memberId]
+                        }).then(async () => {
+                            message.success('移除成功')
+                            handleQueryPage()
+                        }).catch(async (ex) => {
+                            message.error(ex.message)
+                        })
+                    }}>
+                        <Button size={`small`} type={`link`} danger={true}>移除</Button>
+                    </Popconfirm>
+                </Space>
+            }
         }
     ]
     return <Layout direction={`vertical`}>
         <Layout.Item>
-            <PageHeader backIcon={false} title={role?.name}/>
+            <PageHeader backIcon={false} title={role?.name} extra={<Space>
+                <Button type={`link`}>权限配置</Button>
+            </Space>}/>
         </Layout.Item>
         <Layout.Item auto={true}>
-            <GridTable toolbar={<TableToolbar title={[
+            <GridTable toolbar={<TableToolbar title={<Space>
                 <OrgSelectModal selectMode={'member'} cleanAfterClose={true} orgLevelsRequest={(departmentId) => {
                     return departmentApi.queryDepartmentPaths(departmentId)
                 }} orgNodesRequest={(departmentId) => {
                     return departmentApi.queryDepartmentOrgNodeList({departmentId})
-                }} onOk={handleAddMembers}><Button type={`primary`}>添加成员</Button></OrgSelectModal>
-            ]}/>}
+                }} onOk={handleAddMembers}><Button icon={<UserAddOutlined/>}
+                                                   type={`primary`}>添加成员</Button></OrgSelectModal>
+            </Space>}/>}
                        fit={true}
                        size={`small`}
                        loading={loading}

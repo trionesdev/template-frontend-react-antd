@@ -3,6 +3,7 @@ import styles from "./normal-layout.module.less"
 import {Layout} from "@trionesdev/antd-react-ext";
 import {Menu} from "antd";
 import {RouteConstants} from "../../../router/route.constants.ts";
+import {ApartmentOutlined, DatabaseOutlined} from "@ant-design/icons";
 
 export const NormalLayout = () => {
     const navigate = useNavigate()
@@ -11,6 +12,7 @@ export const NormalLayout = () => {
         {
             key: 'org',
             label: '组织管理',
+            icon: <ApartmentOutlined />,
             children: [
                 {
                     key: RouteConstants.ORG.MEMBERS.id,
@@ -33,6 +35,12 @@ export const NormalLayout = () => {
                     onClick: () => navigate(RouteConstants.ORG.ROLES.path())
                 }
             ]
+        },
+        {
+            key: 'dic',
+            label: '数据字典',
+            icon: <DatabaseOutlined />,
+            children: []
         }
     ]
 

@@ -6,56 +6,46 @@
     padding: 4px;
     border-right: 1px solid #d9d9d9;
 
-    &Header {
-
-    }
-
-    &Body {
-      flex: 1 auto;
-      overflow-y: auto;
-
-      :global {
-        .ant-tree {
-          .ant-tree-treenode {
-            padding: 0 2px;
-            border-radius: 2px;
-            .ant-tree-switcher{
-              &:hover{
-                &::before{
-                  background-color: inherit;
-                }
-              }
-              line-height: 36px;
+    :global {
+      .ant-tree {
+        .ant-tree-treenode {
+          padding: 0 2px;
+          border-radius: 2px;
+          .ant-tree-switcher{
+            &:hover{
               &::before{
-                height: 36px;
+                background-color: inherit;
               }
             }
-            .ant-tree-node-content-wrapper{
-              .ant-tree-title{
-                line-height: 36px;
-              }
+            line-height: 36px;
+            &::before{
+              height: 36px;
             }
-            .tree-node-extra {
-              visibility: hidden;
+          }
+          .ant-tree-node-content-wrapper{
+            .ant-tree-title{
+              line-height: 36px;
             }
+          }
+          .tree-node-extra {
+            visibility: hidden;
+          }
 
-            &:hover {
-              .tree-node-extra {
-                visibility: visible;
-              }
+          &:hover {
+            .tree-node-extra {
+              visibility: visible;
             }
           }
         }
       }
-
-      .departmentRoot {
-        margin-left: -24px;
-      }
-
+    }
+    .departmentRoot {
+      margin-left: -24px;
     }
   }
 
   .membersPanel {
     background-color: white;
+    padding: 4px;
   }
 }

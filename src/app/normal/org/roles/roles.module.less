@@ -1,6 +1,5 @@
 .rolesPage {
   .rolesPanel {
-    width: 300px;
     padding: 4px;
 
     :global {
@@ -8,22 +7,27 @@
         .ant-tree-treenode {
           padding: 0 2px;
           border-radius: 2px;
-          .ant-tree-switcher{
-            &:hover{
-              &::before{
+
+          .ant-tree-switcher {
+            &:hover {
+              &::before {
                 background-color: inherit;
               }
             }
+
             line-height: 36px;
-            &::before{
+
+            &::before {
               height: 36px;
             }
           }
-          .ant-tree-node-content-wrapper{
-            .ant-tree-title{
+
+          .ant-tree-node-content-wrapper {
+            .ant-tree-title {
               line-height: 36px;
             }
           }
+
           .tree-node-extra {
             visibility: hidden;
           }
@@ -40,5 +44,7 @@
   }
 
   .roleMembersPanel {
+    padding: 4px;
+    background-color: white;
   }
 }

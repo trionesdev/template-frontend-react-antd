@@ -1,13 +1,14 @@
 import {FC, useEffect, useState} from "react";
-import {GridTable, Layout, PageHeader} from "@trionesdev/antd-react-ext";
+import {GridTable, Layout, PageHeader, TableToolbar} from "@trionesdev/antd-react-ext";
 import {useRequest} from "ahooks";
 import {departmentApi} from "@apis/backend";
-import {Space} from "antd";
+import {Button, Space} from "antd";
+import {UserAddOutlined} from "@ant-design/icons";
 
 type DepartmentMembersProps = {
     department?: any
 }
-export const DepartmentMembers: FC<DepartmentMembersProps> = ({department}) => {
+export const DepartmentMembersPanel: FC<DepartmentMembersProps> = ({department}) => {
     const [pageParams, setPageParams] = useState({pageNum: 1, pageSize: 10})
     const [pageResult, setPageResult] = useState<{ rows: any[], total: number }>({rows: [], total: 0})
 
@@ -34,7 +35,10 @@ export const DepartmentMembers: FC<DepartmentMembersProps> = ({department}) => {
             dataIndex: 'id',
             width: 100,
             render(id: string) {
-                return <Space></Space>
+                return <Space>
+                    <Button size={`small`} type={`link`}>编辑</Button>
+                    <Button size={`small`} type={`link`} danger={true}>删除</Button>
+                </Space>
             }
         }
     ]
@@ -45,6 +49,9 @@ export const DepartmentMembers: FC<DepartmentMembersProps> = ({department}) => {
         </Layout.Item>
         <Layout.Item auto={true}>
             <GridTable
+                toolbar={<TableToolbar title={<Space>
+                    <Button type={`primary`} icon={<UserAddOutlined/>}>新增成员</Button>
+                </Space>}/>}
                 fit={true} size={'small'} columns={columns}
                 dataSource={pageResult?.rows} rowKey={`id`}
                 loading={loading}

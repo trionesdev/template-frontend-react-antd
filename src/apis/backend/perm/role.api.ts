@@ -24,8 +24,12 @@ export class RoleApi extends BackendApi {
         return this.request.get(`${this.baseUri}/role/tree`);
     }
 
-    grantRole(roleId: string, data: { grantObjType: string, grantObjIds: string }) {
+    grantRole(roleId: string, data: { grantObjType: string, grantObjIds: string[] }) {
         return this.request.put(`${this.baseUri}/roles/${roleId}/grant`, data);
+    }
+
+    removeRoleGrantsBatch(roleId: string, data: { grantObjType: string, grantObjIds: string[] }) {
+        return this.request.put(`${this.baseUri}/roles/${roleId}/grants/remove/batch`, data);
     }
 
     queryRoleMemberPage(id: string, params: PageQueryParams) {

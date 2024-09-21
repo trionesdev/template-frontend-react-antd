@@ -128,19 +128,10 @@ export const OrgStructurePanel: FC<OrgStructurePanelProps> = ({
                         }
                     }}>
                         {(() => {
-                            if (selectMode === 'department') {
-                                if (item.type === 'DEPARTMENT') {
+                            if (selectMode) {
+                                if ((selectMode === 'department' && item.type === 'DEPARTMENT') || (selectMode === 'member' && item.type === 'MEMBER')) {
                                     return <Checkbox
                                         checked={Boolean(_.find(selectedNodes, (node) => item.id === node.id))}/>
-                                } else {
-                                    return null;
-                                }
-                            } else if (selectMode === 'member') {
-                                if (item.type === 'MEMBER') {
-                                    return <Checkbox
-                                        checked={Boolean(_.find(selectedNodes, (node) => item.id === node.id))}/>
-                                } else {
-                                    return null;
                                 }
                             } else {
                                 return <Checkbox
@@ -152,7 +143,7 @@ export const OrgStructurePanel: FC<OrgStructurePanelProps> = ({
                                 <div className={classNames(`${prefixCls}-item-content-title`, hashId)}>
                                     <Avatar shape={`square`} icon={<UserOutlined/>}
                                             src={_.get(item, innerOrgNodeFieldNames.avatar)}/>
-                                    <span>{_.get(item, innerOrgNodeFieldNames.name)}</span>
+                                    <span style={{cursor:'default'}}>{_.get(item, innerOrgNodeFieldNames.name)}</span>
                                 </div>
                             </> : <>
                                 <div className={classNames(`${prefixCls}-item-content-title`, hashId)}>
