@@ -2,17 +2,21 @@ import {GridTable, Layout, PageHeader} from "@trionesdev/antd-react-ext";
 import {useState} from "react";
 import {useRequest} from "ahooks";
 import {functionalResourceApi} from "@apis/boss";
-import {ClientType} from "@app/boss/perm/internal/perm.enum.ts";
+import {ClientType} from "@app/boss/perm/internal/perm.enums.ts";
 import {Button, message, Modal, Popconfirm, Space, Tag} from "antd";
 import {
     FunctionalResourceDraftForm
 } from "@app/boss/perm/functional-resource-drafts/functional-resource-draft-form/index.tsx";
 import _ from "lodash";
-import {useNavigate} from "@trionesdev/commons-react";
+import {useNavigate, useSearchParams} from "@trionesdev/commons-react";
 import {RouteConstants} from "../../../../router/route.constants.ts";
+import {AppOptions, ClientTypeOptions} from "@app/boss/perm/internal/perm.options.ts";
+import {useAppConfig} from "../../../../commponents/app-config";
 
 
 export const FunctionalResourceDraftsPage = () => {
+    const appConfig = useAppConfig()
+    const [searchParams] = useSearchParams()
     const navigate = useNavigate()
     const [treeData, setTreeData] = useState<any[] | undefined>()
 
@@ -73,8 +77,18 @@ export const FunctionalResourceDraftsPage = () => {
     return <Layout direction={`vertical`}>
         <Layout.Item>
             <PageHeader onBack={() => {
-                navigate(RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.path!())
-            }} extra={<Space>
+                navigate(RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.path!(), {
+                    state: {
+                        appIdentifier: searchParams.get('appIdentifier'),
+                        clientType: searchParams.get('clientType')
+                    }
+                })
+            }} title={<Space split={`-`}>
+                {appConfig.multiTenant && searchParams.get('appIdentifier') &&
+                    <span>{AppOptions.find((x: any) => x.value === searchParams.get('appIdentifier'))?.label}</span>}
+                {searchParams.get('clientType') &&
+                    <span>{ClientTypeOptions.find((x: any) => x.value === searchParams.get('clientType'))?.label}</span>}
+            </Space>} extra={<Space>
                 <FunctionalResourceDraftForm clientType={ClientType.PC_WEB}>
                     <Button type={`primary`}>新建功能资源</Button>
                 </FunctionalResourceDraftForm>
