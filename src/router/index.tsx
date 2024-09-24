@@ -9,6 +9,7 @@ import {NormalLayout} from "@app/normal/layout";
 import {BossLayout} from "@app/boss/layout";
 import {OrgStructurePage} from "@app/normal/org/org-structure/page.tsx";
 import {TenantMembersPage} from "@app/normal/org/members/page.tsx";
+import {RolesPage} from "@app/normal/org/roles/page.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -23,6 +24,7 @@ const routes: RouteObject[] = [
                     {...RouteConstants.ORG.DEPARTMENTS, element: <DepartmentsPage/>},
                     {...RouteConstants.ORG.ORG_STRUCTURE, element: <OrgStructurePage/>},
                     {...RouteConstants.ORG.MEMBERS, element: <TenantMembersPage/>},
+                    {...RouteConstants.ORG.ROLES, element: <RolesPage/>},
                 ]
             },
             {

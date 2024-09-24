@@ -3,6 +3,7 @@ import styles from "./normal-layout.module.less"
 import {Layout} from "@trionesdev/antd-react-ext";
 import {Menu} from "antd";
 import {RouteConstants} from "../../../router/route.constants.ts";
+import {ApartmentOutlined, DatabaseOutlined} from "@ant-design/icons";
 
 export const NormalLayout = () => {
     const navigate = useNavigate()
@@ -11,6 +12,7 @@ export const NormalLayout = () => {
         {
             key: 'org',
             label: '组织管理',
+            icon: <ApartmentOutlined/>,
             children: [
                 {
                     key: RouteConstants.ORG.MEMBERS.id,
@@ -26,7 +28,35 @@ export const NormalLayout = () => {
                     key: RouteConstants.ORG.ORG_STRUCTURE.id,
                     label: '组织结构',
                     onClick: () => navigate(RouteConstants.ORG.ORG_STRUCTURE.path())
+                },
+                {
+                    key: RouteConstants.ORG.ROLES.id,
+                    label: '角色管理',
+                    onClick: () => navigate(RouteConstants.ORG.ROLES.path())
                 }
+            ]
+        },
+        {
+            key: 'dic',
+            label: '数据字典',
+            icon: <DatabaseOutlined/>,
+            children: [
+                {
+                    key: 'dic-type-manage',
+                    label: '字典类型管理',
+                },
+                {
+                    key: 'dic-manage',
+                    label: '字典管理',
+                },
+                {
+                    key: 'country-manage',
+                    label: '国家管理',
+                },
+                {
+                    key: 'district-manage',
+                    label: '地区管理',
+                },
             ]
         }
     ]

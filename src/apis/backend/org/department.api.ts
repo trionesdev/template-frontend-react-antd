@@ -1,26 +1,35 @@
 import {BackendApi} from "../backend.api.ts";
-import {PageQueryParams} from "../../types.ts";
+import {PageQueryParams} from "@apis";
 
-export class DepartmentApi extends BackendApi{
+export class DepartmentApi extends BackendApi {
     private baseUri = '/org';
 
     createDepartment(data: any) {
         return this.request.post(`${this.baseUri}/departments`, data);
     }
 
-    deleteDepartmentById(id:string){
+    deleteDepartmentById(id: string) {
         return this.request.delete(`${this.baseUri}/departments/${id}`);
     }
 
-    queryDepartmentById(id: string){
+    queryDepartmentById(id: string) {
         return this.request.get(`${this.baseUri}/departments/${id}`);
     }
 
-    queryDepartmentsTree(params?: any){
-        return this.request.get(`${this.baseUri}/department/tree`,{params});
+    queryDepartmentsTree(params?: any) {
+        return this.request.get(`${this.baseUri}/department/tree`, {params});
     }
 
     queryDepartmentMembers(params: PageQueryParams) {
         return this.request.get(`${this.baseUri}/department/member/page`, {params});
+    }
+
+    queryDepartmentPaths(departmentId: string) {
+        return this.request.get(`${this.baseUri}/departments/${departmentId}/paths`);
+    }
+
+
+    queryDepartmentOrgNodeList(params: { departmentId: string }) {
+        return this.request.get(`${this.baseUri}/department/org/list`, {params});
     }
 }
