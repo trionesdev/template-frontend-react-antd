@@ -10,6 +10,7 @@ import {RouteConstants} from "../../../../router/route.constants.ts";
 import {AppOptions, ClientTypeOptions} from "@app/boss/perm/internal/perm.options.ts";
 import {ClientType} from "@app/boss/perm/internal/perm.enums.ts";
 import {useAppConfig} from "../../../../commponents/app-config";
+import {FunctionalResourceForm} from "@app/boss/perm/functional-resources/FunctionalResourceForm.tsx";
 
 export const FunctionalResourcesPage = () => {
     const navigate = useNavigate()
@@ -78,6 +79,7 @@ export const FunctionalResourcesPage = () => {
                     }
                     navigate(`${RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCE_DRAFTS.path!()}?${searchParams.toString()}`)
                 }}>资源编辑</Button>
+                <FunctionalResourceForm><Button type={`primary`}>新建功能资源</Button></FunctionalResourceForm>
             </Space>}/>
         </Layout.Item>
         <Layout.Item auto={true}>
