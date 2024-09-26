@@ -5,25 +5,29 @@ import _ from "lodash";
 
 export type FetchSelectProps = {
     valueOption?: any
+    fixedOptions?: { label?: React.ReactNode, value: string, [key: string]: any }[]
     dropdownFetch?: boolean
     fetchEnable?: boolean
-    fetchRequest?: (searchValue?: string) => Promise<{ label?: React.ReactNode, value: string }>
+    fetchAlways?: boolean
+    fetchRequest?: (searchValue?: string) => Promise<{ label?: React.ReactNode, value: string, [key: string]: any }[]>
 } & Omit<SelectProps, 'options' | 'onDropdownVisibleChange'>
 export const FetchSelect: FC<FetchSelectProps> = ({
                                                       valueOption,
+                                                      fixedOptions,
                                                       dropdownFetch = false,
                                                       fetchEnable = true,
+                                                      fetchAlways = false,
                                                       fetchRequest,
                                                       ...props
                                                   }) => {
     const [fetched, setFetched] = useState(false)
-    const [options, setOptions] = useState(valueOption ? [valueOption] : [])
+    const [options, setOptions] = useState(_.concat([], fixedOptions || [], valueOption || []))
     const {run: handleQuery} = useRequest((searchValue?: string) => {
         return (fetchRequest && fetchEnable) ? fetchRequest(searchValue) : Promise.resolve([])
     }, {
-        manual: dropdownFetch  ,
+        manual: dropdownFetch,
         onSuccess: (data: any) => {
-            setOptions(data)
+            setOptions([...(fixedOptions || []), ...(data || [])])
         },
         onFinally: () => {
             setFetched(true)
@@ -31,14 +35,14 @@ export const FetchSelect: FC<FetchSelectProps> = ({
     })
 
     useEffect(() => {
-        if (fetched){
+        if (fetched) {
             handleQuery()
         }
     }, [fetchRequest]);
 
     useEffect(() => {
         if (!_.isEmpty(valueOption)) {
-            let newOptions = [...options]
+            const newOptions = [...(fixedOptions || []), ...options]
             if (_.isArray(valueOption)) {
                 valueOption.forEach((item: any) => {
                     if (!_.find(newOptions, (o: any) => o.value === item.value)) {
@@ -47,7 +51,7 @@ export const FetchSelect: FC<FetchSelectProps> = ({
                 })
             } else {
                 if (!options.find((item: any) => item.value === valueOption.value)) {
-                    setOptions([...options, valueOption])
+                    setOptions([...(fixedOptions || []), ...options, valueOption])
                 }
             }
         }
@@ -62,7 +66,7 @@ export const FetchSelect: FC<FetchSelectProps> = ({
                    options={options}
                    onSearch={props.showSearch ? handleQuery : undefined}
                    onDropdownVisibleChange={(open) => {
-                       if (open && dropdownFetch && fetchEnable && !fetched) {
+                       if (open && dropdownFetch && fetchEnable && (fetchAlways || !fetched)) {
                            handleQuery()
                        }
                    }}/>

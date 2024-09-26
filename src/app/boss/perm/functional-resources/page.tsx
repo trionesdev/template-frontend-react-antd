@@ -2,27 +2,22 @@ import {GridTable, Layout, PageHeader} from "@trionesdev/antd-react-ext";
 import {useState} from "react";
 import {useRequest} from "ahooks";
 import {functionalResourceApi} from "@apis/boss";
-import {Button, Select, Space, Tag} from "antd";
-import _ from "lodash";
+import {Button, Select, Space} from "antd";
 import {RedoOutlined} from "@ant-design/icons";
-import {useLocation, useNavigate} from "@trionesdev/commons-react";
-import {RouteConstants} from "../../../../router/route.constants.ts";
-import {AppOptions, ClientTypeOptions} from "@app/boss/perm/internal/perm.options.ts";
+import {AppOptions, ClientTypeOptions, ResourceTypeOptions} from "@app/boss/perm/internal/perm.options.ts";
 import {ClientType} from "@app/boss/perm/internal/perm.enums.ts";
 import {useAppConfig} from "../../../../commponents/app-config";
 import {FunctionalResourceForm} from "@app/boss/perm/functional-resources/FunctionalResourceForm.tsx";
 
 export const FunctionalResourcesPage = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
     const appConfig = useAppConfig()
-    const [appIdentifier, setAppIdentifier] = useState<string | undefined>(location.state?.appIdentifier || AppOptions?.[0]?.value)
-    const [clientType, setClientType] = useState<string | undefined>(location.state?.clientType || AppOptions?.[0].clients?.[0]?.value || ClientType.PC_WEB)
+    const [appCode, setAppCode] = useState<string | undefined>(AppOptions?.[0]?.value)
+    const [clientType, setClientType] = useState<ClientType | undefined>(AppOptions?.[0].clients?.[0]?.value || ClientType.PC_WEB)
     const [treeData, setTreeData] = useState<any[] | undefined>()
 
     const {run: handleQuery, loading} = useRequest(() => {
         return functionalResourceApi.queryFunctionalResourceTree({
-            appIdentifier: appConfig.multiTenant ? appIdentifier : null,
+            appCode: appConfig.multiTenant ? appCode : null,
             clientType
         })
     }, {
@@ -35,23 +30,39 @@ export const FunctionalResourcesPage = () => {
 
     const columns = [
         {
-            title: '资源对象名称',
+            title: '类型',
+            dataIndex: 'type',
+            width: 100,
+            render: (type: string) => {
+                return ResourceTypeOptions.find(item => item.value === type)?.label
+            }
+        },
+        {
+            title: '名称',
             dataIndex: 'name',
             width: 200
         },
         {
             title: '标识',
-            dataIndex: 'identifier',
+            dataIndex: 'uniqueCode',
             width: 200
         },
         {
+            title: '描述',
+            dataIndex: 'description'
+        },
+        {
             title: '操作',
-            dataIndex: 'actions',
-            render: (_text: any, _record: any) => {
+            dataIndex: 'id',
+            width: 100,
+            render: (id: string) => {
                 return <Space>
-                    {_.map(_text, (action: any) => {
-                        return <Tag key={action.identifier} bordered={false}>{action.name}</Tag>
-                    })}
+                    <FunctionalResourceForm appCode={appCode} clientType={clientType} parentId={id} onRefresh={handleQuery}>
+                        <Button size={`small`} type={`link`}>添加子项</Button>
+                    </FunctionalResourceForm>
+                    <FunctionalResourceForm appCode={appCode} clientType={clientType} id={id} onRefresh={handleQuery}>
+                        <Button size={`small`} type={`link`}>编辑</Button>
+                    </FunctionalResourceForm>
                 </Space>
             }
         }
@@ -61,25 +72,15 @@ export const FunctionalResourcesPage = () => {
         <Layout.Item>
             <PageHeader backIcon={false} title={<Space>
                 {appConfig.multiTenant &&
-                    <Select options={AppOptions} defaultValue={appIdentifier} onChange={(value) => {
-                        setAppIdentifier(value)
+                    <Select options={AppOptions} defaultValue={appCode} onChange={(value) => {
+                        setAppCode(value)
                         setClientType(AppOptions.find(item => item.value !== value)?.clients?.[0]?.value);
                     }}/>}
                 <Select options={ClientTypeOptions}
                         defaultValue={clientType} value={clientType}/>
             </Space>} extra={<Space>
                 <Button icon={<RedoOutlined/>} type={`text`} onClick={handleQuery}/>
-                <Button type={`primary`} onClick={() => {
-                    const searchParams = new URLSearchParams();
-                    if (appConfig.multiTenant && appIdentifier) {
-                        searchParams.set('appIdentifier', appIdentifier)
-                    }
-                    if (clientType) {
-                        searchParams.set('clientType', clientType)
-                    }
-                    navigate(`${RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCE_DRAFTS.path!()}?${searchParams.toString()}`)
-                }}>资源编辑</Button>
-                <FunctionalResourceForm><Button type={`primary`}>新建功能资源</Button></FunctionalResourceForm>
+                <FunctionalResourceForm appCode={appCode} clientType={clientType} onRefresh={handleQuery}><Button type={`primary`}>新建功能资源</Button></FunctionalResourceForm>
             </Space>}/>
         </Layout.Item>
         <Layout.Item auto={true}>
