@@ -48,7 +48,7 @@ export const FunctionalResourceForm: FC<FunctionalResourceFormProps> = ({
             if (!id) {
                 Object.assign(values, {appCode, clientType})
             }
-            const request = functionalResourceApi.createFunctionalResource(values)
+            const request = id ? functionalResourceApi.updateFunctionalResourceById(id, values) : functionalResourceApi.createFunctionalResource(values)
             request.then(async () => {
                 message.success(`提交成功`)
                 onRefresh?.()

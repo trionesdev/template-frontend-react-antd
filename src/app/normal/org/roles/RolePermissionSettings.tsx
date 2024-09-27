@@ -4,6 +4,10 @@ import {useRequest} from "ahooks";
 import {functionalResourceApi} from "@apis/boss";
 import {ResourceTypeOptions} from "@app/boss/perm/internal/perm.options.ts";
 import {Checkbox, Form} from "antd";
+import _ from "lodash";
+import {icons} from "../../../../commponents/icon-select";
+import {PermissionEffect, PermissionSubjectType} from "@app/boss/perm/internal/perm.enums.ts";
+import {policyApi} from "@apis";
 
 type RolePermissionSettingsProps = {
     children?: React.ReactElement
@@ -11,7 +15,8 @@ type RolePermissionSettingsProps = {
     editable?: boolean
 }
 
-export const RolePermissionSettings: FC<RolePermissionSettingsProps> = ({children, roleId, editable}) => {
+export const RolePermissionSettings: FC<RolePermissionSettingsProps> = ({children, roleId, editable = true}) => {
+    const [form] = Form.useForm()
     const [open, setOpen] = useState(false)
     const [treeData, setTreeData] = useState<any[] | undefined>()
 
@@ -26,9 +31,46 @@ export const RolePermissionSettings: FC<RolePermissionSettingsProps> = ({childre
         }
     })
 
+    const {run: handleQueryRolePermissions} = useRequest(() => {
+        return policyApi.queryPermissionsBySubject({subjectType: PermissionSubjectType.ROLE, subject: roleId})
+    }, {
+        manual: true,
+        onSuccess: (res: any) => {
+            if (res) {
+                debugger
+            }
+        }
+    })
+
+    const handleSubmit = () => {
+        form.validateFields().then((values: any) => {
+            console.log(values)
+            const permissions = _.map(values, (checked: any, key: string) => {
+                return {
+                    obj: key,
+                    effect: checked ? PermissionEffect.ALLOW : PermissionEffect.DENY
+                }
+            }).filter(item => item.effect === PermissionEffect.ALLOW)
+
+            policyApi.savePolicy({
+                subjectType: PermissionSubjectType.ROLE,
+                subject: roleId,
+                permissions: permissions
+            })
+        })
+    }
+
     useEffect(() => {
-        handleQuery()
-    }, []);
+        if (open) {
+            handleQuery()
+        }
+    }, [open]);
+
+    useEffect(() => {
+        if (open && roleId) {
+            handleQueryRolePermissions()
+        }
+    }, [roleId, open]);
 
     const columns = [
         {
@@ -50,6 +92,14 @@ export const RolePermissionSettings: FC<RolePermissionSettingsProps> = ({childre
             width: 200
         },
         {
+            title: '图标',
+            dataIndex: 'icon',
+            width: 50,
+            render: (icon: string) => {
+                return <>{_.get(icons, icon)}</>
+            }
+        },
+        {
             title: '描述',
             dataIndex: 'description'
         },
@@ -58,7 +108,7 @@ export const RolePermissionSettings: FC<RolePermissionSettingsProps> = ({childre
             dataIndex: 'action',
             width: 80,
             render: (_: any, record: { uniqueCode: any; }) => {
-                return <Form.Item noStyle={true} name={record.uniqueCode}>
+                return <Form.Item noStyle={true} name={record.uniqueCode} valuePropName={`checked`}>
                     <Checkbox/>
                 </Form.Item>
             }
@@ -66,9 +116,9 @@ export const RolePermissionSettings: FC<RolePermissionSettingsProps> = ({childre
     ]
 
 
-    return <DrawerForm title="权限配置" open={open} trigger={children} width={800} afterOpenChange={setOpen}
-                       formProps={{disabled: !editable}}>
-        <GridTable fit={true} size={`small`} columns={columns} dataSource={treeData} loading={loading}
+    return <DrawerForm title="权限配置" open={open} trigger={children} width={1000} afterOpenChange={setOpen}
+                       form={form} formProps={{disabled: !editable}} onOk={handleSubmit}>
+        <GridTable fit={true} size={`small`} columns={columns} dataSource={treeData} rowKey={`id`} loading={loading}
                    pagination={false}/>
     </DrawerForm>
 }

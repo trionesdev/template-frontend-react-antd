@@ -13,3 +13,12 @@ export enum ResourceType {
     RESOURCE = 'RESOURCE',
     ACTION = 'ACTION'
 }
+
+export enum PermissionSubjectType {
+    ROLE = 'ROLE',
+}
+
+export enum PermissionEffect {
+    ALLOW = 'ALLOW',
+    DENY = 'DENY'
+}

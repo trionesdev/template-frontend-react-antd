@@ -1,12 +1,27 @@
 import FieldWrapper from "../field-wrapper";
 import {Button, Flex, Modal} from "antd";
-import {useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {icons} from "./icons.tsx";
 import _ from "lodash";
 
-export const IconSelect = () => {
-    const [innerValue, setInnerValue] = useState<any>()
+type IconSelectProps = {
+    value?: string
+    onChange?: (value: string) => void
+}
+export const IconSelect: FC<IconSelectProps> = ({value, onChange}) => {
+    const [innerValue, setInnerValue] = useState<any>(value)
     const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        if (!_.isEqual(value, innerValue)) {
+            setInnerValue(value)
+        }
+    }, [value]);
+
+    useEffect(() => {
+        onChange?.(innerValue)
+    }, [innerValue]);
+
     return <>
         <Modal open={open} title={`图标选择`} footer={null} onClose={() => setOpen(false)}
                onCancel={() => setOpen(false)}>

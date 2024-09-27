@@ -9,6 +9,7 @@ import {ClientType, ResourceType} from "@app/boss/perm/internal/perm.enums.ts";
 import {useAppConfig} from "../../../../commponents/app-config";
 import {FunctionalResourceForm} from "@app/boss/perm/functional-resources/FunctionalResourceForm.tsx";
 import _ from "lodash";
+import {icons} from "../../../../commponents/icon-select";
 
 export const FunctionalResourcesPage = () => {
     const appConfig = useAppConfig()
@@ -42,6 +43,14 @@ export const FunctionalResourcesPage = () => {
             title: '名称',
             dataIndex: 'name',
             width: 200
+        },
+        {
+            title: '图标',
+            dataIndex: 'icon',
+            width: 50,
+            render: (icon: string) => {
+                return <>{_.get(icons, icon)}</>
+            }
         },
         {
             title: '标识',
