@@ -78,13 +78,18 @@ export const FunctionalResourceForm: FC<FunctionalResourceFormProps> = ({
     return <DrawerForm open={open} form={form} trigger={children} title={`${id ? '编辑' : '新建'}功能权限资源`}
                        size={`large`}
                        formProps={{layout: 'horizontal', labelCol: {flex: '100px'}}}
-                       afterOpenChange={open => setOpen(open)} onOk={handleSubmit}>
+                       afterOpenChange={open => {
+                           setOpen(open)
+                           if (!open) {
+                               form.resetFields()
+                           }
+                       }} onOk={handleSubmit}>
         <Form.Item label={`上级资源`} name={`parentId`} initialValue={parentId}>
             <FunctionalResourceSelect
                 valueOption={parentResource}/>
         </Form.Item>
         <Form.Item label={`名称`} name={`name`}>
-            <Input placeholder={`请输入名称`} allowClear />
+            <Input placeholder={`请输入名称`} allowClear/>
         </Form.Item>
         <Form.Item label={`标识编码`} name={`uniqueCode`} required={true}>
             <Input placeholder={`请输入标识编码`}/>

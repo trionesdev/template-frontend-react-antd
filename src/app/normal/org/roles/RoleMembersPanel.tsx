@@ -6,6 +6,7 @@ import {departmentApi, PageResult, roleApi} from "@apis";
 import {RoleGrantObjType} from "@app/normal/org/internal/org.enums.ts";
 import {useRequest} from "ahooks";
 import {UserAddOutlined, UserOutlined} from "@ant-design/icons";
+import {RolePermissionSettings} from "@app/normal/org/roles/RolePermissionSettings.tsx";
 
 type RoleMembersPanelProps = {
     role?: any
@@ -78,7 +79,8 @@ export const RoleMembersPanel: FC<RoleMembersPanelProps> = ({role}) => {
     return <Layout direction={`vertical`}>
         <Layout.Item>
             <PageHeader backIcon={false} title={role?.name} extra={<Space>
-                <Button type={`link`}>权限配置</Button>
+                <RolePermissionSettings roleId={role?.id}><Button
+                    type={`link`}>权限配置</Button></RolePermissionSettings>
             </Space>}/>
         </Layout.Item>
         <Layout.Item auto={true}>

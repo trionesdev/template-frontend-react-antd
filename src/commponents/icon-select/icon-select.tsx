@@ -12,10 +12,12 @@ export const IconSelect = () => {
                onCancel={() => setOpen(false)}>
             <Flex wrap gap="small">
                 {_.map(icons, (icon, key) => {
-                    return <Button type={'text'} icon={icon} onClick={() => {
-                        setInnerValue(key)
-                        setOpen(false)
-                    }}/>
+                    return <Button key={key} color={key === innerValue ? 'primary' : 'default'}
+                                   variant={key === innerValue ? 'outlined' : 'link'} icon={icon}
+                                   onClick={() => {
+                                       setInnerValue(key)
+                                       setOpen(false)
+                                   }}/>
                 })}
             </Flex>
         </Modal>

@@ -21,7 +21,9 @@ export const MainLayout = () => {
                         }
                     }]
                 }}>
-                    <Avatar icon={<UserOutlined/>}/>
+                    <Space><Avatar icon={<UserOutlined/>}/>
+                    <span>TrionesUser</span>
+                    </Space>
                 </Dropdown>
             </Space>}/>
         </Layout.Item>

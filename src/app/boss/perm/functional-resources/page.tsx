@@ -5,9 +5,10 @@ import {functionalResourceApi} from "@apis/boss";
 import {Button, Select, Space} from "antd";
 import {RedoOutlined} from "@ant-design/icons";
 import {AppOptions, ClientTypeOptions, ResourceTypeOptions} from "@app/boss/perm/internal/perm.options.ts";
-import {ClientType} from "@app/boss/perm/internal/perm.enums.ts";
+import {ClientType, ResourceType} from "@app/boss/perm/internal/perm.enums.ts";
 import {useAppConfig} from "../../../../commponents/app-config";
 import {FunctionalResourceForm} from "@app/boss/perm/functional-resources/FunctionalResourceForm.tsx";
+import _ from "lodash";
 
 export const FunctionalResourcesPage = () => {
     const appConfig = useAppConfig()
@@ -55,11 +56,13 @@ export const FunctionalResourcesPage = () => {
             title: '操作',
             dataIndex: 'id',
             width: 100,
-            render: (id: string) => {
+            render: (id: string, record: any) => {
                 return <Space>
-                    <FunctionalResourceForm appCode={appCode} clientType={clientType} parentId={id} onRefresh={handleQuery}>
-                        <Button size={`small`} type={`link`}>添加子项</Button>
-                    </FunctionalResourceForm>
+                    {!_.eq(record.type, ResourceType.ACTION) &&
+                        <FunctionalResourceForm appCode={appCode} clientType={clientType} parentId={id}
+                                                onRefresh={handleQuery}>
+                            <Button size={`small`} type={`link`}>添加子项</Button>
+                        </FunctionalResourceForm>}
                     <FunctionalResourceForm appCode={appCode} clientType={clientType} id={id} onRefresh={handleQuery}>
                         <Button size={`small`} type={`link`}>编辑</Button>
                     </FunctionalResourceForm>
@@ -80,7 +83,8 @@ export const FunctionalResourcesPage = () => {
                         defaultValue={clientType} value={clientType}/>
             </Space>} extra={<Space>
                 <Button icon={<RedoOutlined/>} type={`text`} onClick={handleQuery}/>
-                <FunctionalResourceForm appCode={appCode} clientType={clientType} onRefresh={handleQuery}><Button type={`primary`}>新建功能资源</Button></FunctionalResourceForm>
+                <FunctionalResourceForm appCode={appCode} clientType={clientType} onRefresh={handleQuery}><Button
+                    type={`primary`}>新建功能资源</Button></FunctionalResourceForm>
             </Space>}/>
         </Layout.Item>
         <Layout.Item auto={true}>
