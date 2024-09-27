@@ -84,7 +84,7 @@ export const FunctionalResourceForm: FC<FunctionalResourceFormProps> = ({
                 valueOption={parentResource}/>
         </Form.Item>
         <Form.Item label={`名称`} name={`name`}>
-            <Input placeholder={`请输入名称`}/>
+            <Input placeholder={`请输入名称`} allowClear />
         </Form.Item>
         <Form.Item label={`标识编码`} name={`uniqueCode`} required={true}>
             <Input placeholder={`请输入标识编码`}/>
