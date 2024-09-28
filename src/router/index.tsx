@@ -6,7 +6,6 @@ import {FunctionalResourceDraftsPage} from "@app/boss/perm/functional-resource-d
 import {FunctionalResourcesPage} from "@app/boss/perm/functional-resources/page.tsx";
 import {DepartmentsPage} from "@app/normal/org/departments/page.tsx";
 import {NormalLayout} from "@app/normal/layout";
-import {BossLayout} from "@app/boss/layout";
 import {OrgStructurePage} from "@app/normal/org/org-structure/page.tsx";
 import {TenantMembersPage} from "@app/normal/org/members/page.tsx";
 import {RolesPage} from "@app/normal/org/roles/page.tsx";
@@ -25,10 +24,8 @@ const routes: RouteObject[] = [
                     {...RouteConstants.ORG.ORG_STRUCTURE, element: <OrgStructurePage/>},
                     {...RouteConstants.ORG.MEMBERS, element: <TenantMembersPage/>},
                     {...RouteConstants.ORG.ROLES, element: <RolesPage/>},
-                ]
-            },
-            {
-                path: () => '/boss/', anonymous: true, element: <BossLayout/>, children: [
+
+
                     {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES, element: <FunctionalResourcesPage/>},
                     {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCE_DRAFTS, element: <FunctionalResourceDraftsPage/>}
                 ]

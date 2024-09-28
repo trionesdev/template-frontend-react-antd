@@ -37,7 +37,12 @@ export const RolePermissionSettings: FC<RolePermissionSettingsProps> = ({childre
         manual: true,
         onSuccess: (res: any) => {
             if (res) {
-                debugger
+                const formData = _.map(res, (item: any) => {
+                    return {
+                        [item.obj]: item.effect === PermissionEffect.ALLOW
+                    }
+                })
+                form.setFieldsValue(_.assign({}, ...formData))
             }
         }
     })

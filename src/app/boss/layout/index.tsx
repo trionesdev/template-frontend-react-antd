@@ -1,24 +1,13 @@
-import {Outlet, useNavigate} from "@trionesdev/commons-react";
+import {Outlet} from "@trionesdev/commons-react";
 import styles from "./boss-layout.module.less"
 import {Layout} from "@trionesdev/antd-react-ext";
 import {Menu} from "antd";
-import {RouteConstants} from "../../../router/route.constants.ts";
 
 export const BossLayout = () => {
-    const navigate = useNavigate()
+
 
     const menuItems: any[] = [
-        {
-            key: 'perm',
-            label: '权限资源',
-            children: [
-                {
-                    key: RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.id,
-                    label: '功能权限',
-                    onClick: () => navigate(RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.path!())
-                }
-            ]
-        }
+
     ]
 
     return (

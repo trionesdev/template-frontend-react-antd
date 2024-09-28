@@ -2,7 +2,7 @@ import {GridTable, Layout, PageHeader} from "@trionesdev/antd-react-ext";
 import {useState} from "react";
 import {useRequest} from "ahooks";
 import {functionalResourceApi} from "@apis/boss";
-import {Button, Select, Space} from "antd";
+import {Button, Popconfirm, Select, Space} from "antd";
 import {RedoOutlined} from "@ant-design/icons";
 import {AppOptions, ClientTypeOptions, ResourceTypeOptions} from "@app/boss/perm/internal/perm.options.ts";
 import {ClientType, ResourceType} from "@app/boss/perm/internal/perm.enums.ts";
@@ -64,17 +64,21 @@ export const FunctionalResourcesPage = () => {
         {
             title: '操作',
             dataIndex: 'id',
-            width: 100,
+            width: 180,
             render: (id: string, record: any) => {
                 return <Space>
-                    {!_.eq(record.type, ResourceType.ACTION) &&
-                        <FunctionalResourceForm appCode={appCode} clientType={clientType} parentId={id}
-                                                onRefresh={handleQuery}>
-                            <Button size={`small`} type={`link`}>添加子项</Button>
-                        </FunctionalResourceForm>}
                     <FunctionalResourceForm appCode={appCode} clientType={clientType} id={id} onRefresh={handleQuery}>
                         <Button size={`small`} type={`link`}>编辑</Button>
                     </FunctionalResourceForm>
+                    <FunctionalResourceForm appCode={appCode} clientType={clientType} parentId={id}
+                                            onRefresh={handleQuery}>
+                        <Button disabled={_.eq(record.type, ResourceType.ACTION)} size={`small`}
+                                type={`link`}>添加子项</Button>
+                    </FunctionalResourceForm>
+                    <Popconfirm title={`确定删除该资源？`}>
+                        <Button disabled={!_.isEmpty(record.children)} size={`small`} type={`link`}
+                                danger={true}>删除</Button>
+                    </Popconfirm>
                 </Space>
             }
         }

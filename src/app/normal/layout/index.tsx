@@ -3,7 +3,7 @@ import styles from "./normal-layout.module.less"
 import {Layout} from "@trionesdev/antd-react-ext";
 import {Menu} from "antd";
 import {RouteConstants} from "../../../router/route.constants.ts";
-import {ApartmentOutlined, DatabaseOutlined} from "@ant-design/icons";
+import {ApartmentOutlined, DatabaseOutlined, DesktopOutlined} from "@ant-design/icons";
 
 export const NormalLayout = () => {
     const navigate = useNavigate()
@@ -57,6 +57,18 @@ export const NormalLayout = () => {
                     key: 'district-manage',
                     label: '地区管理',
                 },
+            ]
+        },
+        {
+            key: 'sys',
+            label: '系统资源',
+            icon: <DesktopOutlined/>,
+            children: [
+                {
+                    key: RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.id,
+                    label: '功能权限',
+                    onClick: () => navigate(RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.path!())
+                }
             ]
         }
     ]
