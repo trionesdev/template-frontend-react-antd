@@ -12,6 +12,10 @@ export class DepartmentApi extends BackendApi {
         return this.request.delete(`${this.baseUri}/departments/${id}`);
     }
 
+    updateDepartmentById(id:string,data: any) {
+        return this.request.put(`${this.baseUri}/departments/${id}`, data);
+    }
+
     queryDepartmentById(id: string) {
         return this.request.get(`${this.baseUri}/departments/${id}`);
     }

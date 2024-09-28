@@ -100,7 +100,7 @@ export const FunctionalResourcesPage = () => {
                     type={`primary`}>新建功能资源</Button></FunctionalResourceForm>
             </Space>}/>
         </Layout.Item>
-        <Layout.Item auto={true}>
+        <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
             <GridTable
                 fit={true}
                 size={`small`} columns={columns}

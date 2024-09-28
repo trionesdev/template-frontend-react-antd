@@ -29,7 +29,8 @@ export const DepartmentForm: FC<DepartmentFormProps> = ({children, id, parentId,
 
     const onSubmit = () => {
         form.validateFields().then(values => {
-            departmentApi.createDepartment(values).then(() => {
+            const request = id ? departmentApi.updateDepartmentById(id, values) : departmentApi.createDepartment(values)
+            request.then(() => {
                 setOpen(false)
                 onRefresh?.()
             }).catch(async (res: any) => {

@@ -33,14 +33,18 @@ export const RoleForm: FC<RoleFormProps> = ({children, id, onRefresh}) => {
         })
     }
 
-    useEffect(()=>{
-        if (open && id){
+    useEffect(() => {
+        if (open && id) {
             handleQueryRole()
         }
-    },[id,open])
+    }, [id, open])
 
     return <DrawerForm open={open} form={form} trigger={children} title={`${id ? '修改' : '新增'}角色`}
-                       formProps={{layout: 'vertical'}} onOk={handleSubmit} afterOpenChange={setOpen}>
+                       formProps={{layout: 'vertical'}} onOk={handleSubmit}
+                       afterOpenChange={(o) => {
+                           setOpen(o)
+                           form.resetFields()
+                       }}>
         <Form.Item label={`角色名称`} name={`name`} required={true}>
             <Input/>
         </Form.Item>

@@ -72,7 +72,7 @@ export const DepartmentMemberForm: FC<DepartmentMemberFormProps> = ({
                 <Form.Item name={`phone`} label={`手机号码`} required={true}>
                     <Input/>
                 </Form.Item>
-                <Form.Item name={`departmentIds`} label={`部门`} initialValue={[departmentId]}>
+                <Form.Item name={`departmentIds`} label={`部门`} required={true} initialValue={[departmentId]}>
                     <DepartmentSelect multiple/>
                 </Form.Item>
             </Spin>

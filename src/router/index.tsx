@@ -2,7 +2,6 @@ import {createHashRouter, RouteObject, RouterProvider} from "@trionesdev/commons
 import {SignInPage} from "@app/account/sign-in/page.tsx";
 import {RouteConstants} from "./route.constants.ts";
 import {MainLayout} from "@app/MainLayout.tsx";
-import {FunctionalResourceDraftsPage} from "@app/boss/perm/functional-resource-drafts/page.tsx";
 import {FunctionalResourcesPage} from "@app/boss/perm/functional-resources/page.tsx";
 import {DepartmentsPage} from "@app/normal/org/departments/page.tsx";
 import {NormalLayout} from "@app/normal/layout";
@@ -27,7 +26,6 @@ const routes: RouteObject[] = [
 
 
                     {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES, element: <FunctionalResourcesPage/>},
-                    {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCE_DRAFTS, element: <FunctionalResourceDraftsPage/>}
                 ]
             },
         ]

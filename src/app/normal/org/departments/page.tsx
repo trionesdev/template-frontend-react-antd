@@ -5,6 +5,7 @@ import {DepartmentForm} from "@app/normal/org/departments/DepartmentForm.tsx";
 import {ApartmentOutlined} from "@ant-design/icons";
 import {useRequest} from "ahooks";
 import {departmentApi} from "@apis/backend";
+import _ from "lodash";
 
 export const DepartmentsPage = () => {
     const [result, setResult] = useState<any>()
@@ -45,7 +46,7 @@ export const DepartmentsPage = () => {
                             message.error(err)
                         })
                     }}>
-                        <Button size={`small`} type={`link`} danger>删除</Button>
+                        <Button disabled={!_.isEmpty(record.children)} size={`small`} type={`link`} danger>删除</Button>
                     </Popconfirm>
                 </Space>
             }

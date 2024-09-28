@@ -47,9 +47,11 @@ export const DepartmentMembersPanel: FC<DepartmentMembersProps> = ({department})
             title: '操作',
             dataIndex: 'id',
             width: 100,
-            render(id: string) {
+            render(id: string, record: any) {
                 return <Space>
-                    <Button size={`small`} type={`link`}>编辑</Button>
+                    <DepartmentMemberForm id={record?.memberId}>
+                        <Button size={`small`} type={`link`}>编辑</Button>
+                    </DepartmentMemberForm>
                     <Popconfirm title={`确定删除部门成员？`} onConfirm={() => {
                         departmentApi.deleteDepartmentMemberById(id).then(async () => {
                             message.success(`删除部门成员成功`)
