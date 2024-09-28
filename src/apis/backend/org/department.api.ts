@@ -20,7 +20,11 @@ export class DepartmentApi extends BackendApi {
         return this.request.get(`${this.baseUri}/department/tree`, {params});
     }
 
-    queryDepartmentMembers(params: PageQueryParams) {
+    deleteDepartmentMemberById(id:string) {
+        return this.request.delete(`${this.baseUri}/department/members/${id}`);
+    }
+
+    queryDepartmentMemberPage(params: PageQueryParams) {
         return this.request.get(`${this.baseUri}/department/member/page`, {params});
     }
 

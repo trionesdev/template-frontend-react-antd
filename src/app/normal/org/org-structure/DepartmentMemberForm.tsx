@@ -5,15 +5,18 @@ import {useRequest} from "ahooks";
 import {tenantApi} from "@apis/backend";
 import {DrawerForm} from "@trionesdev/antd-react-ext";
 
-type TenantMemberFormProps = {
+type DepartmentMemberFormProps = {
     children: React.ReactElement,
     id?: string
+    departmentId?: string
     onRefresh?: () => void
 }
 
-export const TenantMemberForm: FC<TenantMemberFormProps> = ({
-                                                                children, id, onRefresh
-                                                            }) => {
+export const DepartmentMemberForm: FC<DepartmentMemberFormProps> = ({
+                                                                        children, id,
+                                                                        departmentId = "0",
+                                                                        onRefresh
+                                                                    }) => {
     const [open, setOpen] = useState(false)
     const [form] = Form.useForm()
 
@@ -69,7 +72,7 @@ export const TenantMemberForm: FC<TenantMemberFormProps> = ({
                 <Form.Item name={`phone`} label={`手机号码`} required={true}>
                     <Input/>
                 </Form.Item>
-                <Form.Item name={`departmentIds`} label={`部门`} initialValue={["0"]}>
+                <Form.Item name={`departmentIds`} label={`部门`} initialValue={[departmentId]}>
                     <DepartmentSelect multiple/>
                 </Form.Item>
             </Spin>

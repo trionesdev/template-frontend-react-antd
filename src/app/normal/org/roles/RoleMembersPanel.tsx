@@ -54,6 +54,10 @@ export const RoleMembersPanel: FC<RoleMembersPanelProps> = ({role}) => {
             }
         },
         {
+            title: '用户名',
+            dataIndex: 'username',
+        },
+        {
             title: '操作',
             dataIndex: 'id',
             width: 100,
