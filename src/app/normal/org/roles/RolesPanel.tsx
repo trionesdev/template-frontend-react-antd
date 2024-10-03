@@ -31,7 +31,7 @@ export const RolesPanel: FC<RolesPanelProps> = ({onRoleChange}) => {
         return [
             {
                 key: nodeData.id,
-                label: <RoleForm id={nodeData.id} onRefresh={handleQueryRoles}><span>编辑</span></RoleForm>
+                label: <RoleForm id={nodeData.id} onRefresh={handleQueryRoles}><span style={{width: '100%'}}>编辑</span></RoleForm>
             },
             {
                 key: 'delete',
@@ -78,7 +78,7 @@ export const RolesPanel: FC<RolesPanelProps> = ({onRoleChange}) => {
                                   {nodeData.name}
                               </div>
                               <div className={`tree-node-extra`}>
-                                  <Dropdown menu={{items: handleNodeMenuItems(nodeData)}}
+                                  <Dropdown  menu={{items: handleNodeMenuItems(nodeData)}}
                                             overlayStyle={{minWidth: 100}}>
                                       <Button size={`small`} type={`text`} icon={<EllipsisOutlined/>}/>
                                   </Dropdown>
