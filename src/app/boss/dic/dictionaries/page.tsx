@@ -56,16 +56,21 @@ export const DictionariesPage = () => {
     ]
 
     return <div style={{height: '100%', backgroundColor: '#fff'}}>
-        <GridTable toolbar={<TableToolbar
-            title={<Space>
-                {type && <Button type={`text`} icon={<ArrowLeftOutlined/>} onClick={() => {
-                    setQueryParams({type: DictionaryType.GROUP})
-                    setType(undefined)
-                }}/>}
-                <span>{`字典类型${type ? `: ${type?.name}` : ''}`}</span>
-            </Space>}
-            extra={<Space>
-                <DictionaryForm><Button type={`primary`}>新建字典</Button></DictionaryForm>
-            </Space>}/>} fit={true} size={`small`} columns={columns} dataSource={rows}/>
+        <GridTable
+            toolbar={<TableToolbar
+                title={<Space>
+                    {type && <Button type={`text`} icon={<ArrowLeftOutlined/>} onClick={() => {
+                        setQueryParams({type: DictionaryType.GROUP})
+                        setType(undefined)
+                    }}/>}
+                    <span>{`字典类型${type ? `: ${type?.name}` : ''}`}</span>
+                </Space>}
+                extra={<Space>
+                    <DictionaryForm defaultType={type ? DictionaryType.DICTIONARY : DictionaryType.GROUP}
+                                    defaultTypeCode={type?.code}><Button
+                        type={`primary`}>新建字典</Button></DictionaryForm>
+                </Space>}/>}
+            fit={true} size={`small`} columns={columns} dataSource={rows} rowKey={`id`}
+            pagination={false}/>
     </div>
 }
