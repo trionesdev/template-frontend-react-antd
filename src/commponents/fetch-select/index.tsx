@@ -1,15 +1,15 @@
 import {Select, SelectProps} from "antd";
-import React, {FC, useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {useRequest} from "ahooks";
 import _ from "lodash";
 
 export type FetchSelectProps = {
     valueOption?: any
-    fixedOptions?: { label?: React.ReactNode, value: string, [key: string]: any }[]
+    fixedOptions?: any[]
     dropdownFetch?: boolean
     fetchEnable?: boolean
     fetchAlways?: boolean
-    fetchRequest?: (searchValue?: string) => Promise<{ label?: React.ReactNode, value: string, [key: string]: any }[]>
+    fetchRequest?: (searchValue?: string) => Promise<any>
 } & Omit<SelectProps, 'options' | 'onDropdownVisibleChange'>
 export const FetchSelect: FC<FetchSelectProps> = ({
                                                       valueOption,

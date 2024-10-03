@@ -8,6 +8,8 @@ import {NormalLayout} from "@app/normal/layout";
 import {OrgStructurePage} from "@app/normal/org/org-structure/page.tsx";
 import {TenantMembersPage} from "@app/normal/org/members/page.tsx";
 import {RolesPage} from "@app/normal/org/roles/page.tsx";
+import {DistrictsPage} from "@app/boss/dic/districts/page.tsx";
+import {DictionariesPage} from "@app/boss/dic/dictionaries/page.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -24,7 +26,8 @@ const routes: RouteObject[] = [
                     {...RouteConstants.ORG.MEMBERS, element: <TenantMembersPage/>},
                     {...RouteConstants.ORG.ROLES, element: <RolesPage/>},
 
-
+                    {...RouteConstants.DIC.DICTIONARIES, element: <DictionariesPage/>},
+                    {...RouteConstants.DIC.DISTRICTS, element: <DistrictsPage/>},
                     {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES, element: <FunctionalResourcesPage/>},
                 ]
             },

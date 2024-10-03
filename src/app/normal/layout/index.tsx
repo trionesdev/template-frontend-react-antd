@@ -42,20 +42,18 @@ export const NormalLayout = () => {
             icon: <DatabaseOutlined/>,
             children: [
                 {
-                    key: 'dic-type-manage',
-                    label: '字典类型管理',
-                },
-                {
-                    key: 'dic-manage',
+                    key: RouteConstants.DIC.DICTIONARIES.id,
                     label: '字典管理',
+                    onClick: () => navigate(RouteConstants.DIC.DICTIONARIES.path!())
                 },
                 {
                     key: 'country-manage',
                     label: '国家管理',
                 },
                 {
-                    key: 'district-manage',
+                    key: RouteConstants.DIC.DISTRICTS.id,
                     label: '地区管理',
+                    onClick: () => navigate(RouteConstants.DIC.DISTRICTS.path!())
                 },
             ]
         },

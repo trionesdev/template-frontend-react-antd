@@ -1,4 +1,4 @@
-import {RouteItem} from "@trionesdev/commons-react";
+import {RouteItem, RouteObject} from "@trionesdev/commons-react";
 
 export namespace RouteConstants {
     export const ACCOUNT = {
@@ -14,7 +14,7 @@ export namespace RouteConstants {
             id: 'departments',
             path: () => "/org/departments",
             anonymous: true,
-        } as RouteItem,
+        } as RouteObject,
         ORG_STRUCTURE:{
             id:'org-structure',
             anonymous: true,
@@ -30,6 +30,19 @@ export namespace RouteConstants {
             anonymous: true,
             path: () => "/org/roles",
         }
+    }
+
+    export const DIC = {
+        DICTIONARIES: {
+            id: 'dictionaries',
+            path: () => "/dic/dictionaries",
+            anonymous: true,
+        } as RouteObject,
+        DISTRICTS: {
+            id: 'districts',
+            path: () => "/dic/districts",
+            anonymous: true,
+        } as RouteObject,
     }
 
     export namespace BOSS {
