@@ -9,6 +9,14 @@ export namespace RouteConstants {
         } as RouteItem,
     }
 
+    export const USER_CENTER={
+        PROFILE:{
+            id:'user-profile',
+            anonymous: true,
+            path: () => "/user-center/profile",
+        },
+    }
+
     export const ORG = {
         DEPARTMENTS: {
             id: 'departments',

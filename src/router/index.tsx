@@ -10,6 +10,7 @@ import {TenantMembersPage} from "@app/normal/org/members/page.tsx";
 import {RolesPage} from "@app/normal/org/roles/page.tsx";
 import {DistrictsPage} from "@app/boss/dic/districts/page.tsx";
 import {DictionariesPage} from "@app/boss/dic/dictionaries/page.tsx";
+import {UserCenterLayout} from "@app/user-center/UserCenterLayout.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -17,10 +18,17 @@ const routes: RouteObject[] = [
     {
         path: () => '/', anonymous: true, element: <MainLayout/>, children: [
             {
+                path: () => '/user-center', anonymous: true, element: <UserCenterLayout/>, children: [
+                    {...RouteConstants.USER_CENTER.PROFILE, element: <div>Profile</div>},
+                ]
+            },
+            {
                 path: () => '/', anonymous: true, element: <NormalLayout/>, children: [
                     {
                         path: () => '/', anonymous: true, element: <div>Home</div>
                     },
+
+
                     {...RouteConstants.ORG.DEPARTMENTS, element: <DepartmentsPage/>},
                     {...RouteConstants.ORG.ORG_STRUCTURE, element: <OrgStructurePage/>},
                     {...RouteConstants.ORG.MEMBERS, element: <TenantMembersPage/>},

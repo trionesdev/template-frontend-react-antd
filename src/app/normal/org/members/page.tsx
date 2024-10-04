@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {useRequest} from "ahooks";
 import {GridTable, Layout, TableToolbar} from "@trionesdev/antd-react-ext";
-import {Button, Space} from "antd";
-import {PlusCircleOutlined} from "@ant-design/icons";
+import {Avatar, Button, Space} from "antd";
+import {PlusCircleOutlined, UserOutlined} from "@ant-design/icons";
 import {TenantMemberForm} from "./TenantMemberForm";
 import {PageResult} from "@apis";
 import {tenantApi} from "@apis/backend";
@@ -29,15 +29,24 @@ export const TenantMembersPage = () => {
     const columns: any[] = [
         {
             title: '姓名',
-            dataIndex: 'nickname'
+            dataIndex: 'nickname',
+            render: (text: string, record: any) => {
+                return <Space>
+                    <Avatar shape={`square`} icon={<UserOutlined/>} src={record.avatar}/>
+                    <span>{text}</span>
+                </Space>
+            }
         },
         {
             title: '操作',
             dataIndex: 'id',
-            render: (id: string, record: any) => {
+            width: 150,
+            render: (_id: string, record: any) => {
                 return <Space>
-                    <TenantMemberForm id={record.id} onRefresh={handleQuery}><Button size={`small`}
-                                                                                     type={`link`}>编辑</Button></TenantMemberForm>
+                    <TenantMemberForm id={record.id} onRefresh={handleQuery}>
+                        <Button size={`small`} type={`link`}>编辑</Button>
+                    </TenantMemberForm>
+                    <Button size={`small`} type={`link`}>修改密码</Button>
                 </Space>
             }
         }
