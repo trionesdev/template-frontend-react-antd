@@ -9,7 +9,7 @@ export const MainLayout = () => {
     const navigate = useNavigate()
     return <Layout direction={`vertical`}>
         <Layout.Item>
-            <AppToolbar title={<Space style={{cursor:"pointer"}} onClick={() => {
+            <AppToolbar title={<Space style={{cursor: "pointer"}} onClick={() => {
                 navigate('/')
             }}>TrionesDev</Space>} extra={<Space>
                 <Dropdown menu={{
@@ -25,7 +25,7 @@ export const MainLayout = () => {
                         {
                             key: `modify-password`,
                             label: `修改密码`,
-                            icon:<KeyOutlined />
+                            icon: <KeyOutlined/>
                         },
                         {
                             key: `logout`,
@@ -38,7 +38,7 @@ export const MainLayout = () => {
                         }
                     ]
                 }}>
-                    <Space><Avatar icon={<UserOutlined/>}/>
+                    <Space style={{cursor: "default"}}><Avatar icon={<UserOutlined/>}/>
                         <span>TrionesUser</span>
                     </Space>
                 </Dropdown>
