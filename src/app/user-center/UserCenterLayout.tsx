@@ -18,7 +18,7 @@ export const UserCenterLayout = () => {
     return <div className={styles.userCenterLayout}>
         <div className={styles.userCenterLayoutWrapper}>
             <div className={styles.userCenterLayoutWrapperSider}>
-                <AvatarEditor />
+                <AvatarEditor width={200} height={200}/>
             </div>
         </div>
     </div>

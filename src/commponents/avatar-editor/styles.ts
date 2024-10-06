@@ -7,6 +7,7 @@ export const genAvatarEditorStyle = (
 ): CSSInterpolation => {
     return {
         [`.${prefixCls}`]: {
+            boxSizing: 'border-box',
             [`&-avatar`]: {
                 position: 'relative',
                 [`&-mask`]: {
@@ -56,11 +57,7 @@ export const genAvatarCropModalStyle = (
 ): CSSInterpolation => {
     return {
         [`.${prefixCls}`]: {
-            '&-cropper': {
-                width: 300,
-                height: 300,
-                overflow: 'hidden'
-            },
+            '&-cropper': {},
             'img': {
                 width: '100%',
                 maxWidth: '100%',

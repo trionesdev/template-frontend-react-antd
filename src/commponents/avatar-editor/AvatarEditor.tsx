@@ -25,7 +25,7 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
                                                         className,
                                                         width = 200,
                                                         height = 200,
-                                                        editable,
+                                                        editable=true,
                                                         accept = '.jpg,.jpeg,.png,.webp',
                                                         uploadRequest,
                                                     }) => {
@@ -40,16 +40,24 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
         reader.readAsDataURL(img);
     };
 
-    const handleUpload = async (param: any) => {
+    const handleImageSelect = async (param: any) => {
         if (!param.file) {
             return;
         }
         getBase64(param.file, (url) => {
-            console.log('url', url)
             setCropImage(url)
             setOpen(true)
         });
     };
+
+    const handleUpload = (dataURL: any) => {
+        if (uploadRequest) {
+
+        } else {
+            setInnerValue(dataURL)
+            setOpen(false)
+        }
+    }
 
 
     const prefixCls = 'triones-avatar-editor';
@@ -59,16 +67,14 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
     });
     return wrapSSR(
         <div className={classNames(prefixCls, hashId)}>
-            {/*<Image preview={false}*/}
-            {/*       src={'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'}/>*/}
-
-
             <div style={{width: width, height: height}}>
                 {innerValue ? <div className={classNames(`${prefixCls}-avatar`, hashId)}>
                     <Image width={width} height={height} preview={false} src={innerValue}/>
                     {editable && <div className={classNames(`${prefixCls}-avatar-mask`, hashId)}>
                         <label>
-                            <input type={'file'} style={{display: "none"}}/>
+                            <input type={'file'} style={{display: "none"}} onChange={(event)=>{
+                                debugger
+                            }}/>
                             <CameraOutlined/>
                         </label>
                     </div>}
@@ -78,7 +84,7 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
                     className="avatar-uploader"
                     accept={accept}
                     showUploadList={false}
-                    customRequest={handleUpload}
+                    customRequest={handleImageSelect}
                 >
                     <CameraOutlined/>
                 </Upload>}
@@ -86,7 +92,7 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
             <AvatarCropModal open={open} cropImage={cropImage} onCancel={() => {
                 setOpen(false)
                 setCropImage(undefined)
-            }}/>
+            }} onOk={handleUpload}/>
         </div>
     )
 }
