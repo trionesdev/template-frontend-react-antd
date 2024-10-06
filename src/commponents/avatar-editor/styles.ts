@@ -10,14 +10,23 @@ export const genAvatarEditorStyle = (
             boxSizing: 'border-box',
             [`&-avatar`]: {
                 position: 'relative',
+                '.ant-avatar-square': {
+                    borderRadius: '0px!important'
+                },
+                [`&:hover`]: {
+                    [`.${prefixCls}-avatar-mask`]: {
+                        visibility: 'visible'
+                    }
+                },
                 [`&-mask`]: {
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    background: 'rgba(0,0,0,.5)',
+                    background: 'rgba(0,0,0,0.3)',
                     display: 'flex',
+                    visibility: 'hidden',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#fff',
