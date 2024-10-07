@@ -11,6 +11,8 @@ import {RolesPage} from "@app/normal/org/roles/page.tsx";
 import {DistrictsPage} from "@app/boss/dic/districts/page.tsx";
 import {DictionariesPage} from "@app/boss/dic/dictionaries/page.tsx";
 import {UserCenterLayout} from "@app/user-center/UserCenterLayout.tsx";
+import {UserProfilePage} from "@app/user-center/profile/page.tsx";
+import {ChangePasswordPage} from "@app/user-center/change-password/page.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -19,7 +21,8 @@ const routes: RouteObject[] = [
         path: () => '/', anonymous: true, element: <MainLayout/>, children: [
             {
                 path: () => '/user-center', anonymous: true, element: <UserCenterLayout/>, children: [
-                    {...RouteConstants.USER_CENTER.PROFILE, element: <div>Profile</div>},
+                    {...RouteConstants.USER_CENTER.PROFILE, element: <UserProfilePage/>},
+                    {...RouteConstants.USER_CENTER.PASSWORD, element: <ChangePasswordPage/>},
                 ]
             },
             {

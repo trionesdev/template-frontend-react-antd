@@ -9,12 +9,17 @@ export namespace RouteConstants {
         } as RouteItem,
     }
 
-    export const USER_CENTER={
-        PROFILE:{
-            id:'user-profile',
+    export const USER_CENTER = {
+        PROFILE: {
+            id: 'user-profile',
             anonymous: true,
             path: () => "/user-center/profile",
         },
+        PASSWORD: {
+            id: 'user-password',
+            anonymous: true,
+            path: () => "/user-center/password",
+        }
     }
 
     export const ORG = {
@@ -23,18 +28,18 @@ export namespace RouteConstants {
             path: () => "/org/departments",
             anonymous: true,
         } as RouteObject,
-        ORG_STRUCTURE:{
-            id:'org-structure',
+        ORG_STRUCTURE: {
+            id: 'org-structure',
             anonymous: true,
             path: () => "/org/structure",
         },
-        MEMBERS:{
-            id:'org-members',
+        MEMBERS: {
+            id: 'org-members',
             anonymous: true,
             path: () => "/org/members",
         },
-        ROLES:{
-            id:'roles',
+        ROLES: {
+            id: 'roles',
             anonymous: true,
             path: () => "/org/roles",
         }

@@ -1,9 +1,18 @@
 .userCenterLayout {
+  padding: 50px;
   &Wrapper {
     display: flex;
+    max-width: 1200px;
+    margin: auto;
 
     &Sider {
       width: 250px;
+
+      .ant-card {
+        .ant-card-body {
+          border-radius: 0;
+        }
+      }
     }
 
     &Content {

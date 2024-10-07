@@ -1,5 +1,5 @@
 import {AppToolbar, Layout} from "@trionesdev/antd-react-ext";
-import {Outlet, useNavigate} from "@trionesdev/commons-react";
+import {Outlet, useAuth, useNavigate} from "@trionesdev/commons-react";
 import {Avatar, Dropdown, Space} from "antd";
 import {KeyOutlined, LogoutOutlined, UserOutlined} from "@ant-design/icons";
 import {StorageUtils} from "@trionesdev/browser-commons";
@@ -7,6 +7,7 @@ import {RouteConstants} from "../router/route.constants.ts";
 
 export const MainLayout = () => {
     const navigate = useNavigate()
+    const {actor} = useAuth()
     return <Layout direction={`vertical`}>
         <Layout.Item>
             <AppToolbar title={<Space style={{cursor: "pointer"}} onClick={() => {
@@ -38,8 +39,8 @@ export const MainLayout = () => {
                         }
                     ]
                 }}>
-                    <Space style={{cursor: "default"}}><Avatar icon={<UserOutlined/>}/>
-                        <span>TrionesUser</span>
+                    <Space style={{cursor: "default"}}><Avatar icon={<UserOutlined/>} src={actor?.avatar}/>
+                        <span>{actor?.nickname}</span>
                     </Space>
                 </Dropdown>
             </Space>}/>

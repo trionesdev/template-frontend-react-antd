@@ -8,6 +8,8 @@ import './index.less'
 import {AuthProvider, PermissionProvider} from "@trionesdev/commons-react";
 import {legacyLogicalPropertiesTransformer, StyleProvider} from "@ant-design/cssinjs";
 import {AppConfigProvider} from "./commponents/app-config";
+import {StorageUtils} from "@trionesdev/browser-commons";
+import {tenantApi} from "@apis";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -15,7 +17,13 @@ createRoot(document.getElementById('root')!).render(
             <ConfigProvider locale={zhCN}>
                 <AppConfigProvider defaultConfig={{multiTenant: false, selfHost: true}}>
                     <AuthProvider authRequest={async () => {
-                        return null
+                        if (StorageUtils.getTrionesUserToken()) {
+                            return tenantApi.queryActorMember().then((actor: any) => {
+                                return actor
+                            })
+                        } else {
+                            return Promise.reject(null)
+                        }
                     }}>
                         <PermissionProvider
                             policyRequest={async () => {
