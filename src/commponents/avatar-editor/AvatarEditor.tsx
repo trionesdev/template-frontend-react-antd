@@ -90,11 +90,11 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
         styleFun: genAvatarEditorStyle,
     });
     return wrapSSR(
-        <div className={classNames(prefixCls, className, hashId)} style={style}>
+        <div className={classNames(prefixCls, className, hashId)} style={{width: size, height: size, ...style}}>
             <Spin spinning={loading}>
                 <div style={{width: size, height: size}}>
                     <div className={classNames(`${prefixCls}-avatar`, hashId)}>
-                        <Avatar size={size} shape={'square'} icon={<UserOutlined/>} src={innerValue || null} />
+                        <Avatar size={size} shape={'square'} icon={<UserOutlined/>} src={innerValue || null}/>
                         {editable && <div className={classNames(`${prefixCls}-avatar-mask`, hashId)}>
                             <label>
                                 <input type={'file'} style={{display: "none"}} accept={accept}

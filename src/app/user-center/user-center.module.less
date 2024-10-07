@@ -7,10 +7,14 @@
 
     &Sider {
       width: 250px;
-
-      .ant-card {
-        .ant-card-body {
-          border-radius: 0;
+      :global{
+        .ant-card {
+          .ant-card-body {
+            border-radius: 0;
+          }
+        }
+        .ant-menu{
+          border-right: 0px!important;
         }
       }
     }

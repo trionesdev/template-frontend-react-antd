@@ -1,21 +1,23 @@
 import {useState} from "react";
 import {useRequest} from "ahooks";
-import {tenantApi} from "@apis";
+import {ossApi, tenantApi} from "@apis";
 import styles from "./user-center.module.less"
 import AvatarEditor from "../../commponents/avatar-editor";
 import {Card, Menu} from "antd";
-import {Outlet, useNavigate} from "@trionesdev/commons-react";
+import {Outlet, useMatches, useNavigate} from "@trionesdev/commons-react";
 import {RouteConstants} from "../../router/route.constants.ts";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
 
 export const UserCenterLayout = () => {
     const navigate = useNavigate()
+    const matches = useMatches();
+
     const [actor, setActor] = useState<any>()
 
-    const {run} = useRequest(() => {
+    useRequest(() => {
         return tenantApi.queryActorMember()
     }, {
-        onSuccess(data) {
+        onSuccess(data:any) {
             setActor(data)
         }
     })
@@ -23,13 +25,18 @@ export const UserCenterLayout = () => {
     return <div className={styles.userCenterLayout}>
         <div className={styles.userCenterLayoutWrapper}>
             <div className={styles.userCenterLayoutWrapperSider}>
-                <Card cover={<AvatarEditor size={250} uploadRequest={(file: File) => {
-                    console.log(file)
-                    return Promise.resolve('https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png')
+                <Card cover={<AvatarEditor size={250} value={actor?.avatar} uploadRequest={(file: File) => {
+                    const formData = new FormData()
+                    formData.append('file', file)
+                    return ossApi.formDataUpload(formData).then((res: any) => {
+                        return res.url
+                    })
+                }} onChange={async (url) => {
+                    await tenantApi.updateActorMember({avatar: url})
                 }}/>}>
                     <Card.Meta title={actor?.nickname}/>
                 </Card>
-                <Menu items={[
+                <Menu selectedKeys={[matches[matches.length - 1].id]} items={[
                     {
                         key: RouteConstants.USER_CENTER.PROFILE.id,
                         label: '我的信息',

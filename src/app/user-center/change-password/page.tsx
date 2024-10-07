@@ -11,7 +11,7 @@ export const ChangePasswordPage = () => {
     }
 
     return <div className={styles.changePassword}>
-        <Card title={`修改密码`} size={'small'} bordered={false} style={{boxShadow: 'none'}} extra={<Space>
+        <Card title={`修改密码`} size={'small'}   extra={<Space>
             <Button type={`primary`} onClick={() => {
 
             }}>提交</Button>

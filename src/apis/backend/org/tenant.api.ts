@@ -21,8 +21,12 @@ export class TenantApi extends BackendApi {
         return this.request.get(this.baseUri + '/tenant/member/page', {params});
     }
 
-    queryActorMember(){
-        return this.request.get(this.baseUri + '/tenant/member/actor');
+    queryActorMember() {
+        return this.request.get(this.baseUri + '/tenant/actor/member');
+    }
+
+    updateActorMember(data: any) {
+        return this.request.put(this.baseUri + '/tenant/actor/member', data);
     }
 
 }

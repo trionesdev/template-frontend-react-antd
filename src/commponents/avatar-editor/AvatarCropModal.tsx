@@ -145,7 +145,6 @@ export const AvatarCropModal: FC<AvatarCropModalProps> = ({open, cropImage, onCa
     const handleOk = () => {
         cropper.getCropperSelection()?.$toCanvas().then((canvas: any) => {
             onOk?.(canvas.toDataURL())
-            console.log(canvas.toDataURL())
         });
     }
 
