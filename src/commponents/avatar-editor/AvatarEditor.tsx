@@ -64,13 +64,13 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
             const fileExt = mimeType.split('/')[1];
             const file = new File([blob], `file.${fileExt}`, {type: mimeType});
             setLoading(true)
-            uploadRequest(file).then((url: string) => {
+            uploadRequest(file).then(async (url: string) => {
                 setInnerValue(url)
                 onChange?.(url)
             }).finally(() => {
                 setLoading(false)
-                setOpen(false)
             })
+            setOpen(false)
         } else {
             setInnerValue(dataURL)
             setOpen(false)
