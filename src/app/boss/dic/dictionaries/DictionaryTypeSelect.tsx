@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {FetchSelect} from "../../../../commponents/fetch-select";
 import {dictionaryApi} from "@apis/boss";
+import {FetchSelect} from "@trionesdev/antd-react-ext";
 
 type DictionaryTypeSelectProps = {
     value?: string

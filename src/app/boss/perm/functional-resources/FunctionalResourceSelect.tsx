@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {functionalResourceApi} from "@apis/boss";
-import {FetchTreeSelect} from "../../../../commponents/fetch-tree-select";
+import {FetchTreeSelect} from "@trionesdev/antd-react-ext";
 
 type FunctionalResourceSelectProps = {
     value?: string
@@ -19,7 +19,7 @@ export const FunctionalResourceSelect: FC<FunctionalResourceSelectProps> = ({
     return <FetchTreeSelect value={value} onChange={onChange}
                             fieldNames={{label: 'name', value: 'id'}}
                             dropdownFetch={true}
-                            valueOption={valueOption}
+                            initialValueOption={valueOption}
                             fetchAlways={true}
                             fetchEnable={false}
                             fixedOptions={[{name: '无父级资源', id: '0'}]}
