@@ -45,7 +45,7 @@ export const MainLayout = () => {
                 </Dropdown>
             </Space>}/>
         </Layout.Item>
-        <Layout.Item auto={true}>
+        <Layout.Item auto={true} style={{overflow: "auto"}}>
             <Outlet/>
         </Layout.Item>
     </Layout>

@@ -46,12 +46,12 @@ export const UserProfilePage = () => {
         </Space>}>
             <Form form={form}>
                 <Form.Item label={`昵称`} name={`nickname`}>
-                    <EditableDesc editing={editing}>
+                    <EditableDesc editing={editing} editIcon={true} manualChange={true}>
                         <Input/>
                     </EditableDesc>
                 </Form.Item>
-                <Form.Item label={`邮箱`} name={`email`}>
-                    <EditableDesc editing={editing}>
+                <Form.Item label={`邮箱`} name={`email`} >
+                    <EditableDesc editing={editing} editIcon={true} manualChange={true}>
                         <Input/>
                     </EditableDesc>
                 </Form.Item>
