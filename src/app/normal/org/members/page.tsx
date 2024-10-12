@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useRequest} from "ahooks";
 import {GridTable, Layout, TableToolbar} from "@trionesdev/antd-react-ext";
 import {Avatar, Button, Space} from "antd";
-import {PlusCircleOutlined, UserOutlined} from "@ant-design/icons";
+import {PlusCircleOutlined, RedoOutlined, UserOutlined} from "@ant-design/icons";
 import {TenantMemberForm} from "./TenantMemberForm";
 import {PageResult} from "@apis";
 import {tenantApi} from "@apis/backend";
@@ -60,6 +60,8 @@ export const TenantMembersPage = () => {
                         <TenantMemberForm onRefresh={handleQuery}>
                             <Button type={`primary`} icon={<PlusCircleOutlined/>}>添加成员</Button>
                         </TenantMemberForm>
+                    </Space>} extra={<Space>
+                        <Button icon={<RedoOutlined/>} type={`text`} onClick={handleQuery}/>
                     </Space>}/>}
                     fit={true} size={'small'} columns={columns} dataSource={result?.rows} rowKey={`id`}
                     loading={loading}

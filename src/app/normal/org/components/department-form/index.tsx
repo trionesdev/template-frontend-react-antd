@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from "react";
 import {Form, Input, message, Spin} from "antd";
-import {DepartmentSelect} from "../components/department-select";
+import {DepartmentSelect} from "../department-select";
 import {departmentApi} from "@apis/backend";
 import {useRequest} from "ahooks";
 import {ModalForm} from "@trionesdev/antd-react-ext";

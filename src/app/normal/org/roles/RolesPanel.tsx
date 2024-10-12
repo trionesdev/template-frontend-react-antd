@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from "react";
 import {Button, Dropdown, Flex, Modal, Spin, Tree} from "antd";
-import {EllipsisOutlined, UserAddOutlined} from "@ant-design/icons";
+import {EllipsisOutlined, PlusOutlined} from "@ant-design/icons";
 import {useRequest} from "ahooks";
 import {roleApi} from "@apis/backend";
 import styles from "./roles.module.less"
@@ -62,7 +62,7 @@ export const RolesPanel: FC<RolesPanelProps> = ({onRoleChange}) => {
         <Layout.Item>
             <Flex gap="small" style={{padding: '4px 0px'}}>
                 <Flex gap="small" flex={1}>
-                    <RoleForm onRefresh={handleQueryRoles}><Button icon={<UserAddOutlined/>}
+                    <RoleForm onRefresh={handleQueryRoles}><Button icon={<PlusOutlined />}
                                                                    block={true}>新建角色</Button></RoleForm>
                 </Flex>
                 {/*<Button type={`link`}>展开</Button>*/}

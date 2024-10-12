@@ -1,11 +1,11 @@
 import {useState} from "react";
 import {GridTable, Layout, TableToolbar} from "@trionesdev/antd-react-ext";
 import {Button, message, Popconfirm, Space} from "antd";
-import {DepartmentForm} from "@app/normal/org/departments/DepartmentForm.tsx";
-import {ApartmentOutlined} from "@ant-design/icons";
+import {ApartmentOutlined, RedoOutlined} from "@ant-design/icons";
 import {useRequest} from "ahooks";
 import {departmentApi} from "@apis/backend";
 import _ from "lodash";
+import {DepartmentForm} from "@app/normal/org/components/department-form";
 
 export const DepartmentsPage = () => {
     const [result, setResult] = useState<any>()
@@ -58,9 +58,10 @@ export const DepartmentsPage = () => {
             <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
                 <GridTable
                     toolbar={<TableToolbar title={<Space>
-                        <DepartmentForm onRefresh={handleQuery}><Button type={`primary`}
-                                                                        icon={
-                                                                            <ApartmentOutlined/>}>新建部门</Button></DepartmentForm>
+                        <DepartmentForm onRefresh={handleQuery}>
+                            <Button type={`primary`} icon={<ApartmentOutlined/>}>新建部门</Button></DepartmentForm>
+                    </Space>} extra={<Space>
+                        <Button icon={<RedoOutlined/>} type={`text`} onClick={handleQuery}/>
                     </Space>}/>}
                     expandable={{
                         defaultExpandAllRows: true,

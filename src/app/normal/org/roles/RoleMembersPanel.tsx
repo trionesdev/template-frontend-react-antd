@@ -5,7 +5,7 @@ import OrgSelectModal from "../../../../commponents/org-select-modal";
 import {departmentApi, PageResult, roleApi} from "@apis";
 import {RoleGrantObjType} from "@app/normal/org/internal/org.enums.ts";
 import {useRequest} from "ahooks";
-import {UserAddOutlined, UserOutlined} from "@ant-design/icons";
+import {RedoOutlined, UserAddOutlined, UserOutlined} from "@ant-design/icons";
 import {RolePermissionSettings} from "@app/normal/org/roles/RolePermissionSettings.tsx";
 
 type RoleMembersPanelProps = {
@@ -95,6 +95,8 @@ export const RoleMembersPanel: FC<RoleMembersPanelProps> = ({role}) => {
                     return departmentApi.queryDepartmentOrgNodeList({departmentId})
                 }} onOk={handleAddMembers}><Button icon={<UserAddOutlined/>}
                                                    type={`primary`}>添加成员</Button></OrgSelectModal>
+            </Space>} extra={<Space>
+                <Button icon={<RedoOutlined/>} type={`text`} onClick={handleQueryPage}/>
             </Space>}/>}
                        fit={true}
                        size={`small`}

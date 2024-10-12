@@ -3,7 +3,7 @@ import {GridTable, Layout, PageHeader, TableToolbar} from "@trionesdev/antd-reac
 import {useRequest} from "ahooks";
 import {departmentApi} from "@apis/backend";
 import {Button, message, Popconfirm, Space} from "antd";
-import {UserAddOutlined} from "@ant-design/icons";
+import {RedoOutlined, UserAddOutlined} from "@ant-design/icons";
 import {DepartmentMemberForm} from "@app/normal/org/org-structure/DepartmentMemberForm.tsx";
 
 type DepartmentMembersProps = {
@@ -77,6 +77,8 @@ export const DepartmentMembersPanel: FC<DepartmentMembersProps> = ({department})
                     <DepartmentMemberForm departmentId={department?.id} onRefresh={queryDepartmentMemberPage}>
                         <Button type={`primary`} icon={<UserAddOutlined/>}>新增成员</Button>
                     </DepartmentMemberForm>
+                </Space>} extra={<Space>
+                    <Button icon={<RedoOutlined/>} type={`text`} onClick={queryDepartmentMemberPage}/>
                 </Space>}/>}
                 fit={true} size={'small'} columns={columns}
                 dataSource={pageResult?.rows} rowKey={`id`}
