@@ -1,5 +1,5 @@
 import styles from "./profile.module.less"
-import {Button, Card, Form, Input, message, Space} from "antd";
+import {Card, Form, Input, message} from "antd";
 import {EditableDesc} from "@trionesdev/antd-react-ext";
 import {useRequest} from "ahooks";
 import {tenantApi} from "@apis";
@@ -34,23 +34,14 @@ export const UserProfilePage = () => {
     }
 
     return <div className={styles.userProfile}>
-        <Card title={`个人信息`}  extra={<Space>
-            {editing ? <Space>
-                <Button onClick={() => {
-                    setEditing(false)
-                }}>取消</Button>
-                <Button type={`primary`} onClick={handleSubmit}>保存</Button>
-            </Space> : <Button type={`primary`} onClick={() => {
-                setEditing(true)
-            }}>修改</Button>}
-        </Space>}>
+        <Card title={`个人信息`}>
             <Form form={form}>
                 <Form.Item label={`昵称`} name={`nickname`}>
                     <EditableDesc editing={editing} editIcon={true} manualChange={true}>
                         <Input/>
                     </EditableDesc>
                 </Form.Item>
-                <Form.Item label={`邮箱`} name={`email`} >
+                <Form.Item label={`邮箱`} name={`email`}>
                     <EditableDesc editing={editing} editIcon={true} manualChange={true}>
                         <Input/>
                     </EditableDesc>
