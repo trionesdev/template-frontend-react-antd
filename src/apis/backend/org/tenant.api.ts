@@ -29,4 +29,12 @@ export class TenantApi extends BackendApi {
         return this.request.put(this.baseUri + '/tenant/actor/member', data);
     }
 
+    changeActorPassword(data: any) {
+        return this.request.put(this.baseUri + '/tenant/actor/password', data);
+    }
+
+    changePassword(data: any) {
+        return this.request.put(this.baseUri + '/tenant/member/password', data);
+    }
+
 }

@@ -1,7 +1,7 @@
 import {AppToolbar, Layout} from "@trionesdev/antd-react-ext";
 import {Outlet, useAuth, useNavigate} from "@trionesdev/commons-react";
 import {Avatar, Dropdown, Space} from "antd";
-import {KeyOutlined, LogoutOutlined, UserOutlined} from "@ant-design/icons";
+import {LogoutOutlined, UserOutlined} from "@ant-design/icons";
 import {StorageUtils} from "@trionesdev/browser-commons";
 import {RouteConstants} from "../router/route.constants.ts";
 
@@ -22,11 +22,6 @@ export const MainLayout = () => {
                             onClick: () => {
                                 navigate(RouteConstants.USER_CENTER.PROFILE.path!())
                             }
-                        },
-                        {
-                            key: `modify-password`,
-                            label: `修改密码`,
-                            icon: <KeyOutlined/>
                         },
                         {
                             key: `logout`,

@@ -48,11 +48,11 @@ export const NormalLayout = () => {
                 },
                 {
                     key: 'country-manage',
-                    label: '国家管理',
+                    label: '国家字典',
                 },
                 {
                     key: RouteConstants.DIC.DISTRICTS.id,
-                    label: '地区管理',
+                    label: '地区字典',
                     onClick: () => navigate(RouteConstants.DIC.DISTRICTS.path!())
                 },
             ]
