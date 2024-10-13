@@ -49,6 +49,7 @@ export const NormalLayout = () => {
                 {
                     key: 'country-manage',
                     label: '国家字典',
+                    onClick: () => navigate(RouteConstants.DIC.COUNTRIES.path!())
                 },
                 {
                     key: RouteConstants.DIC.DISTRICTS.id,

@@ -13,6 +13,7 @@ import {DictionariesPage} from "@app/boss/dic/dictionaries/page.tsx";
 import {UserCenterLayout} from "@app/user-center/UserCenterLayout.tsx";
 import {UserProfilePage} from "@app/user-center/profile/page.tsx";
 import {ChangePasswordPage} from "@app/user-center/change-password/page.tsx";
+import {CountriesPage} from "@app/boss/dic/countries/page.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -39,6 +40,7 @@ const routes: RouteObject[] = [
 
                     {...RouteConstants.DIC.DICTIONARIES, element: <DictionariesPage/>},
                     {...RouteConstants.DIC.DISTRICTS, element: <DistrictsPage/>},
+                    {...RouteConstants.DIC.COUNTRIES, element: <CountriesPage/>},
                     {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES, element: <FunctionalResourcesPage/>},
                 ]
             },

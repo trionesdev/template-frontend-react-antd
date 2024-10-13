@@ -56,6 +56,11 @@ export namespace RouteConstants {
             path: () => "/dic/districts",
             anonymous: true,
         } as RouteObject,
+        COUNTRIES: {
+            id: 'countries',
+            path: () => "/dic/countries",
+            anonymous: true,
+        }
     }
 
     export namespace BOSS {
