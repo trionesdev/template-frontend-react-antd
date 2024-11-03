@@ -3,7 +3,7 @@ import {GridTable, Layout, TableToolbar} from "@trionesdev/antd-react-ext";
 import {Button, message, Popconfirm, Space} from "antd";
 import {ApartmentOutlined, RedoOutlined} from "@ant-design/icons";
 import {useRequest} from "ahooks";
-import {departmentApi} from "@apis/backend";
+import {departmentApi} from "@apis/tenant";
 import _ from "lodash";
 import {DepartmentForm} from "@app/normal/org/components/department-form";
 
@@ -14,7 +14,7 @@ export const DepartmentsPage = () => {
         return departmentApi.queryDepartmentsTree()
     }, {
         onSuccess: (res: any) => {
-            setResult(res)
+            setResult(res||[])
         }
     })
 

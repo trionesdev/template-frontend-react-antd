@@ -37,6 +37,6 @@ export const CountriesPage = () => {
     ]
 
     return <div style={{height: '100%', backgroundColor: '#fff'}}>
-        <GridTable fit={true} size={`small`} columns={columns} dataSource={rows} loading={loading}/>
+        <GridTable fit={true} size={`small`} columns={columns} dataSource={rows} rowKey={`id`} loading={loading}/>
     </div>
 }

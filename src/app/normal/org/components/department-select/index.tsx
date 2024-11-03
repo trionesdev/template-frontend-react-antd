@@ -1,6 +1,6 @@
 import {FC} from "react";
 
-import {departmentApi} from "@apis/backend";
+import {departmentApi} from "@apis/tenant";
 import {FetchTreeSelectProps} from "@trionesdev/antd-react-ext/dist/fetch-tree-select/fetch-tree-select";
 import {FetchTreeSelect} from "@trionesdev/antd-react-ext";
 

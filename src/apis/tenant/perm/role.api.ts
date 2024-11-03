@@ -1,7 +1,7 @@
-import {BackendApi} from "@apis/backend/backend.api.ts";
+import {BaseTenantApi} from "@apis/tenant/base-tenant.api.ts";
 import {PageQueryParams} from "@apis";
 
-export class RoleApi extends BackendApi {
+export class RoleApi extends BaseTenantApi {
     private baseUri = '/perm';
 
     createRole(role: any) {

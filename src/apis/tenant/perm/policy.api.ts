@@ -1,8 +1,8 @@
-import {BackendApi} from "@apis/backend/backend.api.ts";
+import {BaseTenantApi} from "@apis/tenant/base-tenant.api.ts";
 import {ClientType, PermissionSubjectType} from "@app/boss/perm/internal/perm.enums.ts";
 
 
-export class PolicyApi extends BackendApi {
+export class PolicyApi extends BaseTenantApi {
     private baseUri = '/perm';
 
     savePolicy(data: {

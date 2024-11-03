@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import {DrawerForm} from "@trionesdev/antd-react-ext";
 import {Form, Input, message} from "antd";
-import {roleApi} from "@apis";
+import {roleApi} from "@apis/tenant";
 
 type RoleFormProps = {
     children: React.ReactElement,

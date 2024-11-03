@@ -1,11 +1,11 @@
 import {StorageUtils} from "@trionesdev/browser-commons"
 import {BaseTrionesApi} from "@trionesdev/commons"
 
-export class BackendApi  extends BaseTrionesApi{
+export class BaseTenantApi extends BaseTrionesApi{
 
     constructor() {
         super({
-            baseURL: `/api`,
+            baseURL: `/tenant-api`,
             beforeRequest: (request: any) => {
                 const token = StorageUtils.getTrionesUserToken();
                 if (token) {

@@ -1,12 +1,12 @@
 import {useState} from "react";
 import {useRequest} from "ahooks";
-import {ossApi, tenantApi} from "@apis";
 import styles from "./user-center.module.less"
 import {Card, Menu} from "antd";
 import {Outlet, useMatches, useNavigate} from "@trionesdev/commons-react";
 import {RouteConstants} from "../../router/route.constants.ts";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
 import { AvatarEditor } from "@trionesdev/antd-react-ext";
+import {ossApi, tenantApi} from "@apis/tenant";
 
 export const UserCenterLayout = () => {
     const navigate = useNavigate()

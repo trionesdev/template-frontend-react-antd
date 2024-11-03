@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import {GridTable, Layout, PageHeader, TableToolbar} from "@trionesdev/antd-react-ext";
 import {useRequest} from "ahooks";
-import {departmentApi} from "@apis/backend";
+import {departmentApi} from "@apis/tenant";
 import {Button, message, Popconfirm, Space} from "antd";
 import {RedoOutlined, UserAddOutlined} from "@ant-design/icons";
 import {DepartmentMemberForm} from "@app/normal/org/org-structure/DepartmentMemberForm.tsx";

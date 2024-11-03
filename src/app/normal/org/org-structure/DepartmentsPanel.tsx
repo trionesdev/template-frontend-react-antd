@@ -1,7 +1,7 @@
 import {Layout} from "@trionesdev/antd-react-ext";
 import {FC, useEffect, useState} from "react";
 import {useRequest} from "ahooks";
-import {departmentApi} from "@apis";
+import {departmentApi} from "@apis/tenant";
 import {Avatar, Button, Dropdown, Flex, message, Modal, Space, Spin, Tree} from "antd";
 import classNames from "classnames";
 import styles from "./org-structure.module.less";

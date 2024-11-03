@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from "react";
 import {Form, Input, message, Spin} from "antd";
 import {DepartmentSelect} from "../components/department-select";
 import {useRequest} from "ahooks";
-import {tenantApi} from "@apis/backend";
+import {tenantApi} from "@apis/tenant";
 import {DrawerForm} from "@trionesdev/antd-react-ext";
 
 type TenantMemberFormProps = {

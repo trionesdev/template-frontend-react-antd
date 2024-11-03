@@ -1,6 +1,6 @@
 import styles from "./change-password.module.less"
 import {Button, Card, Form, Input, message, Space} from "antd";
-import {tenantApi} from "@apis";
+import {tenantApi} from "@apis/tenant";
 
 export const ChangePasswordPage = () => {
     const [form] = Form.useForm();

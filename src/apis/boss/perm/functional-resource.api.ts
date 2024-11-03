@@ -1,4 +1,5 @@
-import {BaseBossApi} from "../boss.api.ts";
+import {BaseBossApi} from "@apis/boss/base-boss.api.ts";
+
 
 export class FunctionalResourceApi extends BaseBossApi {
     private baseUri = '/perm';

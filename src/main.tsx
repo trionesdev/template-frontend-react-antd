@@ -9,7 +9,7 @@ import {AuthProvider, PermissionProvider} from "@trionesdev/commons-react";
 import {legacyLogicalPropertiesTransformer, StyleProvider} from "@ant-design/cssinjs";
 import {AppConfigProvider} from "./commponents/app-config";
 import {StorageUtils} from "@trionesdev/browser-commons";
-import {tenantApi} from "@apis";
+import {tenantApi} from "@apis/tenant";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>

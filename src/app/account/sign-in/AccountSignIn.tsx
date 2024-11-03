@@ -1,6 +1,6 @@
 import {Alert, Button, Form, Input, message} from "antd";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
-import {tenantAccountApi, tenantApi} from "@apis";
+import {tenantAccountApi, tenantApi} from "@apis/tenant";
 import {useState} from "react";
 import {useAuth, useNavigate} from "@trionesdev/commons-react";
 

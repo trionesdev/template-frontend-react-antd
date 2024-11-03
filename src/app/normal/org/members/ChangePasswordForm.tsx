@@ -2,7 +2,7 @@ import {DrawerForm} from "@trionesdev/antd-react-ext";
 import React, {FC, useState} from "react";
 import {Form, Input, message} from "antd";
 import _ from "lodash";
-import {tenantApi} from "@apis";
+import {tenantApi} from "@apis/tenant";
 
 type ChangePasswordFormProps = {
     children?: React.ReactElement

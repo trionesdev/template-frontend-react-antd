@@ -5,7 +5,7 @@ import {Avatar, Button, Space} from "antd";
 import {PlusCircleOutlined, RedoOutlined, UserOutlined} from "@ant-design/icons";
 import {TenantMemberForm} from "./TenantMemberForm";
 import {PageResult} from "@apis";
-import {tenantApi} from "@apis/backend";
+import {tenantApi} from "../../../../apis/tenant";
 import {ChangePasswordForm} from "@app/normal/org/members/ChangePasswordForm.tsx";
 
 export const TenantMembersPage = () => {

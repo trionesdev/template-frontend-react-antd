@@ -1,6 +1,6 @@
-import {BackendApi} from "@apis/backend/backend.api.ts";
+import {BaseTenantApi} from "@apis/tenant/base-tenant.api.ts";
 
-export class OssApi extends BackendApi {
+export class OssApi extends BaseTenantApi {
     private baseUri = '/oss';
 
     formDataUpload(data: FormData) {

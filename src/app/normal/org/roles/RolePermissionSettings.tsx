@@ -7,7 +7,7 @@ import {Checkbox, Form} from "antd";
 import _ from "lodash";
 import {icons} from "../../../../commponents/icon-select";
 import {PermissionEffect, PermissionSubjectType} from "@app/boss/perm/internal/perm.enums.ts";
-import {policyApi} from "@apis";
+import {policyApi} from "@apis/tenant";
 
 type RolePermissionSettingsProps = {
     children?: React.ReactElement

@@ -1,4 +1,5 @@
-import {BaseBossApi} from "@apis/boss/boss.api.ts";
+import {BaseBossApi} from "@apis/boss/base-boss.api.ts";
+
 
 export class DistrictApi extends BaseBossApi {
     private baseUri = '/dic';

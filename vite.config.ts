@@ -16,7 +16,7 @@ export default defineConfig({
     server: {
         // port: 3000,
         proxy: {
-            "/api": {
+            "/tenant-api": {
                 target: "http://localhost:8080/",
                 // target: "http://dubhe-gateway.moensun.cn/",
                 changeOrigin: true,

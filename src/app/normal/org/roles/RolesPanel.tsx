@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from "react";
 import {Button, Dropdown, Flex, Modal, Spin, Tree} from "antd";
 import {EllipsisOutlined, PlusOutlined} from "@ant-design/icons";
 import {useRequest} from "ahooks";
-import {roleApi} from "@apis/backend";
+import {roleApi} from "../../../../apis/tenant";
 import styles from "./roles.module.less"
 import {RoleForm} from "@app/normal/org/roles/RoleForm.tsx";
 import {Layout} from "@trionesdev/antd-react-ext";

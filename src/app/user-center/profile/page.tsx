@@ -2,8 +2,8 @@ import styles from "./profile.module.less"
 import {Card, Form, Input, message} from "antd";
 import {EditableDesc} from "@trionesdev/antd-react-ext";
 import {useRequest} from "ahooks";
-import {tenantApi} from "@apis";
 import {useState} from "react";
+import {tenantApi} from "@apis/tenant";
 
 export const UserProfilePage = () => {
     const [editing, setEditing] = useState(false)

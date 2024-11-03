@@ -1,8 +1,8 @@
-import {BackendApi} from "../backend.api.ts";
+import {BaseTenantApi} from "../base-tenant.api.ts";
 import {PageQueryParams} from "@apis";
 
 
-export class TenantApi extends BackendApi {
+export class TenantApi extends BaseTenantApi {
     private baseUri = '/org';
 
     createTenantMember(data: any) {
