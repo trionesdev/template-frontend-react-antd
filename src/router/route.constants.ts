@@ -63,6 +63,14 @@ export namespace RouteConstants {
         }
     }
 
+    export const LOG = {
+        LOGIN: {
+            id: 'signInLog',
+            path: () => "/log/login-logs",
+            anonymous: true,
+        } as RouteItem,
+    }
+
     export namespace BOSS {
         export const PERM = {
             FUNCTIONAL_RESOURCE_DRAFTS: {

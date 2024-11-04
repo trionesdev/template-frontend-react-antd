@@ -60,13 +60,18 @@ export const NormalLayout = () => {
         },
         {
             key: 'sys',
-            label: '系统资源',
+            label: '系统管理',
             icon: <DesktopOutlined/>,
             children: [
                 {
                     key: RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.id,
                     label: '功能权限',
                     onClick: () => navigate(RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.path!())
+                },
+                {
+                    key: RouteConstants.LOG.LOGIN.id,
+                    label: '登录记录',
+                    onClick: () => navigate(RouteConstants.LOG.LOGIN.path!())
                 }
             ]
         }
