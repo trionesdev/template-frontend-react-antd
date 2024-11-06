@@ -69,9 +69,9 @@ export const NormalLayout = () => {
                     onClick: () => navigate(RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.path!())
                 },
                 {
-                    key: RouteConstants.LOG.LOGIN.id,
-                    label: '登录记录',
-                    onClick: () => navigate(RouteConstants.LOG.LOGIN.path!())
+                    key: RouteConstants.LOG.OPERATION_LOGS.id,
+                    label: '行为记录',
+                    onClick: () => navigate(RouteConstants.LOG.OPERATION_LOGS.path!())
                 }
             ]
         }

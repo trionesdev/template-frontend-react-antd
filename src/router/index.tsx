@@ -14,7 +14,7 @@ import {UserCenterLayout} from "@app/user-center/UserCenterLayout.tsx";
 import {UserProfilePage} from "@app/user-center/profile/page.tsx";
 import {ChangePasswordPage} from "@app/user-center/change-password/page.tsx";
 import {CountriesPage} from "@app/boss/dic/countries/page.tsx";
-import {LoginLogsPage} from "@app/normal/log/login/page.tsx";
+import {OperationLogsPage} from "@app/normal/log/operation/page.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -43,7 +43,7 @@ const routes: RouteObject[] = [
                     {...RouteConstants.DIC.DISTRICTS, element: <DistrictsPage/>},
                     {...RouteConstants.DIC.COUNTRIES, element: <CountriesPage/>},
 
-                    {...RouteConstants.LOG.LOGIN, element: <LoginLogsPage/>},
+                    {...RouteConstants.LOG.OPERATION_LOGS, element: <OperationLogsPage/>},
 
                     {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES, element: <FunctionalResourcesPage/>},
                 ]

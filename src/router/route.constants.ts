@@ -1,4 +1,4 @@
-import {RouteItem, RouteObject} from "@trionesdev/commons-react";
+import {RouteObject} from "@trionesdev/commons-react";
 
 export namespace RouteConstants {
     export const ACCOUNT = {
@@ -6,7 +6,7 @@ export namespace RouteConstants {
             id: 'sign-in',
             path: () => "/sign-in",
             anonymous: true,
-        } as RouteItem,
+        } as RouteObject,
     }
 
     export const USER_CENTER = {
@@ -64,11 +64,11 @@ export namespace RouteConstants {
     }
 
     export const LOG = {
-        LOGIN: {
-            id: 'signInLog',
-            path: () => "/log/login-logs",
+        OPERATION_LOGS: {
+            id: 'operation-log',
+            path: () => "/log/operation-logs",
             anonymous: true,
-        } as RouteItem,
+        } as RouteObject,
     }
 
     export namespace BOSS {
@@ -77,12 +77,12 @@ export namespace RouteConstants {
                 id: 'functional-resource-drafts',
                 path: () => "/boss/perm/functional-resource-drafts",
                 anonymous: true,
-            } as RouteItem,
+            } as RouteObject,
             FUNCTIONAL_RESOURCES: {
                 id: 'functional-resources',
                 path: () => "/boss/perm/functional-resources",
                 anonymous: true,
-            } as RouteItem,
+            } as RouteObject,
         }
     }
 }
