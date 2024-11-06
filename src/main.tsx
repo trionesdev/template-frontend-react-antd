@@ -24,6 +24,11 @@ createRoot(document.getElementById('root')!).render(
                         } else {
                             return Promise.reject(null)
                         }
+                    }} onUnAuthenticated={() => {
+                        window.location.href = '/#/sign-in'
+                    }} onSignOut={() => {
+                        StorageUtils.removeTenantUserToken();
+                        window.location.href = '/#/sign-in'
                     }}>
                         <PermissionProvider
                             policyRequest={async () => {

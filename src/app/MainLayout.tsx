@@ -2,12 +2,11 @@ import {AppToolbar, Layout} from "@trionesdev/antd-react-ext";
 import {Outlet, useAuth, useNavigate} from "@trionesdev/commons-react";
 import {Avatar, Dropdown, Space} from "antd";
 import {LogoutOutlined, UserOutlined} from "@ant-design/icons";
-import {StorageUtils} from "@trionesdev/browser-commons";
 import {RouteConstants} from "../router/route.constants.ts";
 
 export const MainLayout = () => {
     const navigate = useNavigate()
-    const {actor} = useAuth()
+    const {actor, signOut} = useAuth()
     return <Layout direction={`vertical`}>
         <Layout.Item>
             <AppToolbar title={<Space style={{cursor: "pointer"}} onClick={() => {
@@ -28,8 +27,7 @@ export const MainLayout = () => {
                             label: `退出登录`,
                             icon: <LogoutOutlined/>,
                             onClick: () => {
-                                StorageUtils.removeTenantUserToken();
-                                navigate(RouteConstants.ACCOUNT.SIGN_IN.path!())
+                                signOut?.()
                             }
                         }
                     ]
