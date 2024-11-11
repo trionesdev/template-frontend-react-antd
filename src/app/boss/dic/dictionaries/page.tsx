@@ -49,7 +49,9 @@ export const DictionariesPage = () => {
                         setQueryParams({type: DictionaryType.DICTIONARY, typeCode: record.code})
                         setType(record)
                     }}>查看</Button>}
-                    <Button size={`small`} type={`link`}>编辑</Button>
+                    <DictionaryForm defaultType={record.type} id={record.id}>
+                        <Button size={`small`} type={`link`}>编辑</Button>
+                    </DictionaryForm>
                 </Space>
             }
         }

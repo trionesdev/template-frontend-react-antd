@@ -20,17 +20,17 @@ const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
 
     {
-        path: () => '/', anonymous: true, element: <MainLayout/>, children: [
+        path: () => '/', anonymous: false, element: <MainLayout/>, children: [
             {
-                path: () => '/user-center', anonymous: true, element: <UserCenterLayout/>, children: [
+                path: () => '/user-center', anonymous: false, element: <UserCenterLayout/>, children: [
                     {...RouteConstants.USER_CENTER.PROFILE, element: <UserProfilePage/>},
                     {...RouteConstants.USER_CENTER.PASSWORD, element: <ChangePasswordPage/>},
                 ]
             },
             {
-                path: () => '/', anonymous: true, element: <NormalLayout/>, children: [
+                path: () => '/', anonymous: false, element: <NormalLayout/>, children: [
                     {
-                        path: () => '/', anonymous: true, element: <div>Home</div>
+                        path: () => '/', anonymous: false, element: <div>Home</div>
                     },
 
 
