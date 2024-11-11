@@ -37,4 +37,8 @@ export class TenantApi extends BaseTenantApi {
         return this.request.put(this.baseUri + '/tenant/member/password', data);
     }
 
+    queryOrgList(params: any) {
+        return this.request.get(this.baseUri + '/tenant/org/list', {params});
+    }
+
 }

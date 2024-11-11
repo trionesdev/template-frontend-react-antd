@@ -3,7 +3,7 @@ import {Button, Flex, Modal, Space} from "antd";
 import {OrgNodeTag} from "./OrgNodeTag";
 import {OrgStructurePanel} from "./org-structure-panel";
 import _ from "lodash";
-import {OrgLevelFieldNames, OrgNodeFieldNames, selectMode} from "./types.ts";
+import {OrgLevelFieldNames, OrgNodeFieldNames, selectType} from "./types.ts";
 
 type OrgSelectModalProps = {
     children?: React.ReactElement
@@ -28,11 +28,16 @@ type OrgSelectModalProps = {
      * @description 选择模式
      * @default
      */
-    selectMode?: selectMode
+    selectType?: selectType
     orgLevelsRequest?: (id: any) => Promise<any>
     orgNodesRequest?: (departmentId: any) => Promise<any>
     orgLevelFieldNames?: OrgLevelFieldNames
     orgNodeFieldNames?: OrgNodeFieldNames
+    /**
+     * @description 查询请求
+     * @default
+     */
+    searchRequest?: (params: any) => Promise<any>
 }
 export const OrgSelectModal: FC<OrgSelectModalProps> = ({
                                                             children,
@@ -41,11 +46,12 @@ export const OrgSelectModal: FC<OrgSelectModalProps> = ({
                                                             title = '选择组织成员',
                                                             width = 600,
                                                             cleanAfterClose,
-                                                            selectMode,
+                                                            selectType,
                                                             orgLevelsRequest,
                                                             orgNodesRequest,
                                                             orgLevelFieldNames,
-                                                            orgNodeFieldNames
+                                                            orgNodeFieldNames,
+                                                            searchRequest
                                                         }) => {
     const [open, setOpen] = useState(false)
     const [selectedNodes, setSelectedNodes] = useState<any[]>(value || []);
@@ -72,16 +78,23 @@ export const OrgSelectModal: FC<OrgSelectModalProps> = ({
                }}
                afterOpenChange={(o) => {
                    setOpen(o)
+                   if (!o) {
+                       setSelectedNodes([])
+                   }
                }}
                destroyOnClose={true}
         >
             <Flex justify="space-between" style={{minHeight: 400}} gap={4}>
                 <div style={{width: '100%'}}>
-                    <OrgStructurePanel open={open} value={selectedNodes} onChange={setSelectedNodes}
-                                       selectMode={selectMode}
+                    <OrgStructurePanel open={open} value={selectedNodes}
+                                       onChange={setSelectedNodes}
+                                       selectType={selectType}
                                        orgLevelsRequest={orgLevelsRequest}
-                                       orgNodesRequest={orgNodesRequest} orgLevelFieldNames={orgLevelFieldNames}
-                                       orgNodeFieldNames={orgNodeFieldNames}/>
+                                       orgNodesRequest={orgNodesRequest}
+                                       orgLevelFieldNames={orgLevelFieldNames}
+                                       orgNodeFieldNames={orgNodeFieldNames}
+                                       searchRequest={searchRequest}
+                    />
                 </div>
                 <div style={{borderLeft: '1px solid #e8e8e8'}}/>
                 <Flex vertical={true} gap={4} style={{width: '100%'}}>

@@ -1,10 +1,12 @@
-export type selectMode = 'department' | 'member'
+export type selectType = 'department' | 'member'
 export type OrgNode = {
     id: string
     name: string
     parentId: string
     type?: 'DEPARTMENT' | 'MEMBER'
     avatar?: string
+    nickname?: string
+    [key: string]: any
 }
 
 export type OrgLevel = {
@@ -22,4 +24,6 @@ export type OrgNodeFieldNames = {
     parentId?: string
     type?: string
     avatar?: string
+    nickname?: string
+    [key: string]: any
 }

@@ -2,12 +2,12 @@ import {FC, useEffect, useState} from "react";
 import {GridTable, Layout, PageHeader, TableToolbar} from "@trionesdev/antd-react-ext";
 import {Avatar, Button, message, Popconfirm, Space} from "antd";
 import OrgSelectModal from "../../../../commponents/org-select-modal";
-import { PageResult} from "@apis";
+import {PageResult} from "@apis";
 import {RoleGrantObjType} from "@app/normal/org/internal/org.enums.ts";
 import {useRequest} from "ahooks";
 import {RedoOutlined, UserAddOutlined, UserOutlined} from "@ant-design/icons";
 import {RolePermissionSettings} from "@app/normal/org/roles/RolePermissionSettings.tsx";
-import {departmentApi, roleApi} from "@apis/tenant";
+import {departmentApi, roleApi, tenantApi} from "@apis/tenant";
 
 type RoleMembersPanelProps = {
     role?: any
@@ -90,12 +90,21 @@ export const RoleMembersPanel: FC<RoleMembersPanelProps> = ({role}) => {
         </Layout.Item>
         <Layout.Item auto={true}>
             <GridTable toolbar={<TableToolbar title={<Space>
-                <OrgSelectModal selectMode={'member'} cleanAfterClose={true} orgLevelsRequest={(departmentId) => {
-                    return departmentApi.queryDepartmentPaths(departmentId)
-                }} orgNodesRequest={(departmentId) => {
-                    return departmentApi.queryDepartmentOrgNodeList({departmentId})
-                }} onOk={handleAddMembers}><Button icon={<UserAddOutlined/>}
-                                                   type={`primary`}>添加成员</Button></OrgSelectModal>
+                <OrgSelectModal selectMode={'member'}
+                                cleanAfterClose={true}
+                                orgLevelsRequest={(departmentId) => {
+                                    return departmentApi.queryDepartmentPaths(departmentId)
+                                }}
+                                orgNodesRequest={(departmentId) => {
+                                    return departmentApi.queryDepartmentOrgNodeList({departmentId})
+                                }}
+                                searchRequest={(params) => {
+                                    return tenantApi.queryOrgList(params)
+                                }}
+                                onOk={handleAddMembers}
+                >
+                    <Button icon={<UserAddOutlined/>}
+                            type={`primary`}>添加成员</Button></OrgSelectModal>
             </Space>} extra={<Space>
                 <Button icon={<RedoOutlined/>} type={`text`} onClick={handleQueryPage}/>
             </Space>}/>}

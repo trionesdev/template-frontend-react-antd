@@ -6,28 +6,30 @@ import {useCssInJs} from "@trionesdev/antd-react-ext";
 import {genOrgStructPanelStyle} from "../styles";
 import classNames from "classnames";
 import _ from "lodash";
-import {OrgLevel, OrgLevelFieldNames, OrgNode, OrgNodeFieldNames, selectMode} from "../types.ts";
+import {OrgLevel, OrgLevelFieldNames, OrgNode, OrgNodeFieldNames, selectType} from "../types.ts";
 import {OrgSelect} from "./OrgSelect.tsx";
 
 type OrgStructurePanelProps = {
     open?: boolean,
     value?: OrgNode[],
     onChange?: (nodes: any[]) => void
-    selectMode?: selectMode
+    selectType?: selectType
     orgLevelsRequest?: (id: any) => Promise<OrgLevel[]>
     orgNodesRequest?: (departmentId: any) => Promise<OrgNode[]>
     orgLevelFieldNames?: OrgLevelFieldNames
     orgNodeFieldNames?: OrgNodeFieldNames
+    searchRequest?: (params: any) => Promise<any>
 }
 export const OrgStructurePanel: FC<OrgStructurePanelProps> = ({
                                                                   open,
                                                                   value,
                                                                   onChange,
-                                                                  selectMode,
+                                                                  selectType,
                                                                   orgLevelsRequest,
                                                                   orgNodesRequest,
                                                                   orgLevelFieldNames,
-                                                                  orgNodeFieldNames
+                                                                  orgNodeFieldNames,
+                                                                  searchRequest
                                                               }) => {
     const innerOrgLevelFieldNames = _.assign({
         id: 'id',
@@ -38,7 +40,8 @@ export const OrgStructurePanel: FC<OrgStructurePanelProps> = ({
         name: 'name',
         parentId: 'parentId',
         type: 'type',
-        avatar: 'avatar'
+        avatar: 'avatar',
+        nickname: 'nickname'
     }, orgNodeFieldNames)
     const [departmentId, setDepartmentId] = useState<string>("0");
     const [departmentPaths, setDepartmentPaths] = useState<OrgLevel[]>([]);
@@ -100,7 +103,9 @@ export const OrgStructurePanel: FC<OrgStructurePanelProps> = ({
     const {wrapSSR, hashId} = useCssInJs({prefix: prefixCls, styleFun: genOrgStructPanelStyle})
     return wrapSSR(
         <div className={classNames(prefixCls, hashId)}>
-            <OrgSelect/>
+            <OrgSelect searchRequest={searchRequest} selectedNodes={selectedNodes}
+                       orgNodeFieldNames={innerOrgNodeFieldNames}
+                       onTrigger={handleTrigger}/>
             <div style={{padding: '4px 0px'}}>
                 <Breadcrumb className={`${prefixCls}-breadcrumb`}
                             separator=">"
@@ -117,10 +122,10 @@ export const OrgStructurePanel: FC<OrgStructurePanelProps> = ({
                   dataSource={rows} renderItem={(item: any) => {
                 return <List.Item className={classNames(`${prefixCls}-item`, hashId)}>
                     <div className={classNames(`${prefixCls}-item-inner`, hashId)} onClick={() => {
-                        if (selectMode) {
-                            if (selectMode == 'department' && item.type === 'DEPARTMENT') {
+                        if (selectType) {
+                            if (selectType == 'department' && _.get(item, innerOrgNodeFieldNames.type) === 'DEPARTMENT') {
                                 return handleTrigger(item)
-                            } else if (selectMode == 'member' && item.type === 'MEMBER') {
+                            } else if (selectType == 'member' && _.get(item, innerOrgNodeFieldNames.type) === 'MEMBER') {
                                 return handleTrigger(item)
                             }
                         } else {
@@ -128,8 +133,8 @@ export const OrgStructurePanel: FC<OrgStructurePanelProps> = ({
                         }
                     }}>
                         {(() => {
-                            if (selectMode) {
-                                if ((selectMode === 'department' && item.type === 'DEPARTMENT') || (selectMode === 'member' && item.type === 'MEMBER')) {
+                            if (selectType) {
+                                if ((selectType === 'department' && item.type === 'DEPARTMENT') || (selectType === 'member' && item.type === 'MEMBER')) {
                                     return <Checkbox
                                         checked={Boolean(_.find(selectedNodes, (node) => item.id === node.id))}/>
                                 }
@@ -143,7 +148,7 @@ export const OrgStructurePanel: FC<OrgStructurePanelProps> = ({
                                 <div className={classNames(`${prefixCls}-item-content-title`, hashId)}>
                                     <Avatar shape={`square`} icon={<UserOutlined/>}
                                             src={_.get(item, innerOrgNodeFieldNames.avatar)}/>
-                                    <span style={{cursor:'default'}}>{_.get(item, innerOrgNodeFieldNames.name)}</span>
+                                    <span style={{cursor: 'default'}}>{_.get(item, innerOrgNodeFieldNames.name)}</span>
                                 </div>
                             </> : <>
                                 <div className={classNames(`${prefixCls}-item-content-title`, hashId)}>

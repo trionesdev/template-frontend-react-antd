@@ -18,10 +18,11 @@ export const genOrgStructPanelStyle = (
             [`&-list`]: {
                 [`.${prefixCls}-item`]: {
                     borderRadius: token.borderRadiusLG,
+                    cursor: 'pointer',
                     [`&:hover`]: {
                         backgroundColor: '#00000012',
                     },
-                    [`&-inner`]:{
+                    [`&-inner`]: {
                         display: 'flex',
                         alignItems: 'center',
                         gap: 8,
@@ -60,3 +61,34 @@ export const genOrgTagStyle = (
         },
     };
 };
+
+export const genOrgSelectStyle = (prefixCls: string, token: GlobalToken,): any => {
+    return {
+        [`.${prefixCls}`]: {},
+        [`.${prefixCls}-dropdown`]: {
+            backgroundColor: '#fff',
+            '.ant-list-item': {
+                borderRadius: token.borderRadiusLG,
+                padding: '8px 16px',
+                [`&:hover`]: {
+                    backgroundColor: '#00000012',
+                },
+                '.org-option': {
+                    display: 'flex',
+                    width: '100%',
+                    gap: '8px',
+                    cursor: 'pointer',
+                    '.org-option-content': {
+                        flex: '1 auto',
+                        display: 'flex',
+                        alignItems: 'center',
+                        '.org-option-meta': {
+                            color: 'rgba(23, 26, 29, 0.4)',
+                            fontSize: '12px'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
