@@ -4,6 +4,7 @@ import {AppConfigContext} from "./context.tsx";
 type AppConfigProviderProps = {
     children?: React.ReactNode,
     configRequest?: () => Promise<any>
+    subApp?: boolean
     defaultConfig?: {
         multiTenant?: boolean,
         selfHost?: boolean
@@ -11,7 +12,7 @@ type AppConfigProviderProps = {
 }
 
 export const AppConfigProvider: FC<AppConfigProviderProps> = ({
-                                                                  children, configRequest, defaultConfig
+                                                                  children, configRequest, subApp, defaultConfig
                                                               }) => {
     const [config, setConfig] = useState<{ multiTenant?: boolean, selfHost?: boolean }>(defaultConfig || {})
 
@@ -20,6 +21,7 @@ export const AppConfigProvider: FC<AppConfigProviderProps> = ({
     }, []);
 
     return <AppConfigContext.Provider value={{
+        subApp,
         multiTenant: config.multiTenant,
         selfHost: config.selfHost
     }}>{children}</AppConfigContext.Provider>

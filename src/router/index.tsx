@@ -1,7 +1,6 @@
 import {createHashRouter, RouteObject, RouterProvider} from "@trionesdev/commons-react";
 import {SignInPage} from "@app/account/sign-in/page.tsx";
 import {RouteConstants} from "./route.constants.ts";
-import {MainLayout} from "@app/MainLayout.tsx";
 import {FunctionalResourcesPage} from "@app/boss/perm/functional-resources/page.tsx";
 import {DepartmentsPage} from "@app/normal/org/departments/page.tsx";
 import {NormalLayout} from "@app/normal/layout";
@@ -15,12 +14,13 @@ import {UserProfilePage} from "@app/user-center/profile/page.tsx";
 import {ChangePasswordPage} from "@app/user-center/change-password/page.tsx";
 import {CountriesPage} from "@app/boss/dic/countries/page.tsx";
 import {OperationLogsPage} from "@app/normal/log/operation/page.tsx";
+import {AppLayout} from "@app/layout";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
 
     {
-        path: () => '/', anonymous: false, element: <MainLayout/>, children: [
+        path: () => '/', anonymous: false, element: <AppLayout/>, children: [
             {
                 path: () => '/user-center', anonymous: false, element: <UserCenterLayout/>, children: [
                     {...RouteConstants.USER_CENTER.PROFILE, element: <UserProfilePage/>},
@@ -52,6 +52,24 @@ const routes: RouteObject[] = [
     },
 
 ]
+
+export const routeMatch = (id: string): RouteObject | undefined => {
+    const match = (id: string, routes: RouteObject[]): RouteObject | undefined => {
+        for (let i = 0; i < routes.length; i++) {
+            if (routes[i].id === id) {
+                return routes[i]
+            }
+            const children = routes[i].children
+            if (children) {
+                const result = match(id, children)
+                if (result) {
+                    return result
+                }
+            }
+        }
+    }
+    return match(id, routes)
+}
 
 export const AppRouter = () => {
     return <RouterProvider router={createHashRouter(routes)}/>;

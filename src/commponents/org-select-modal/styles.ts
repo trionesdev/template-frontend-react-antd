@@ -16,6 +16,8 @@ export const genOrgStructPanelStyle = (
                 }
             },
             [`&-list`]: {
+                maxHeight:400,
+                overflowY: 'auto',
                 [`.${prefixCls}-item`]: {
                     borderRadius: token.borderRadiusLG,
                     cursor: 'pointer',

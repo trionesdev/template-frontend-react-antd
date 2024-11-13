@@ -90,7 +90,7 @@ export const RoleMembersPanel: FC<RoleMembersPanelProps> = ({role}) => {
         </Layout.Item>
         <Layout.Item auto={true}>
             <GridTable toolbar={<TableToolbar title={<Space>
-                <OrgSelectModal selectMode={'member'}
+                <OrgSelectModal selectType={'member'}
                                 cleanAfterClose={true}
                                 orgLevelsRequest={(departmentId) => {
                                     return departmentApi.queryDepartmentPaths(departmentId)

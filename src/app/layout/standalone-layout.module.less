@@ -1,0 +1,80 @@
+.standaloneLayout {
+  height: 100%;
+  background-color: rgb(48, 65, 86);
+
+  &SiderWraper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(48, 65, 86);
+
+    .logo {
+      height: 60px;
+      flex-shrink: 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 4px;
+    }
+
+    .menu {
+      flex: auto;
+      overflow-y: auto;
+      background-color: rgb(48, 65, 86);
+
+      :global {
+        .ant-menu-dark {
+          background-color: rgb(48, 65, 86);
+
+          .ant-menu-sub.ant-menu-inline {
+            background-color: #1f2d3d;
+          }
+        }
+      }
+    }
+  }
+
+  &Header {
+    background-color: white;
+    height: 60px;
+    padding: 8px;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #0000000d;
+  }
+
+  &TagsMenu {
+    box-sizing: border-box;
+    background-color: white;
+    border-bottom: 1px solid #0000000d;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    overflow-x: hidden;
+    flex-shrink: 0;
+
+    &Wrapper {
+      display: flex;
+      padding: 8px 4px;
+      width: fit-content;
+    }
+
+    :global {
+      .ant-tag {
+        padding: 0px 4px;
+        border-radius: 0;
+        cursor: pointer;
+      }
+
+      .active-tag {
+        background-color: #1677FF;
+        border: 1px solid #1677FF;
+        color: white;
+
+        .anticon {
+          color: white;
+        }
+      }
+    }
+  }
+}

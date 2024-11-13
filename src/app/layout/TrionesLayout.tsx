@@ -2,9 +2,9 @@ import {AppToolbar, Layout} from "@trionesdev/antd-react-ext";
 import {Outlet, useAuth, useNavigate} from "@trionesdev/commons-react";
 import {Avatar, Dropdown, Space} from "antd";
 import {LogoutOutlined, UserOutlined} from "@ant-design/icons";
-import {RouteConstants} from "../router/route.constants.ts";
+import {RouteConstants} from "../../router/route.constants.ts";
 
-export const MainLayout = () => {
+export const TrionesLayout = () => {
     const navigate = useNavigate()
     const {actor, signOut} = useAuth()
     return <Layout direction={`vertical`}>

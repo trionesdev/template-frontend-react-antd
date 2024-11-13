@@ -103,7 +103,7 @@ export const OrgStructurePanel: FC<OrgStructurePanelProps> = ({
     const {wrapSSR, hashId} = useCssInJs({prefix: prefixCls, styleFun: genOrgStructPanelStyle})
     return wrapSSR(
         <div className={classNames(prefixCls, hashId)}>
-            <OrgSelect searchRequest={searchRequest} selectedNodes={selectedNodes}
+            <OrgSelect selectType={selectType} searchRequest={searchRequest} selectedNodes={selectedNodes}
                        orgNodeFieldNames={innerOrgNodeFieldNames}
                        onTrigger={handleTrigger}/>
             <div style={{padding: '4px 0px'}}>
@@ -117,7 +117,7 @@ export const OrgStructurePanel: FC<OrgStructurePanelProps> = ({
                             })}
                 />
             </div>
-            <List className={classNames(`${prefixCls}-list`, hashId)} size={`small`} loading={loading} rowKey={`id`}
+            <List className={classNames(`${prefixCls}-list`, hashId)}  size={`small`} loading={loading} rowKey={`id`}
                   bordered={false} split={false}
                   dataSource={rows} renderItem={(item: any) => {
                 return <List.Item className={classNames(`${prefixCls}-item`, hashId)}>

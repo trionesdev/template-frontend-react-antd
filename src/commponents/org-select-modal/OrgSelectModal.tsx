@@ -98,7 +98,7 @@ export const OrgSelectModal: FC<OrgSelectModalProps> = ({
                 </div>
                 <div style={{borderLeft: '1px solid #e8e8e8'}}/>
                 <Flex vertical={true} gap={4} style={{width: '100%'}}>
-                    <div style={{flex: 1}}>
+                    <div style={{flex: 1, overflowY: 'auto'}}>
                         <Flex gap="4px 0" wrap>
                             {selectedNodes.map((node) => <OrgNodeTag key={node.id} orgNode={node} onClose={(id) => {
                                 setSelectedNodes((nodes) => nodes.filter((node) => node.id !== id))
