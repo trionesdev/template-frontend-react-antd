@@ -15,12 +15,13 @@ import {ChangePasswordPage} from "@app/user-center/change-password/page.tsx";
 import {CountriesPage} from "@app/boss/dic/countries/page.tsx";
 import {OperationLogsPage} from "@app/normal/log/operation/page.tsx";
 import {AppLayout} from "@app/layout";
+import {CodeFormatRulesPage} from "@app/normal/base/code-format-rules/page.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
 
     {
-        path: () => '/', anonymous: false, element: <AppLayout/>, children: [
+        id: 'home', path: () => '/', anonymous: false, element: <AppLayout/>, children: [
             {
                 path: () => '/user-center', anonymous: false, element: <UserCenterLayout/>, children: [
                     {...RouteConstants.USER_CENTER.PROFILE, element: <UserProfilePage/>},
@@ -44,6 +45,7 @@ const routes: RouteObject[] = [
                     {...RouteConstants.DIC.COUNTRIES, element: <CountriesPage/>},
 
                     {...RouteConstants.LOG.OPERATION_LOGS, element: <OperationLogsPage/>},
+                    {...RouteConstants.BASE.CODE_FORMAT_RULES, element: <CodeFormatRulesPage/>},
 
                     {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES, element: <FunctionalResourcesPage/>},
                 ]
