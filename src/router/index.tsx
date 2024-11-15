@@ -15,6 +15,7 @@ import {ChangePasswordPage} from "@app/user-center/change-password/page.tsx";
 import {CountriesPage} from "@app/boss/dic/countries/page.tsx";
 import {OperationLogsPage} from "@app/normal/log/operation/page.tsx";
 import {AppLayout} from "@app/layout";
+import {CodeFormatRulesPage} from "@app/normal/base/code-format-rules/page.tsx";
 import {WarehousesPage} from "@app/normal/warehouse/warehouses/page.tsx";
 
 const routes: RouteObject[] = [
@@ -31,7 +32,7 @@ const routes: RouteObject[] = [
             {
                 path: () => '/', anonymous: false, element: <NormalLayout/>, children: [
                     {
-                        path: () => '/', anonymous: false, element: <div>Home</div>
+                        id: 'home', path: () => '/', anonymous: false, element: <div>Home</div>
                     },
 
 
@@ -45,9 +46,8 @@ const routes: RouteObject[] = [
                     {...RouteConstants.DIC.COUNTRIES, element: <CountriesPage/>},
 
                     {...RouteConstants.WAREHOUSE.WAREHOUSES, element: <WarehousesPage/>},
-
-
                     {...RouteConstants.LOG.OPERATION_LOGS, element: <OperationLogsPage/>},
+                    {...RouteConstants.BASE.CODE_FORMAT_RULES, element: <CodeFormatRulesPage/>},
 
                     {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES, element: <FunctionalResourcesPage/>},
                 ]

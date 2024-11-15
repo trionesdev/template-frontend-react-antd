@@ -15,14 +15,14 @@ import {routeMatch} from "../../router";
 import _ from "lodash";
 
 const TagsMenu = () => {
+    const homeRoute = {id: 'home', label: '首页', path: () => '/'} //此处的路由对象是自己设置的，要跟路由表对应上，由于匹配是根据ID的，记得路由配置要加上id
     const tagsMenuRef = useRef<any>()
     const tagsMenuWrapperRef = useRef<any>()
     const navigate = useNavigate()
-    const [routeObjects, setRouteObjects] = useState<RouteObject[]>([])
-    const [activeRouteObject, setActiveRouteObject] = useState<RouteObject | undefined>()
+    const [routeObjects, setRouteObjects] = useState<RouteObject[]>([homeRoute])
+    const [activeRouteObject, setActiveRouteObject] = useState<RouteObject | undefined>(homeRoute)
     const [translateX, setTranslateX] = useState<number>(0)
     const matches = useMatches()
-
 
     useEffect(() => {
         const routeId = matches[matches.length - 1].id;
@@ -64,13 +64,22 @@ const TagsMenu = () => {
         }
     }}>
         <div ref={tagsMenuWrapperRef} className={styles.standaloneLayoutTagsMenuWrapper}>
-            <Tag icon={<HomeOutlined/>}>首页</Tag>
             {routeObjects.map((item: RouteObject) => <Tag key={item.id}
                                                           className={item?.id === activeRouteObject?.id ? 'active-tag' : ''}
-                                                          closable={true}
+                                                          icon={item.id == homeRoute.id ? <HomeOutlined/> : false}
+                                                          closable={item.id !== homeRoute.id}
                                                           onClose={() => {
                                                               const newRouteObjects = routeObjects.filter(route => route.id !== item?.id)
                                                               setRouteObjects(newRouteObjects)
+                                                              let newRoute = null
+                                                              if (_.isEmpty(newRouteObjects)) {
+                                                                  newRoute = homeRoute
+                                                              } else {
+                                                                  newRoute = newRouteObjects[newRouteObjects.length - 1]
+                                                              }
+                                                              setActiveRouteObject(newRoute)
+                                                              const path = _.isFunction(newRoute.path) ? newRoute.path() : newRoute.path
+                                                              navigate(path!)
                                                           }}
                                                           onClick={() => {
                                                               const path = _.isFunction(item.path) ? item.path() : item.path
@@ -158,6 +167,11 @@ export const StandAloneLayout = () => {
                     key: RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.id,
                     label: RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.label,
                     onClick: () => navigate(RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.path!())
+                },
+                {
+                    key: RouteConstants.BASE.CODE_FORMAT_RULES,
+                    label: RouteConstants.BASE.CODE_FORMAT_RULES.label,
+                    onClick: () => navigate(RouteConstants.BASE.CODE_FORMAT_RULES.path!())
                 },
                 {
                     key: RouteConstants.LOG.OPERATION_LOGS.id,
