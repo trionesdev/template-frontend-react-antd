@@ -24,7 +24,6 @@ const TagsMenu = () => {
     const [translateX, setTranslateX] = useState<number>(0)
     const matches = useMatches()
 
-
     useEffect(() => {
         const routeId = matches[matches.length - 1].id;
         const currentRouteObject = routeObjects.find(item => item.id === routeId);
@@ -72,11 +71,15 @@ const TagsMenu = () => {
                                                           onClose={() => {
                                                               const newRouteObjects = routeObjects.filter(route => route.id !== item?.id)
                                                               setRouteObjects(newRouteObjects)
+                                                              let newRoute = null
                                                               if (_.isEmpty(newRouteObjects)) {
-                                                                  setActiveRouteObject(homeRoute)
+                                                                  newRoute = homeRoute
                                                               } else {
-                                                                  setActiveRouteObject(newRouteObjects[newRouteObjects.length - 1])
+                                                                  newRoute = newRouteObjects[newRouteObjects.length - 1]
                                                               }
+                                                              setActiveRouteObject(newRoute)
+                                                              const path = _.isFunction(newRoute.path) ? newRoute.path() : newRoute.path
+                                                              navigate(path!)
                                                           }}
                                                           onClick={() => {
                                                               const path = _.isFunction(item.path) ? item.path() : item.path

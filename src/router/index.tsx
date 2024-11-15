@@ -21,7 +21,7 @@ const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
 
     {
-        id: 'home', path: () => '/', anonymous: false, element: <AppLayout/>, children: [
+        path: () => '/', anonymous: false, element: <AppLayout/>, children: [
             {
                 path: () => '/user-center', anonymous: false, element: <UserCenterLayout/>, children: [
                     {...RouteConstants.USER_CENTER.PROFILE, element: <UserProfilePage/>},
@@ -31,7 +31,7 @@ const routes: RouteObject[] = [
             {
                 path: () => '/', anonymous: false, element: <NormalLayout/>, children: [
                     {
-                        path: () => '/', anonymous: false, element: <div>Home</div>
+                        id: 'home', path: () => '/', anonymous: false, element: <div>Home</div>
                     },
 
 

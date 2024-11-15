@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <StyleProvider transformers={[legacyLogicalPropertiesTransformer]}>
             <ConfigProvider locale={zhCN}>
-                <AppConfigProvider defaultConfig={{multiTenant: false, selfHost: true}}>
+                <AppConfigProvider  defaultConfig={{multiTenant: false, selfHost: true}}>
                     <AuthProvider authRequest={async () => {
                         if (StorageUtils.getTrionesUserToken()) {
                             return tenantApi.queryActorMember().then((actor: any) => {
