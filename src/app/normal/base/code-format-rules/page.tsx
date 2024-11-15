@@ -2,7 +2,7 @@ import {useState} from "react";
 import {GridTable, Layout, TableToolbar} from "@trionesdev/antd-react-ext";
 import {useRequest} from "ahooks";
 import {codeFormatRuleApi} from "@apis/tenant";
-import {Button, Space} from "antd";
+import {Button, message, Modal, Space} from "antd";
 import {CodeFormatRuleForm} from "@app/normal/base/code-format-rules/CodeFormatRuleForm.tsx";
 import {TimeFormatTypeOptions} from "@app/normal/base/internal/base.options.ts";
 import {DateUtils} from "@trionesdev/commons";
@@ -77,10 +77,25 @@ export const CodeFormatRulesPage = () => {
             title: '操作',
             dataIndex: 'id',
             width: 180,
+            fixed: 'right',
             render: (_text: string, record: any) => {
                 return <Space>
-                    <Button size={`small`} type={`link`}>编辑</Button>
-                    <Button size={`small`} type={`link`} danger={true}>删除</Button>
+                    <CodeFormatRuleForm id={record.id} onRefresh={handlqQueryList}><Button size={`small`}
+                                                                                           type={`link`}>编辑</Button></CodeFormatRuleForm>
+                    <Button size={`small`} type={`link`} danger={true} onClick={() => {
+                        Modal.confirm({
+                            title: '确定删除该编码规则？',
+                            content: '删除可能会影响业务编码的生成',
+                            onOk: () => {
+                                codeFormatRuleApi.deleteCodeFormatRuleById(record.id).then(async () => {
+                                    message.success(`删除成功`)
+                                    handlqQueryList()
+                                }).catch(async (err) => {
+                                    message.error(err)
+                                })
+                            }
+                        })
+                    }}>删除</Button>
                 </Space>
             }
         }
@@ -90,13 +105,14 @@ export const CodeFormatRulesPage = () => {
         <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
             <GridTable fit={true} size={'small'}
                        toolbar={<TableToolbar title={<Space>
-                           <CodeFormatRuleForm><Button type={`primary`}>新建规则</Button></CodeFormatRuleForm>
+                           <CodeFormatRuleForm onRefresh={handlqQueryList}><Button
+                               type={`primary`}>新建规则</Button></CodeFormatRuleForm>
                        </Space>} extra={<Space>
                            <Button type={`text`} icon={<RedoOutlined/>} onClick={handlqQueryList}/>
                        </Space>}/>}
                        columns={columns} dataSource={result} rowKey={`id`}
                        loading={loading}
-                       pagination={false}/>
+                       pagination={false} scroll={{x: 1200}}/>
         </Layout.Item>
     </Layout>
 }

@@ -15,7 +15,7 @@ export class CodeFormatRuleApi extends BaseTenantApi {
         return this.request.put(`${this.baseUri}/code-format-rules/${id}`, data)
     }
 
-    getCodeFormatRuleById(id: string) {
+    queryCodeFormatRuleById(id: string) {
         return this.request.get(`${this.baseUri}/code-format-rules/${id}`)
     }
 
