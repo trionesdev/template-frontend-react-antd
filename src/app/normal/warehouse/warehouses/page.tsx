@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useRequest} from "ahooks";
 import {GridTable, Layout, SearchToolbar, TableToolbar} from "@trionesdev/antd-react-ext";
 import {Button, FormItemProps, Input, message, Modal, Popconfirm, Space, Switch} from "antd";
-import {ExclamationCircleFilled, MinusCircleOutlined, PlusCircleOutlined, RedoOutlined} from "@ant-design/icons";
+import {ExclamationCircleFilled, MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import {PageResult} from "@apis";
 import {warehouseApi} from "@apis/tenant";
 import { WarehouseForm } from "./WarehouseForm.tsx";
@@ -143,14 +143,15 @@ export const WarehousesPage = () => {
                     setSearchParams(params)
                 }} onReset={() => setSearchParams({})} onSearch={handleQuery}/>
                 <GridTable
-                    toolbar={<TableToolbar title={<Space>
-                        <WarehouseForm onRefresh={handleQuery}>
-                            <Button type={`primary`} icon={<PlusCircleOutlined/>}>添加仓库</Button>
-                        </WarehouseForm>
-                            <Button type={`primary`} danger icon={<MinusCircleOutlined />} onClick={handleDeleteBatch}>删除仓库</Button>
-                    </Space>} extra={<Space>
-                        <Button icon={<RedoOutlined/>} type={`text`} onClick={handleQuery}/>
-                    </Space>}/>}
+                    toolbar={<TableToolbar title={
+                        <Space>
+                            <WarehouseForm onRefresh={handleQuery}>
+                                <Button type={`primary`} icon={<PlusCircleOutlined/>}>添加仓库</Button>
+                            </WarehouseForm>
+                            <Button type={`primary`} danger icon={<MinusCircleOutlined/>}
+                                    onClick={handleDeleteBatch}>删除仓库</Button>
+                        </Space>}
+                    />}
                     fit={true} size={'small'} columns={columns} dataSource={result?.rows} rowKey={`id`}
                     loading={loading}
                     rowSelection={{
