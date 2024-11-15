@@ -85,6 +85,15 @@ export namespace RouteConstants {
         } as RouteObject,
     }
 
+    export const WAREHOUSE = {
+        WAREHOUSES: {
+            ...baseConfig,
+            id: 'warehouses',
+            label: '仓库管理',
+            path: () => "/warehouse/warehouses",
+        } as RouteObject,
+    }
+
     export namespace BOSS {
         export const PERM = {
             FUNCTIONAL_RESOURCES: {

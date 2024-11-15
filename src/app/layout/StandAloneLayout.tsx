@@ -2,7 +2,7 @@ import {Outlet, RouteObject, useAuth, useMatches, useNavigate} from "@trionesdev
 import {Avatar, Button, Dropdown, Layout, Menu, Space, Tag} from "antd";
 import styles from "./standalone-layout.module.less"
 import {
-    ApartmentOutlined,
+    ApartmentOutlined, AppstoreAddOutlined,
     DatabaseOutlined,
     DesktopOutlined, HomeOutlined,
     LogoutOutlined,
@@ -134,6 +134,18 @@ export const StandAloneLayout = () => {
                     key: RouteConstants.DIC.DISTRICTS.id,
                     label: RouteConstants.DIC.DISTRICTS.label,
                     onClick: () => navigate(RouteConstants.DIC.DISTRICTS.path!())
+                },
+            ]
+        },
+        {
+            key: 'basic-data',
+            label: '基础数据',
+            icon: <AppstoreAddOutlined />,
+            children: [
+                {
+                    key: RouteConstants.WAREHOUSE.WAREHOUSES.id,
+                    label: RouteConstants.WAREHOUSE.WAREHOUSES.label,
+                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSES.path!())
                 },
             ]
         },
