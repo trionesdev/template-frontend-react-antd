@@ -92,6 +92,12 @@ export namespace RouteConstants {
             label: '仓库管理',
             path: () => "/warehouse/warehouses",
         } as RouteObject,
+        WAREHOUSE_AREAS: {
+            ...baseConfig,
+            id: 'warehouse-areas',
+            label: '库区管理',
+            path: () => "/warehouse/warehouse-areas",
+        } as RouteObject,
     }
 
     export const BASE = {

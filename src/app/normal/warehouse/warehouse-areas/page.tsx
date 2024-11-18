@@ -4,11 +4,11 @@ import {GridTable, Layout, SearchToolbar, TableToolbar} from "@trionesdev/antd-r
 import {Button, FormItemProps, Input, message, Modal, Popconfirm, Space, Switch} from "antd";
 import {ExclamationCircleFilled, MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import {PageResult} from "@apis";
-import {warehouseApi} from "@apis/tenant";
-import { WarehouseForm } from "./WarehouseForm.tsx";
+import {warehouseAreaApi} from "@apis/tenant";
+import { WarehouseAreaForm } from "./WarehouseAreaForm.tsx";
 import _ from "lodash";
 
-export const WarehousesPage = () => {
+export const WarehouseAreasPage = () => {
     const [searchParams, setSearchParams] = useState<any>({})
     const [pageParams, setPageParams] = useState({pageNum: 1, pageSize: 10})
     const [result, setResult] = useState<PageResult<any>>({rows: [], total: 0})
@@ -17,7 +17,7 @@ export const WarehousesPage = () => {
 
     const {run: handleQuery, loading} = useRequest(() => {
         const params = {...pageParams, ...searchParams}
-        return warehouseApi.queryWarehousePage(params)
+        return warehouseAreaApi.queryPage(params)
     }, {
         manual: true,
         onSuccess: (res: any) => {
@@ -32,19 +32,19 @@ export const WarehousesPage = () => {
 
     const columns: any[] = [
         {
-            title: '仓库编码',
+            title: '库区编码',
             dataIndex: 'code',
             width: 200,
         },
         {
-            title: '仓库名称',
+            title: '库区名称',
             dataIndex: 'name',
             width: 200,
         },
         {
-            title: '仓库地址',
-            dataIndex: 'address',
-            width: 400,
+            title: '所属仓库',
+            dataIndex: 'warehouseName',
+            width: 200,
         },
         {
             title: '状态',
@@ -65,9 +65,9 @@ export const WarehousesPage = () => {
             width: 150,
             render: (_id: string, record: any) => {
                 return <Space>
-                    <WarehouseForm id={record.id} onRefresh={handleQuery}>
+                    <WarehouseAreaForm id={record.id} onRefresh={handleQuery}>
                         <Button size={`small`} type={`link`}>编辑</Button>
-                    </WarehouseForm>
+                    </WarehouseAreaForm>
                     <Popconfirm
                         title={'确认删除记录'}
                         okText={'确定'}
@@ -84,7 +84,7 @@ export const WarehousesPage = () => {
     ]
 
     const handleDelete = (id: string) => {
-        warehouseApi.deleteWarehouseByIds([id]).then(async () => {
+        warehouseAreaApi.deleteByIds([id]).then(async () => {
             message.success(`删除成功`)
             handleQuery()
         }).catch(async (ex) => {
@@ -110,7 +110,7 @@ export const WarehousesPage = () => {
             okType: 'danger',
             cancelText: '取消',
             onOk() {
-                warehouseApi.deleteWarehouseByIds(selectedRowKeys).then(() => {
+                warehouseAreaApi.deleteByIds(selectedRowKeys).then(() => {
                     message.success('删除成功')
                     setSelectedRowKeys([])
                     handleQuery()
@@ -122,7 +122,7 @@ export const WarehousesPage = () => {
     }
 
     const handleEnable = (id: string, enabled: boolean) => {
-        warehouseApi.updateWarehouseById(id, {enabled: enabled}).then(async () => {
+        warehouseAreaApi.updateById(id, {enabled: enabled}).then(async () => {
             message.success(enabled ? '启用成功' : '禁用成功')
             handleQuery()
         }).catch(async (ex) => {
@@ -131,8 +131,8 @@ export const WarehousesPage = () => {
     }
 
     const searchFormItems: FormItemProps[] = [
-        {label: '仓库编码', name: 'code', children: <Input type={'text'} placeholder={`请输入仓库编码`} />},
-        {label: '仓库名称', name: 'name', children: <Input type={'text'} placeholder={`请输入仓库名称`} />},
+        {label: '库区编码', name: 'code', children: <Input type={'text'} placeholder={`请输入库区编码`} />},
+        {label: '库区名称', name: 'name', children: <Input type={'text'} placeholder={`请输入库区名称`} />},
     ]
 
 
@@ -145,11 +145,11 @@ export const WarehousesPage = () => {
                 <GridTable
                     toolbar={<TableToolbar title={
                         <Space>
-                            <WarehouseForm onRefresh={handleQuery}>
-                                <Button type={`primary`} icon={<PlusCircleOutlined/>}>添加仓库</Button>
-                            </WarehouseForm>
+                            <WarehouseAreaForm onRefresh={handleQuery}>
+                                <Button type={`primary`} icon={<PlusCircleOutlined/>}>添加库区</Button>
+                            </WarehouseAreaForm>
                             <Button type={`primary`} danger icon={<MinusCircleOutlined/>}
-                                    onClick={handleDeleteBatch}>删除仓库</Button>
+                                    onClick={handleDeleteBatch}>删除库区</Button>
                         </Space>}
                     />}
                     fit={true} size={'small'} columns={columns} dataSource={result?.rows} rowKey={`id`}

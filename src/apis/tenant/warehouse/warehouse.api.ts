@@ -21,7 +21,7 @@ export class WarehouseApi extends BaseTenantApi {
     }
 
     queryWarehouseList(params?: any) {
-        return this.request.get(`${this.baseUri}/warehouses/page`, {params});
+        return this.request.get(`${this.baseUri}/warehouses/list`, {params});
     }
 
     deleteWarehouseByIds(ids: string[]) {
