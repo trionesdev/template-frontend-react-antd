@@ -56,16 +56,16 @@ export const WarehouseForm: FC<WarehouseFormProps> = ({
         }} form={form} onOk={handleSubmit}
                     formProps={{layout: 'vertical'}}>
             <Spin spinning={loading}>
-                <Form.Item name={`name`} label={`仓库名称`} required={true}>
+                <Form.Item name={`name`} label={`仓库名称`} rules={[{required: true}]} required={true}>
                     <Input placeholder={"请输入仓库名称"}/>
                 </Form.Item>
-                <Form.Item name={`code`} label={`仓库编码`} required={true}>
+                <Form.Item name={`code`} label={`仓库编码`} rules={[{required: true}]} required={true}>
                     <Input placeholder={"请输入仓库编码"}/>
                 </Form.Item>
                 <Form.Item name={`address`} label={`仓库地址`} >
                     <Input.TextArea rows={4} placeholder={"请输入仓库地址"}/>
                 </Form.Item>
-                <Form.Item name={`enabled`} label={`状态`} initialValue={true} required={true}>
+                <Form.Item name={`enabled`} label={`状态`} initialValue={true} >
                     <Switch/>
                 </Form.Item>
                 <Form.Item name={`remark`} label={`备注`} >

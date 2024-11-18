@@ -5,13 +5,13 @@ import {warehouseAreaApi} from "@apis/tenant";
 import {DrawerForm} from "@trionesdev/antd-react-ext";
 import {WarehouseSelect} from "@app/normal/warehouse/components/warehouse-select";
 
-type WarehouseFormProps = {
+type WarehouseAreaFormProps = {
     children: React.ReactElement,
     id?: string
     onRefresh?: () => void
 }
 
-export const WarehouseAreaForm: FC<WarehouseFormProps> = ({
+export const WarehouseAreaForm: FC<WarehouseAreaFormProps> = ({
                                                                 children, id, onRefresh
                                                             }) => {
     const [open, setOpen] = useState(false)
@@ -57,16 +57,16 @@ export const WarehouseAreaForm: FC<WarehouseFormProps> = ({
         }} form={form} onOk={handleSubmit}
                     formProps={{layout: 'vertical'}}>
             <Spin spinning={loading}>
-                <Form.Item name={`name`} label={`库区名称`} required={true}>
+                <Form.Item name={`name`} label={`库区名称`} rules={[{required: true}]} required={true}>
                     <Input placeholder={"请输入库区名称"}/>
                 </Form.Item>
-                <Form.Item name={`code`} label={`库区编码`} required={true}>
+                <Form.Item name={`code`} label={`库区编码`} rules={[{required: true}]} required={true}>
                     <Input placeholder={"请输入库区编码"}/>
                 </Form.Item>
                 <Form.Item name={`warehouseId`} label={`所属仓库`} >
                     <WarehouseSelect />
                 </Form.Item>
-                <Form.Item name={`enabled`} label={`状态`} initialValue={true} required={true}>
+                <Form.Item name={`enabled`} label={`状态`} initialValue={true} >
                     <Switch/>
                 </Form.Item>
                 <Form.Item name={`remark`} label={`备注`} >
