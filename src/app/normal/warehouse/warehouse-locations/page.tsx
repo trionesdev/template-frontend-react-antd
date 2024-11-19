@@ -7,16 +7,19 @@ import {PageResult} from "@apis";
 import {warehouseLocationApi} from "@apis/tenant";
 import { WarehouseLocationForm } from "./WarehouseLocationForm.tsx";
 import _ from "lodash";
+import {WarehouseAreaSelect} from "@app/normal/warehouse/components/warehouse-area-select";
+import {WarehouseSelect} from "@app/normal/warehouse/components/warehouse-select";
 
 export const WarehouseLocationsPage = () => {
     const [searchParams, setSearchParams] = useState<any>({})
     const [pageParams, setPageParams] = useState({pageNum: 1, pageSize: 10})
     const [result, setResult] = useState<PageResult<any>>({rows: [], total: 0})
     const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([])
-
+    const [warehouseId, setWarehouseId] = useState<string>()
+    const [warehouseAreaId, setWarehouseAreaId] = useState<string>()
 
     const {run: handleQuery, loading} = useRequest(() => {
-        const params = {...pageParams, ...searchParams}
+        const params = {...pageParams, ...searchParams, warehouseAreaId: warehouseAreaId}
         return warehouseLocationApi.queryPage(params)
     }, {
         manual: true,
@@ -39,6 +42,11 @@ export const WarehouseLocationsPage = () => {
         {
             title: '库位名称',
             dataIndex: 'name',
+            width: 200,
+        },
+        {
+            title: '所属库区',
+            dataIndex: 'warehouseAreaName',
             width: 200,
         },
         {
@@ -133,6 +141,8 @@ export const WarehouseLocationsPage = () => {
     const searchFormItems: FormItemProps[] = [
         {label: '库位编码', name: 'code', children: <Input type={'text'} placeholder={`请输入库位编码`} />},
         {label: '库位名称', name: 'name', children: <Input type={'text'} placeholder={`请输入库位名称`} />},
+        {label: '所属仓库', name: 'warehouseId', children: <WarehouseSelect />},
+        {label: '所属库区', children: <WarehouseAreaSelect value={warehouseAreaId} onChange={setWarehouseAreaId} warehouseId={warehouseId} />},
     ]
 
 
@@ -141,7 +151,11 @@ export const WarehouseLocationsPage = () => {
             <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
                 <SearchToolbar items={searchFormItems} onSearchParamsChange={(params) => {
                     setSearchParams(params)
-                }} onReset={() => setSearchParams({})} onSearch={handleQuery}/>
+                    if (params['warehouseId'] != warehouseId) {
+                        setWarehouseId(params['warehouseId'])
+                        setWarehouseAreaId(undefined)
+                    }
+                }} onReset={() => setSearchParams({})} onSearch={handleQuery} />
                 <GridTable
                     toolbar={<TableToolbar title={
                         <Space>

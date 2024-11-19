@@ -7,6 +7,7 @@ import {PageResult} from "@apis";
 import {warehouseAreaApi} from "@apis/tenant";
 import { WarehouseAreaForm } from "./WarehouseAreaForm.tsx";
 import _ from "lodash";
+import {WarehouseSelect} from "@app/normal/warehouse/components/warehouse-select";
 
 export const WarehouseAreasPage = () => {
     const [searchParams, setSearchParams] = useState<any>({})
@@ -133,6 +134,7 @@ export const WarehouseAreasPage = () => {
     const searchFormItems: FormItemProps[] = [
         {label: '库区编码', name: 'code', children: <Input type={'text'} placeholder={`请输入库区编码`} />},
         {label: '库区名称', name: 'name', children: <Input type={'text'} placeholder={`请输入库区名称`} />},
+        {label: '所属仓库', name: 'warehouseId', children: <WarehouseSelect />},
     ]
 
 
