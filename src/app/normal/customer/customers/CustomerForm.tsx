@@ -4,13 +4,13 @@ import {useRequest} from "ahooks";
 import {customerApi} from "@apis/tenant";
 import {DrawerForm} from "@trionesdev/antd-react-ext";
 
-type WarehouseFormProps = {
+type CustomerFormProps = {
     children: React.ReactElement,
     id?: string
     onRefresh?: () => void
 }
 
-export const CustomerForm: FC<WarehouseFormProps> = ({
+export const CustomerForm: FC<CustomerFormProps> = ({
                                                                 children, id, onRefresh
                                                             }) => {
     const [open, setOpen] = useState(false)

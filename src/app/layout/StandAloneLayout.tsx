@@ -181,6 +181,16 @@ export const StandAloneLayout = () => {
                     label: RouteConstants.SUPPLIER.SUPPLIERS.label,
                     onClick: () => navigate(RouteConstants.SUPPLIER.SUPPLIERS.path!())
                 },
+                {
+                    key: RouteConstants.GOOD.GOODS.id,
+                    label: RouteConstants.GOOD.GOODS.label,
+                    onClick: () => navigate(RouteConstants.GOOD.GOODS.path!())
+                },
+                {
+                    key: RouteConstants.GOOD.MEASURE_UNITS.id,
+                    label: RouteConstants.GOOD.MEASURE_UNITS.label,
+                    onClick: () => navigate(RouteConstants.GOOD.MEASURE_UNITS.path!())
+                },
             ]
         },
         {

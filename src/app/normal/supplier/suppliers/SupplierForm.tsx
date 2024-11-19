@@ -4,13 +4,13 @@ import {useRequest} from "ahooks";
 import {supplierApi} from "@apis/tenant";
 import {DrawerForm} from "@trionesdev/antd-react-ext";
 
-type WarehouseFormProps = {
+type SupplierFormProps = {
     children: React.ReactElement,
     id?: string
     onRefresh?: () => void
 }
 
-export const SupplierForm: FC<WarehouseFormProps> = ({
+export const SupplierForm: FC<SupplierFormProps> = ({
                                                                 children, id, onRefresh
                                                             }) => {
     const [open, setOpen] = useState(false)

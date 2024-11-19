@@ -94,6 +94,21 @@ export namespace RouteConstants {
         } as RouteObject,
     }
 
+    export const GOOD = {
+        GOODS: {
+            ...baseConfig,
+            id: 'goods',
+            label: '货物管理',
+            path: () => "/good/goods",
+        } as RouteObject,
+        MEASURE_UNITS: {
+            ...baseConfig,
+            id: 'measure-units',
+            label: '单位管理',
+            path: () => "/good/measure-units",
+        } as RouteObject,
+    }
+
     export const LOG = {
         OPERATION_LOGS: {
             ...baseConfig,

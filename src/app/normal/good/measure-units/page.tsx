@@ -4,11 +4,11 @@ import {GridTable, Layout, SearchToolbar, TableToolbar} from "@trionesdev/antd-r
 import {Button, FormItemProps, Input, message, Modal, Popconfirm, Space, Switch} from "antd";
 import {ExclamationCircleFilled, MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import {PageResult} from "@apis";
-import {warehouseApi} from "@apis/tenant";
-import { WarehouseForm } from "./WarehouseForm.tsx";
+import {measureUnitApi} from "@apis/tenant";
+import { MeasureUnitForm } from "./MeasureUnitForm.tsx";
 import _ from "lodash";
 
-export const WarehousesPage = () => {
+export const MeasureUnitsPage = () => {
     const [searchParams, setSearchParams] = useState<any>({})
     const [pageParams, setPageParams] = useState({pageNum: 1, pageSize: 10})
     const [result, setResult] = useState<PageResult<any>>({rows: [], total: 0})
@@ -17,7 +17,7 @@ export const WarehousesPage = () => {
 
     const {run: handleQuery, loading} = useRequest(() => {
         const params = {...pageParams, ...searchParams}
-        return warehouseApi.queryPage(params)
+        return measureUnitApi.queryPage(params)
     }, {
         manual: true,
         onSuccess: (res: any) => {
@@ -32,19 +32,14 @@ export const WarehousesPage = () => {
 
     const columns: any[] = [
         {
-            title: '仓库编码',
+            title: '单位编码',
             dataIndex: 'code',
             width: 200,
         },
         {
-            title: '仓库名称',
+            title: '单位名称',
             dataIndex: 'name',
             width: 200,
-        },
-        {
-            title: '仓库地址',
-            dataIndex: 'address',
-            width: 400,
         },
         {
             title: '启用',
@@ -65,9 +60,9 @@ export const WarehousesPage = () => {
             width: 150,
             render: (_id: string, record: any) => {
                 return <Space>
-                    <WarehouseForm id={record.id} onRefresh={handleQuery}>
+                    <MeasureUnitForm id={record.id} onRefresh={handleQuery}>
                         <Button size={`small`} type={`link`}>编辑</Button>
-                    </WarehouseForm>
+                    </MeasureUnitForm>
                     <Popconfirm
                         title={'确认删除记录'}
                         okText={'确定'}
@@ -84,7 +79,7 @@ export const WarehousesPage = () => {
     ]
 
     const handleDelete = (id: string) => {
-        warehouseApi.deleteByIds([id]).then(async () => {
+        measureUnitApi.deleteByIds([id]).then(async () => {
             message.success(`删除成功`)
             handleQuery()
         }).catch(async (ex) => {
@@ -110,7 +105,7 @@ export const WarehousesPage = () => {
             okType: 'danger',
             cancelText: '取消',
             onOk() {
-                warehouseApi.deleteByIds(selectedRowKeys).then(() => {
+                measureUnitApi.deleteByIds(selectedRowKeys).then(() => {
                     message.success('删除成功')
                     setSelectedRowKeys([])
                     handleQuery()
@@ -122,7 +117,7 @@ export const WarehousesPage = () => {
     }
 
     const handleEnable = (id: string, enabled: boolean) => {
-        warehouseApi.updateById(id, {enabled: enabled}).then(async () => {
+        measureUnitApi.updateById(id, {enabled: enabled}).then(async () => {
             message.success(enabled ? '启用成功' : '禁用成功')
             handleQuery()
         }).catch(async (ex) => {
@@ -131,8 +126,8 @@ export const WarehousesPage = () => {
     }
 
     const searchFormItems: FormItemProps[] = [
-        {label: '仓库编码', name: 'code', children: <Input type={'text'} placeholder={`请输入仓库编码`} />},
-        {label: '仓库名称', name: 'name', children: <Input type={'text'} placeholder={`请输入仓库名称`} />},
+        {label: '单位编码', name: 'code', children: <Input type={'text'} placeholder={`请输入单位编码`} />},
+        {label: '单位名称', name: 'name', children: <Input type={'text'} placeholder={`请输入单位名称`} />},
     ]
 
 
@@ -145,11 +140,11 @@ export const WarehousesPage = () => {
                 <GridTable
                     toolbar={<TableToolbar title={
                         <Space>
-                            <WarehouseForm onRefresh={handleQuery}>
-                                <Button type={`primary`} icon={<PlusCircleOutlined/>}>添加仓库</Button>
-                            </WarehouseForm>
+                            <MeasureUnitForm onRefresh={handleQuery}>
+                                <Button type={`primary`} icon={<PlusCircleOutlined/>}>添加单位</Button>
+                            </MeasureUnitForm>
                             <Button type={`primary`} danger icon={<MinusCircleOutlined/>}
-                                    onClick={handleDeleteBatch}>删除仓库</Button>
+                                    onClick={handleDeleteBatch}>删除单位</Button>
                         </Space>}
                     />}
                     fit={true} size={'small'} columns={columns} dataSource={result?.rows} rowKey={`id`}

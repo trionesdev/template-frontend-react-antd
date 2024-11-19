@@ -4,27 +4,27 @@ import {PageQueryParams} from "@apis";
 export class WarehouseApi extends BaseTenantApi {
     private baseUri = '/warehouse';
 
-    createWarehouse(warehouse: any) {
-        return this.request.post(`${this.baseUri}/warehouses`, warehouse);
+    create(entity: any) {
+        return this.request.post(`${this.baseUri}/warehouses`, entity);
     }
 
-    updateWarehouseById(id: string, warehouse: any) {
-        return this.request.put(`${this.baseUri}/warehouses/${id}`, warehouse);
+    updateById(id: string, entity: any) {
+        return this.request.put(`${this.baseUri}/warehouses/${id}`, entity);
     }
 
-    queryWarehouseById(id: string) {
+    queryById(id: string) {
         return this.request.get(`${this.baseUri}/warehouses/${id}`);
     }
 
-    queryWarehousePage(params: PageQueryParams) {
+    queryPage(params: PageQueryParams) {
         return this.request.get(`${this.baseUri}/warehouses/page`, {params});
     }
 
-    queryWarehouseList(params?: any) {
+    queryList(params?: any) {
         return this.request.get(`${this.baseUri}/warehouses/list`, {params});
     }
 
-    deleteWarehouseByIds(ids: string[]) {
+    deleteByIds(ids: string[]) {
         return this.request.delete(`${this.baseUri}/warehouses/${ids.join(",")}`);
     }
 

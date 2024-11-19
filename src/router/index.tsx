@@ -22,6 +22,8 @@ import {WarehouseLocationsPage} from "@app/normal/warehouse/warehouse-locations/
 import {WarehouseContainersPage} from "@app/normal/warehouse/warehouse-containers/page.tsx";
 import {CustomersPage} from "@app/normal/customer/customers/page.tsx";
 import {SuppliersPage} from "@app/normal/supplier/suppliers/page.tsx";
+import {GoodsPage} from "@app/normal/good/goods/page.tsx";
+import {MeasureUnitsPage} from "@app/normal/good/measure-units/page.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -56,6 +58,8 @@ const routes: RouteObject[] = [
                     {...RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS, element: <WarehouseContainersPage/>},
                     {...RouteConstants.CUSTOMER.CUSTOMERS, element: <CustomersPage/>},
                     {...RouteConstants.SUPPLIER.SUPPLIERS, element: <SuppliersPage/>},
+                    {...RouteConstants.GOOD.GOODS, element: <GoodsPage/>},
+                    {...RouteConstants.GOOD.MEASURE_UNITS, element: <MeasureUnitsPage/>},
 
                     {...RouteConstants.LOG.OPERATION_LOGS, element: <OperationLogsPage/>},
                     {...RouteConstants.BASE.CODE_FORMAT_RULES, element: <CodeFormatRulesPage/>},

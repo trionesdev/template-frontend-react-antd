@@ -4,12 +4,12 @@ import {PageQueryParams} from "@apis";
 export class WarehouseContainerApi extends BaseTenantApi {
     private baseUri = '/warehouse';
 
-    create(warehouse: any) {
-        return this.request.post(`${this.baseUri}/warehouse-containers`, warehouse);
+    create(entity: any) {
+        return this.request.post(`${this.baseUri}/warehouse-containers`, entity);
     }
 
-    updateById(id: string, warehouse: any) {
-        return this.request.put(`${this.baseUri}/warehouse-containers/${id}`, warehouse);
+    updateById(id: string, entity: any) {
+        return this.request.put(`${this.baseUri}/warehouse-containers/${id}`, entity);
     }
 
     queryById(id: string) {
