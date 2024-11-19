@@ -4,23 +4,20 @@ import {GridTable, Layout, SearchToolbar, TableToolbar} from "@trionesdev/antd-r
 import {Button, FormItemProps, Input, message, Modal, Popconfirm, Space, Switch} from "antd";
 import {ExclamationCircleFilled, MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import {PageResult} from "@apis";
-import {warehouseLocationApi} from "@apis/tenant";
-import { WarehouseLocationForm } from "./WarehouseLocationForm.tsx";
+import {supplierApi} from "@apis/tenant";
+import { SupplierForm } from "./SupplierForm.tsx";
 import _ from "lodash";
-import {WarehouseAreaSelect} from "@app/normal/warehouse/components/warehouse-area-select";
-import {WarehouseSelect} from "@app/normal/warehouse/components/warehouse-select";
 
-export const WarehouseLocationsPage = () => {
+export const SuppliersPage = () => {
     const [searchParams, setSearchParams] = useState<any>({})
     const [pageParams, setPageParams] = useState({pageNum: 1, pageSize: 10})
     const [result, setResult] = useState<PageResult<any>>({rows: [], total: 0})
     const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([])
-    const [warehouseId, setWarehouseId] = useState<string>()
-    const [warehouseAreaId, setWarehouseAreaId] = useState<string>()
+
 
     const {run: handleQuery, loading} = useRequest(() => {
-        const params = {...pageParams, ...searchParams, warehouseAreaId: warehouseAreaId}
-        return warehouseLocationApi.queryPage(params)
+        const params = {...pageParams, ...searchParams}
+        return supplierApi.queryPage(params)
     }, {
         manual: true,
         onSuccess: (res: any) => {
@@ -35,29 +32,39 @@ export const WarehouseLocationsPage = () => {
 
     const columns: any[] = [
         {
-            title: '库位编码',
+            title: '供应商编码',
             dataIndex: 'code',
             width: 200,
         },
         {
-            title: '库位名称',
+            title: '供应商名称',
             dataIndex: 'name',
             width: 200,
         },
         {
-            title: '所属库区',
-            dataIndex: 'warehouseAreaName',
+            title: '联系人',
+            dataIndex: 'contactName',
+            width: 80,
+        },
+        {
+            title: '手机号',
+            dataIndex: 'contactPhone',
+            width: 150,
+        },
+        {
+            title: '固定电话',
+            dataIndex: 'contactFixedTelephone',
+            width: 150,
+        },
+        {
+            title: '电子邮箱',
+            dataIndex: 'contactEmail',
             width: 200,
         },
         {
-            title: '所属仓库',
-            dataIndex: 'warehouseName',
+            title: '地址',
+            dataIndex: 'contactAddress',
             width: 200,
-        },
-        {
-            title: '层数',
-            dataIndex: 'floorQuantity',
-            width: 100,
         },
         {
             title: '启用',
@@ -78,9 +85,9 @@ export const WarehouseLocationsPage = () => {
             width: 150,
             render: (_id: string, record: any) => {
                 return <Space>
-                    <WarehouseLocationForm id={record.id} onRefresh={handleQuery}>
+                    <SupplierForm id={record.id} onRefresh={handleQuery}>
                         <Button size={`small`} type={`link`}>编辑</Button>
-                    </WarehouseLocationForm>
+                    </SupplierForm>
                     <Popconfirm
                         title={'确认删除记录'}
                         okText={'确定'}
@@ -97,7 +104,7 @@ export const WarehouseLocationsPage = () => {
     ]
 
     const handleDelete = (id: string) => {
-        warehouseLocationApi.deleteByIds([id]).then(async () => {
+        supplierApi.deleteByIds([id]).then(async () => {
             message.success(`删除成功`)
             handleQuery()
         }).catch(async (ex) => {
@@ -123,7 +130,7 @@ export const WarehouseLocationsPage = () => {
             okType: 'danger',
             cancelText: '取消',
             onOk() {
-                warehouseLocationApi.deleteByIds(selectedRowKeys).then(() => {
+                supplierApi.deleteByIds(selectedRowKeys).then(() => {
                     message.success('删除成功')
                     setSelectedRowKeys([])
                     handleQuery()
@@ -135,7 +142,7 @@ export const WarehouseLocationsPage = () => {
     }
 
     const handleEnable = (id: string, enabled: boolean) => {
-        warehouseLocationApi.updateById(id, {enabled: enabled}).then(async () => {
+        supplierApi.updateById(id, {enabled: enabled}).then(async () => {
             message.success(enabled ? '启用成功' : '禁用成功')
             handleQuery()
         }).catch(async (ex) => {
@@ -144,10 +151,9 @@ export const WarehouseLocationsPage = () => {
     }
 
     const searchFormItems: FormItemProps[] = [
-        {label: '库位编码', name: 'code', children: <Input type={'text'} placeholder={`请输入库位编码`} />},
-        {label: '库位名称', name: 'name', children: <Input type={'text'} placeholder={`请输入库位名称`} />},
-        {label: '所属仓库', name: 'warehouseId', children: <WarehouseSelect />},
-        {label: '所属库区', children: <WarehouseAreaSelect value={warehouseAreaId} onChange={setWarehouseAreaId} warehouseId={warehouseId} />},
+        {label: '供应商编码', name: 'code', children: <Input type={'text'} placeholder={`请输入供应商编码`} />},
+        {label: '供应商名称', name: 'name', children: <Input type={'text'} placeholder={`请输入供应商名称`} />},
+        {label: '联系人', name: 'contactName', children: <Input type={'text'} placeholder={`请输入联系人`} />},
     ]
 
 
@@ -156,19 +162,15 @@ export const WarehouseLocationsPage = () => {
             <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
                 <SearchToolbar items={searchFormItems} onSearchParamsChange={(params) => {
                     setSearchParams(params)
-                    if (params['warehouseId'] != warehouseId) {
-                        setWarehouseId(params['warehouseId'])
-                        setWarehouseAreaId(undefined)
-                    }
-                }} onReset={() => setSearchParams({})} onSearch={handleQuery} />
+                }} onReset={() => setSearchParams({})} onSearch={handleQuery}/>
                 <GridTable
                     toolbar={<TableToolbar title={
                         <Space>
-                            <WarehouseLocationForm onRefresh={handleQuery}>
-                                <Button type={`primary`} icon={<PlusCircleOutlined/>}>添加库位</Button>
-                            </WarehouseLocationForm>
+                            <SupplierForm onRefresh={handleQuery}>
+                                <Button type={`primary`} icon={<PlusCircleOutlined/>}>添加供应商</Button>
+                            </SupplierForm>
                             <Button type={`primary`} danger icon={<MinusCircleOutlined/>}
-                                    onClick={handleDeleteBatch}>删除库位</Button>
+                                    onClick={handleDeleteBatch}>删除供应商</Button>
                         </Space>}
                     />}
                     fit={true} size={'small'} columns={columns} dataSource={result?.rows} rowKey={`id`}

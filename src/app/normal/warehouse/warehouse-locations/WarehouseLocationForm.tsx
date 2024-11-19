@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from "react";
-import {Form, Input, message, Spin, Switch} from "antd";
+import {Form, Input, InputNumber, message, Spin, Switch} from "antd";
 import {useRequest} from "ahooks";
 import {warehouseLocationApi} from "@apis/tenant";
 import {DrawerForm} from "@trionesdev/antd-react-ext";
@@ -74,6 +74,9 @@ export const WarehouseLocationForm: FC<WarehouseLocationFormProps> = ({
                 <Form.Item name={`warehouseAreaId`} label={`所属库区`}
                            rules={[{required: true}]} required={true}>
                     <WarehouseAreaSelect warehouseId={warehouseId}/>
+                </Form.Item>
+                <Form.Item name={`floorQuantity`} label={`层数`}>
+                    <InputNumber placeholder={"请输入层数"} />
                 </Form.Item>
                 <Form.Item name={`enabled`} label={`启用`} initialValue={true}>
                     <Switch/>

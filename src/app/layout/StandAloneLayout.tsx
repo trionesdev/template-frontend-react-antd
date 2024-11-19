@@ -171,6 +171,16 @@ export const StandAloneLayout = () => {
                     label: RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS.label,
                     onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS.path!())
                 },
+                {
+                    key: RouteConstants.CUSTOMER.CUSTOMERS.id,
+                    label: RouteConstants.CUSTOMER.CUSTOMERS.label,
+                    onClick: () => navigate(RouteConstants.CUSTOMER.CUSTOMERS.path!())
+                },
+                {
+                    key: RouteConstants.SUPPLIER.SUPPLIERS.id,
+                    label: RouteConstants.SUPPLIER.SUPPLIERS.label,
+                    onClick: () => navigate(RouteConstants.SUPPLIER.SUPPLIERS.path!())
+                },
             ]
         },
         {

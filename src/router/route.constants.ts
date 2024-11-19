@@ -76,6 +76,24 @@ export namespace RouteConstants {
         }
     }
 
+    export const CUSTOMER = {
+        CUSTOMERS: {
+            ...baseConfig,
+            id: 'customers',
+            label: '客户管理',
+            path: () => "/customer/customers",
+        } as RouteObject,
+    }
+
+    export const SUPPLIER = {
+        SUPPLIERS: {
+            ...baseConfig,
+            id: 'suppliers',
+            label: '供应商管理',
+            path: () => "/supplier/suppliers",
+        } as RouteObject,
+    }
+
     export const LOG = {
         OPERATION_LOGS: {
             ...baseConfig,
