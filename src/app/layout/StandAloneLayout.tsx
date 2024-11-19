@@ -166,6 +166,11 @@ export const StandAloneLayout = () => {
                     label: RouteConstants.WAREHOUSE.WAREHOUSE_LOCATIONS.label,
                     onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_LOCATIONS.path!())
                 },
+                {
+                    key: RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS.id,
+                    label: RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS.label,
+                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS.path!())
+                },
             ]
         },
         {

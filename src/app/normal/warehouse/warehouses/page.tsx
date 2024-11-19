@@ -47,7 +47,7 @@ export const WarehousesPage = () => {
             width: 400,
         },
         {
-            title: '状态',
+            title: '启用',
             dataIndex: 'enabled',
             width: 100,
             render: (text: boolean, record: any) => {

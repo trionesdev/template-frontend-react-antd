@@ -75,7 +75,7 @@ export const WarehouseLocationForm: FC<WarehouseLocationFormProps> = ({
                            rules={[{required: true}]} required={true}>
                     <WarehouseAreaSelect warehouseId={warehouseId}/>
                 </Form.Item>
-                <Form.Item name={`enabled`} label={`状态`} initialValue={true}>
+                <Form.Item name={`enabled`} label={`启用`} initialValue={true}>
                     <Switch/>
                 </Form.Item>
                 <Form.Item name={`remark`} label={`备注`}>

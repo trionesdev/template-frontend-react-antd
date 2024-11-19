@@ -55,7 +55,7 @@ export const WarehouseLocationsPage = () => {
             width: 200,
         },
         {
-            title: '状态',
+            title: '启用',
             dataIndex: 'enabled',
             width: 100,
             render: (text: boolean, record: any) => {

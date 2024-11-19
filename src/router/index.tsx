@@ -19,6 +19,7 @@ import {CodeFormatRulesPage} from "@app/normal/base/code-format-rules/page.tsx";
 import {WarehousesPage} from "@app/normal/warehouse/warehouses/page.tsx";
 import {WarehouseAreasPage} from "@app/normal/warehouse/warehouse-areas/page.tsx";
 import {WarehouseLocationsPage} from "@app/normal/warehouse/warehouse-locations/page.tsx";
+import {WarehouseContainersPage} from "@app/normal/warehouse/warehouse-containers/page.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -50,6 +51,7 @@ const routes: RouteObject[] = [
                     {...RouteConstants.WAREHOUSE.WAREHOUSES, element: <WarehousesPage/>},
                     {...RouteConstants.WAREHOUSE.WAREHOUSE_AREAS, element: <WarehouseAreasPage/>},
                     {...RouteConstants.WAREHOUSE.WAREHOUSE_LOCATIONS, element: <WarehouseLocationsPage/>},
+                    {...RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS, element: <WarehouseContainersPage/>},
 
                     {...RouteConstants.LOG.OPERATION_LOGS, element: <OperationLogsPage/>},
                     {...RouteConstants.BASE.CODE_FORMAT_RULES, element: <CodeFormatRulesPage/>},
