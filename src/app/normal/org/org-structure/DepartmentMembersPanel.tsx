@@ -4,7 +4,7 @@ import {useRequest} from "ahooks";
 import {departmentApi} from "@apis/tenant";
 import {Button, message, Popconfirm, Space} from "antd";
 import {RedoOutlined, UserAddOutlined} from "@ant-design/icons";
-import {DepartmentMemberForm} from "@app/normal/org/org-structure/DepartmentMemberForm.tsx";
+import {TenantMemberForm} from "@app/normal/org/components/tenant-member-form";
 
 type DepartmentMembersProps = {
     department?: any
@@ -49,9 +49,9 @@ export const DepartmentMembersPanel: FC<DepartmentMembersProps> = ({department})
             width: 100,
             render(id: string, record: any) {
                 return <Space>
-                    <DepartmentMemberForm id={record?.memberId}>
+                    <TenantMemberForm id={record?.memberId}>
                         <Button size={`small`} type={`link`}>编辑</Button>
-                    </DepartmentMemberForm>
+                    </TenantMemberForm>
                     <Popconfirm title={`确定删除部门成员？`} onConfirm={() => {
                         departmentApi.deleteDepartmentMemberById(id).then(async () => {
                             message.success(`删除部门成员成功`)
@@ -74,9 +74,9 @@ export const DepartmentMembersPanel: FC<DepartmentMembersProps> = ({department})
         <Layout.Item auto={true}>
             <GridTable
                 toolbar={<TableToolbar title={<Space>
-                    <DepartmentMemberForm departmentId={department?.id} onRefresh={queryDepartmentMemberPage}>
+                    <TenantMemberForm departmentId={department?.id} onRefresh={queryDepartmentMemberPage}>
                         <Button type={`primary`} icon={<UserAddOutlined/>}>新增成员</Button>
-                    </DepartmentMemberForm>
+                    </TenantMemberForm>
                 </Space>} extra={<Space>
                     <Button icon={<RedoOutlined/>} type={`text`} onClick={queryDepartmentMemberPage}/>
                 </Space>}/>}

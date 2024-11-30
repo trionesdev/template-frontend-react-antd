@@ -52,8 +52,10 @@ export const DepartmentForm: FC<DepartmentFormProps> = ({children, id, parentId,
 
 
     return <ModalForm trigger={children} title={`${id ? '修改' : '新建'}部门`} form={form} open={open}
+                      onTriggerClick={() => setOpen(true)}
+                      onClose={() => setOpen(false)}
+                      onCancel={() => setOpen(false)}
                       afterOpenChange={(o) => {
-                          setOpen(o)
                           if (!o) {
                               form.resetFields()
                           }

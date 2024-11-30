@@ -3,10 +3,10 @@ import {useRequest} from "ahooks";
 import {GridTable, Layout, TableToolbar} from "@trionesdev/antd-react-ext";
 import {Avatar, Button, Space} from "antd";
 import {PlusCircleOutlined, RedoOutlined, UserOutlined} from "@ant-design/icons";
-import {TenantMemberForm} from "./TenantMemberForm";
 import {PageResult} from "@apis";
 import {tenantApi} from "@apis/tenant";
 import {ChangePasswordForm} from "@app/normal/org/members/ChangePasswordForm.tsx";
+import {TenantMemberForm} from "@app/normal/org/components/tenant-member-form";
 
 export const TenantMembersPage = () => {
 
