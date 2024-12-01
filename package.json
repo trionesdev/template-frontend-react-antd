@@ -12,7 +12,7 @@
   "dependencies": {
     "@ant-design/cssinjs": "^1.21.1",
     "@ant-design/icons": "^5.5.1",
-    "@trionesdev/antd-react-ext": "0.0.7-beta.10",
+    "@trionesdev/antd-react-ext": "0.0.7-beta.12",
     "@trionesdev/browser-commons": "0.0.1-beta.3",
     "@trionesdev/commons": "0.0.1-beta.3",
     "@trionesdev/commons-react": "0.0.1-beta.4",
