@@ -98,51 +98,36 @@ export const StandAloneLayout = () => {
 
     const menuItems: any[] = [
         {
-            key: 'org',
-            label: '组织管理',
-            icon: <ApartmentOutlined/>,
+            key: 'warehouse-inbound-management',
+            label: '入库管理',
+            icon: <AppstoreAddOutlined />,
             children: [
                 {
-                    key: RouteConstants.ORG.MEMBERS.id,
-                    label: RouteConstants.ORG.MEMBERS.label,
-                    onClick: () => navigate(RouteConstants.ORG.MEMBERS.path!())
+                    key: RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN.id,
+                    label: RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN.label,
+                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN.path!())
                 },
                 {
-                    key: RouteConstants.ORG.DEPARTMENTS.id,
-                    label: RouteConstants.ORG.DEPARTMENTS.label,
-                    onClick: () => navigate(RouteConstants.ORG.DEPARTMENTS.path!())
+                    key: RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_ORDER.id,
+                    label: RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_ORDER.label,
+                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_ORDER.path!())
                 },
-                {
-                    key: RouteConstants.ORG.ORG_STRUCTURE.id,
-                    label: RouteConstants.ORG.ORG_STRUCTURE.label,
-                    onClick: () => navigate(RouteConstants.ORG.ORG_STRUCTURE.path())
-                },
-                {
-                    key: RouteConstants.ORG.ROLES.id,
-                    label: RouteConstants.ORG.ROLES.label,
-                    onClick: () => navigate(RouteConstants.ORG.ROLES.path())
-                }
             ]
         },
         {
-            key: 'dic',
-            label: '数据字典',
-            icon: <DatabaseOutlined/>,
+            key: 'warehouse-outbound-management',
+            label: '出库管理',
+            icon: <AppstoreAddOutlined />,
             children: [
                 {
-                    key: RouteConstants.DIC.DICTIONARIES.id,
-                    label: RouteConstants.DIC.DICTIONARIES.label,
-                    onClick: () => navigate(RouteConstants.DIC.DICTIONARIES.path!())
+                    key: RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_PLAN.id,
+                    label: RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_PLAN.label,
+                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_PLAN.path!())
                 },
                 {
-                    key: RouteConstants.DIC.COUNTRIES.id,
-                    label: RouteConstants.DIC.COUNTRIES.label,
-                    onClick: () => navigate(RouteConstants.DIC.COUNTRIES.path!())
-                },
-                {
-                    key: RouteConstants.DIC.DISTRICTS.id,
-                    label: RouteConstants.DIC.DISTRICTS.label,
-                    onClick: () => navigate(RouteConstants.DIC.DISTRICTS.path!())
+                    key: RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_ORDER.id,
+                    label: RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_ORDER.label,
+                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_ORDER.path!())
                 },
             ]
         },
@@ -191,6 +176,55 @@ export const StandAloneLayout = () => {
                 //     label: RouteConstants.GOOD.MEASURE_UNITS.label,
                 //     onClick: () => navigate(RouteConstants.GOOD.MEASURE_UNITS.path!())
                 // },
+            ]
+        },
+        {
+            key: 'org',
+            label: '组织管理',
+            icon: <ApartmentOutlined/>,
+            children: [
+                {
+                    key: RouteConstants.ORG.MEMBERS.id,
+                    label: RouteConstants.ORG.MEMBERS.label,
+                    onClick: () => navigate(RouteConstants.ORG.MEMBERS.path!())
+                },
+                {
+                    key: RouteConstants.ORG.DEPARTMENTS.id,
+                    label: RouteConstants.ORG.DEPARTMENTS.label,
+                    onClick: () => navigate(RouteConstants.ORG.DEPARTMENTS.path!())
+                },
+                {
+                    key: RouteConstants.ORG.ORG_STRUCTURE.id,
+                    label: RouteConstants.ORG.ORG_STRUCTURE.label,
+                    onClick: () => navigate(RouteConstants.ORG.ORG_STRUCTURE.path())
+                },
+                {
+                    key: RouteConstants.ORG.ROLES.id,
+                    label: RouteConstants.ORG.ROLES.label,
+                    onClick: () => navigate(RouteConstants.ORG.ROLES.path())
+                }
+            ]
+        },
+        {
+            key: 'dic',
+            label: '数据字典',
+            icon: <DatabaseOutlined/>,
+            children: [
+                {
+                    key: RouteConstants.DIC.DICTIONARIES.id,
+                    label: RouteConstants.DIC.DICTIONARIES.label,
+                    onClick: () => navigate(RouteConstants.DIC.DICTIONARIES.path!())
+                },
+                {
+                    key: RouteConstants.DIC.COUNTRIES.id,
+                    label: RouteConstants.DIC.COUNTRIES.label,
+                    onClick: () => navigate(RouteConstants.DIC.COUNTRIES.path!())
+                },
+                {
+                    key: RouteConstants.DIC.DISTRICTS.id,
+                    label: RouteConstants.DIC.DISTRICTS.label,
+                    onClick: () => navigate(RouteConstants.DIC.DISTRICTS.path!())
+                },
             ]
         },
         {

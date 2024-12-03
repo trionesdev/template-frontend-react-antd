@@ -143,6 +143,42 @@ export namespace RouteConstants {
             label: '托盘管理',
             path: () => "/warehouse/warehouse-containers",
         } as RouteObject,
+        WAREHOUSE_INBOUND_PLAN: {
+            ...baseConfig,
+            id: 'warehouse-inbound-plans',
+            label: '入库计划',
+            path: () => "/warehouse/warehouse-inbound-plans",
+        } as RouteObject,
+        WAREHOUSE_INBOUND_PLAN_NEW: {
+            ...baseConfig,
+            id: 'warehouse-inbound-plan-new',
+            label: '添加出库计划',
+            path: () => "/warehouse/warehouse-inbound-plans/new",
+        } as RouteObject,
+        WAREHOUSE_INBOUND_PLAN_EDIT: {
+            ...baseConfig,
+            id: 'warehouse-inbound-plan-edit',
+            label: '修改出库计划',
+            path: (id?:any) => `/warehouse/warehouse-inbound-plans/edit/${id || ":id"}`,
+        } as RouteObject,
+        WAREHOUSE_INBOUND_ORDER: {
+            ...baseConfig,
+            id: 'warehouse-inbound-orders',
+            label: '入库单',
+            path: () => "/warehouse/warehouse-inbound-orders",
+        } as RouteObject,
+        WAREHOUSE_OUTBOUND_PLAN: {
+            ...baseConfig,
+            id: 'warehouse-outbound-plans',
+            label: '出库计划',
+            path: () => "/warehouse/warehouse-outbound-plans",
+        } as RouteObject,
+        WAREHOUSE_OUTBOUND_ORDER: {
+            ...baseConfig,
+            id: 'warehouse-outbound-orders',
+            label: '出库单',
+            path: () => "/warehouse/warehouse-outbound-orders",
+        } as RouteObject,
     }
 
     export const BASE = {
