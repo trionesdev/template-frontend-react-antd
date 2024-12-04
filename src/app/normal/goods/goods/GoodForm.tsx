@@ -3,7 +3,7 @@ import {Form, Input, InputNumber, message, Spin, Switch} from "antd";
 import {useRequest} from "ahooks";
 import {goodApi} from "@apis/tenant";
 import {DrawerForm} from "@trionesdev/antd-react-ext";
-import {MeasureUnitSelect} from "@app/normal/good/goods/MeasureUnitSelect.tsx";
+import {MeasureUnitSelect} from "@app/normal/goods/goods/MeasureUnitSelect.tsx";
 
 type WarehouseFormProps = {
     children: React.ReactElement,

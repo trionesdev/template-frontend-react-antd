@@ -156,26 +156,26 @@ export const StandAloneLayout = () => {
                     label: RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS.label,
                     onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS.path!())
                 },
-                // {
-                //     key: RouteConstants.CUSTOMER.CUSTOMERS.id,
-                //     label: RouteConstants.CUSTOMER.CUSTOMERS.label,
-                //     onClick: () => navigate(RouteConstants.CUSTOMER.CUSTOMERS.path!())
-                // },
-                // {
-                //     key: RouteConstants.SUPPLIER.SUPPLIERS.id,
-                //     label: RouteConstants.SUPPLIER.SUPPLIERS.label,
-                //     onClick: () => navigate(RouteConstants.SUPPLIER.SUPPLIERS.path!())
-                // },
-                // {
-                //     key: RouteConstants.GOOD.GOODS.id,
-                //     label: RouteConstants.GOOD.GOODS.label,
-                //     onClick: () => navigate(RouteConstants.GOOD.GOODS.path!())
-                // },
-                // {
-                //     key: RouteConstants.GOOD.MEASURE_UNITS.id,
-                //     label: RouteConstants.GOOD.MEASURE_UNITS.label,
-                //     onClick: () => navigate(RouteConstants.GOOD.MEASURE_UNITS.path!())
-                // },
+                {
+                    key: RouteConstants.CUSTOMER.CUSTOMERS.id,
+                    label: RouteConstants.CUSTOMER.CUSTOMERS.label,
+                    onClick: () => navigate(RouteConstants.CUSTOMER.CUSTOMERS.path!())
+                },
+                {
+                    key: RouteConstants.SUPPLIER.SUPPLIERS.id,
+                    label: RouteConstants.SUPPLIER.SUPPLIERS.label,
+                    onClick: () => navigate(RouteConstants.SUPPLIER.SUPPLIERS.path!())
+                },
+                {
+                    key: RouteConstants.GOODS.GOODS.id,
+                    label: RouteConstants.GOODS.GOODS.label,
+                    onClick: () => navigate(RouteConstants.GOODS.GOODS.path!())
+                },
+                {
+                    key: RouteConstants.GOODS.MEASURE_UNITS.id,
+                    label: RouteConstants.GOODS.MEASURE_UNITS.label,
+                    onClick: () => navigate(RouteConstants.GOODS.MEASURE_UNITS.path!())
+                },
             ]
         },
         {

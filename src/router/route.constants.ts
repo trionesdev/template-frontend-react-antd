@@ -94,7 +94,7 @@ export namespace RouteConstants {
         } as RouteObject,
     }
 
-    export const GOOD = {
+    export const GOODS = {
         GOODS: {
             ...baseConfig,
             id: 'goods',
