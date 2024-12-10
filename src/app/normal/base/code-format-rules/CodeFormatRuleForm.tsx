@@ -14,8 +14,8 @@ export const CodeFormatRuleForm: FC<CodeFormatRuleFormProps> = ({
                                                                     children, id, onRefresh
                                                                 }) => {
     const [open, setOpen] = useState(false)
-
     const [form] = Form.useForm()
+
     const handleSubmit = () => {
         form.validateFields().then(values => {
             const request = id ? codeFormatRuleApi.updateCodeFormatRuleById(id, values) : codeFormatRuleApi.createCodeFormatRule(values)
@@ -42,13 +42,16 @@ export const CodeFormatRuleForm: FC<CodeFormatRuleFormProps> = ({
     }, [open, id]);
 
 
-    return <ModalForm open={open} trigger={children} title={`${id ? '编辑' : '新建'}编码规则`} form={form}
-                      formProps={{labelAlign: 'left', labelCol: {flex: '100px'}}} afterOpenChange={o => {
-        setOpen(o)
-        if (!o) {
-            form.resetFields()
-        }
-    }} onOk={handleSubmit}>
+    return <ModalForm open={open} trigger={children} title={`${id ? '编辑' : '新建'}编码规则`}
+                      onTriggerClick={() => setOpen(true)} form={form}
+                      formProps={{labelAlign: 'left', labelCol: {flex: '100px'}}} onClose={() => setOpen(false)}
+                      onCancel={() => setOpen(false)}
+                      afterOpenChange={o => {
+                          setOpen(o)
+                          if (!o) {
+                              form.resetFields()
+                          }
+                      }} onOk={handleSubmit}>
         <Form.Item label={`名称`} name={`name`} required={true} rules={[{required: true, message: '请输入名称'}]}>
             <Input placeholder={`请输入名称`}/>
         </Form.Item>

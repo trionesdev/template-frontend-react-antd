@@ -1,6 +1,7 @@
 import {TimeFormatType} from "@app/normal/base/internal/base.enums.ts";
 
 export const TimeFormatTypeOptions = [
+    {label: '不使用时间格式', value: TimeFormatType.NONE},
     {label: 'yyyy', value: TimeFormatType.YYYY},
     {label: 'yyyyMM', value: TimeFormatType.YYYY_MM},
     {label: 'yyyyMMdd', value: TimeFormatType.YYYY_MM_DD},

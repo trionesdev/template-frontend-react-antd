@@ -1,4 +1,5 @@
 export enum TimeFormatType {
+    NONE = 'NONE',
     YYYY = 'YYYY',
     YYYY_MM = 'YYYY_MM',
     YYYY_MM_DD = 'YYYY_MM_DD',
