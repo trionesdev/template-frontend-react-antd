@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import {useRequest} from "ahooks";
 import {GridTable, Layout, SearchToolbar, TableToolbar} from "@trionesdev/antd-react-ext";
-import {Button, FormItemProps, Input, message, Modal, Popconfirm, Space, Switch} from "antd";
+import {Button, FormItemProps, Input, message, Modal, Popconfirm, Space, Switch, Typography} from "antd";
 import {ExclamationCircleFilled, MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import {PageResult} from "@apis";
 import {warehouseApi} from "@apis/tenant";
-import { WarehouseForm } from "./WarehouseForm.tsx";
+import {WarehouseForm} from "./WarehouseForm.tsx";
 import _ from "lodash";
 
 export const WarehousesPage = () => {
@@ -52,12 +52,17 @@ export const WarehousesPage = () => {
             width: 100,
             render: (text: boolean, record: any) => {
                 return <Switch checked={text}
-                               onChange={(checked: boolean) => {handleEnable(record.id, checked)}}/>
+                               onChange={(checked: boolean) => {
+                                   handleEnable(record.id, checked)
+                               }}/>
             }
         },
         {
             title: '备注',
             dataIndex: 'remark',
+            render: (text: string) => {
+                return <Typography.Text ellipsis={true}>{text}</Typography.Text>
+            }
         },
         {
             title: '操作',
@@ -131,17 +136,19 @@ export const WarehousesPage = () => {
     }
 
     const searchFormItems: FormItemProps[] = [
-        {label: '仓库编码', name: 'code', children: <Input type={'text'} placeholder={`请输入仓库编码`} />},
-        {label: '仓库名称', name: 'name', children: <Input type={'text'} placeholder={`请输入仓库名称`} />},
+        {label: '仓库编码', name: 'code', children: <Input type={'text'} placeholder={`请输入仓库编码`}/>},
+        {label: '仓库名称', name: 'name', children: <Input type={'text'} placeholder={`请输入仓库名称`}/>},
     ]
 
 
     return (
-        <Layout>
-            <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
+        <Layout direction={`vertical`} style={{gap: 4}}>
+            <Layout.Item style={{backgroundColor: 'white'}}>
                 <SearchToolbar items={searchFormItems} onSearchParamsChange={(params) => {
                     setSearchParams(params)
                 }} onReset={() => setSearchParams({})} onSearch={handleQuery}/>
+            </Layout.Item>
+            <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
                 <GridTable
                     toolbar={<TableToolbar title={
                         <Space>

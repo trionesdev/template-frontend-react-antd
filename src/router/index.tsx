@@ -26,9 +26,10 @@ import {GoodsPage} from "@app/normal/good/goods/page.tsx";
 import {MeasureUnitsPage} from "@app/normal/good/measure-units/page.tsx";
 import WarehouseOutboundOrderPage from "@app/normal/warehouse/warehouse-outbound-order/page.tsx";
 import WarehouseOutboundPlanPage from "@app/normal/warehouse/warehouse-outbound-plan/page.tsx";
-import WarehouseInboundOrderPage from "@app/normal/warehouse/inbound-orders/page.tsx";
+import InboundOrdersPage from "@app/normal/warehouse/inbound-orders/page.tsx";
 import WarehouseInboundPlanPage from "@app/normal/warehouse/warehouse-inbound-plan/page.tsx";
 import WarehouseInboundPlanForm from "@app/normal/warehouse/warehouse-inbound-plan/WarehouseInboundPlanForm.tsx";
+import InboundOrderPage from "@app/normal/warehouse/inbound-order/page.tsx";
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -64,7 +65,8 @@ const routes: RouteObject[] = [
                     {...RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN, element: <WarehouseInboundPlanPage/>},
                     {...RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN_NEW, element: <WarehouseInboundPlanForm/>},
                     {...RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN_EDIT, element: <WarehouseInboundPlanForm/>},
-                    {...RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_ORDER, element: <WarehouseInboundOrderPage/>},
+                    {...RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_ORDER, element: <InboundOrdersPage/>},
+                    {...RouteConstants.WAREHOUSE.INBOUND_ORDER, element: <InboundOrderPage/>},
                     {...RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_PLAN, element: <WarehouseOutboundPlanPage/>},
                     {...RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_ORDER, element: <WarehouseOutboundOrderPage/>},
                     {...RouteConstants.CUSTOMER.CUSTOMERS, element: <CustomersPage/>},

@@ -164,9 +164,15 @@ export namespace RouteConstants {
         WAREHOUSE_INBOUND_ORDER: {
             ...baseConfig,
             id: 'inbound-orders',
-            label: '入库单',
+            label: '入库单管理',
             path: () => "/warehouse/inbound-orders",
         } as RouteObject,
+        INBOUND_ORDER:{
+            ...baseConfig,
+            id: 'inbound-order',
+            label: '入库单详情',
+            path: (id?:any) => `/warehouse/inbound-orders/${id || ":id"}`,
+        },
         WAREHOUSE_OUTBOUND_PLAN: {
             ...baseConfig,
             id: 'warehouse-outbound-plans',

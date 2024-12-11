@@ -12,8 +12,8 @@ type WarehouseAreaFormProps = {
 }
 
 export const WarehouseAreaForm: FC<WarehouseAreaFormProps> = ({
-                                                                children, id, onRefresh
-                                                            }) => {
+                                                                  children, id, onRefresh
+                                                              }) => {
     const [open, setOpen] = useState(false)
     const [form] = Form.useForm()
 
@@ -49,12 +49,15 @@ export const WarehouseAreaForm: FC<WarehouseAreaFormProps> = ({
     }, [open, id])
 
     return (
-        <DrawerForm trigger={children} title={`${id ? '修改' : '新建'}库区`} open={open} afterOpenChange={(o) => {
-            setOpen(o)
-            if (!o) {
-                form.resetFields()
-            }
-        }} form={form} onOk={handleSubmit}
+        <DrawerForm trigger={children} title={`${id ? '修改' : '新建'}库区`} open={open}
+                    onTriggerClick={() => setOpen(true)}
+                    onClose={() => setOpen(false)}
+                    onCancel={() => setOpen(false)}
+                    afterOpenChange={(o) => {
+                        if (!o) {
+                            form.resetFields()
+                        }
+                    }} form={form} onOk={handleSubmit}
                     formProps={{layout: 'vertical'}}>
             <Spin spinning={loading}>
                 <Form.Item name={`name`} label={`库区名称`} rules={[{required: true}]} required={true}>
@@ -63,13 +66,13 @@ export const WarehouseAreaForm: FC<WarehouseAreaFormProps> = ({
                 <Form.Item name={`code`} label={`库区编码`} rules={[{required: true}]} required={true}>
                     <Input placeholder={"请输入库区编码"}/>
                 </Form.Item>
-                <Form.Item name={`warehouseId`} label={`所属仓库`} >
-                    <WarehouseSelect />
+                <Form.Item name={`warehouseId`} label={`所属仓库`}>
+                    <WarehouseSelect/>
                 </Form.Item>
-                <Form.Item name={`enabled`} label={`启用`} initialValue={true} >
+                <Form.Item name={`enabled`} label={`启用`} initialValue={true}>
                     <Switch/>
                 </Form.Item>
-                <Form.Item name={`remark`} label={`备注`} >
+                <Form.Item name={`remark`} label={`备注`}>
                     <Input.TextArea rows={4} placeholder={"请输入备注"}/>
                 </Form.Item>
             </Spin>

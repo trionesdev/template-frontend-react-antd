@@ -51,12 +51,15 @@ export const WarehouseLocationForm: FC<WarehouseLocationFormProps> = ({
     }, [open, id])
 
     return (
-        <DrawerForm trigger={children} title={`${id ? '修改' : '新建'}库位`} open={open} afterOpenChange={(o) => {
-            setOpen(o)
-            if (!o) {
-                form.resetFields()
-            }
-        }} form={form} onOk={handleSubmit}
+        <DrawerForm trigger={children} title={`${id ? '修改' : '新建'}库位`} open={open}
+                    onTriggerClick={() => setOpen(true)}
+                    onClose={() => setOpen(false)}
+                    onCancel={() => setOpen(false)}
+                    afterOpenChange={(o) => {
+                        if (!o) {
+                            form.resetFields()
+                        }
+                    }} form={form} onOk={handleSubmit}
                     formProps={{layout: 'vertical'}}>
             <Spin spinning={loading}>
                 <Form.Item name={`name`} label={`库位名称`} rules={[{required: true}]} required={true}>
@@ -66,17 +69,17 @@ export const WarehouseLocationForm: FC<WarehouseLocationFormProps> = ({
                     <Input placeholder={"请输入库位编码"}/>
                 </Form.Item>
                 <Form.Item name={`warehouseId`} label={`所属仓库`} rules={[{required: true}]} required={true}>
-                    <WarehouseSelect onChange={(value)=> {
+                    <WarehouseSelect onChange={(value) => {
                         form.setFieldValue('warehouseId', value)
                         form.setFieldValue('warehouseAreaId', null)
-                    }} />
+                    }}/>
                 </Form.Item>
                 <Form.Item name={`warehouseAreaId`} label={`所属库区`}
                            rules={[{required: true}]} required={true}>
                     <WarehouseAreaSelect warehouseId={warehouseId}/>
                 </Form.Item>
                 <Form.Item name={`floorQuantity`} label={`层数`}>
-                    <InputNumber placeholder={"请输入层数"} />
+                    <InputNumber placeholder={"请输入层数"}/>
                 </Form.Item>
                 <Form.Item name={`enabled`} label={`启用`} initialValue={true}>
                     <Switch/>

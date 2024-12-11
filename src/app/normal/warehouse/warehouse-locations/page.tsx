@@ -152,8 +152,8 @@ export const WarehouseLocationsPage = () => {
 
 
     return (
-        <Layout>
-            <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
+        <Layout direction={`vertical`} style={{gap:4}}>
+            <Layout.Item style={{backgroundColor: 'white'}}>
                 <SearchToolbar items={searchFormItems} onSearchParamsChange={(params) => {
                     setSearchParams(params)
                     if (params['warehouseId'] != warehouseId) {
@@ -161,6 +161,8 @@ export const WarehouseLocationsPage = () => {
                         setWarehouseAreaId(undefined)
                     }
                 }} onReset={() => setSearchParams({})} onSearch={handleQuery} />
+            </Layout.Item>
+            <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
                 <GridTable
                     toolbar={<TableToolbar title={
                         <Space>

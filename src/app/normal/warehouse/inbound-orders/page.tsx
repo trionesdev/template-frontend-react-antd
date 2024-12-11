@@ -6,8 +6,10 @@ import {InboundOrderForm} from "@app/normal/warehouse/inbound-orders/InboundOrde
 import {useRequest} from "ahooks";
 import {inboundApi} from "@apis/tenant";
 import {SyncOutlined} from "@ant-design/icons";
+import {Link} from "@trionesdev/commons-react";
+import {RouteConstants} from "../../../../router/route.constants.ts";
 
-const InboundOrderPage: FC = () => {
+const InboundOrdersPage: FC = () => {
     const [pageParams, setPageParams] = useState({pageNum: 1, pageSize: 10})
     const [result, setResult] = useState<PageResult<any>>({rows: [], total: 0})
 
@@ -41,9 +43,11 @@ const InboundOrderPage: FC = () => {
                 return <Space>
                     <Button type={`link`}>详情</Button>
                     <Button type={`link`} onClick={() => {
-                        ReactDomUtils.render(<InboundOrderForm id={record.id} onRefresh={handleQueryPage} defaultOpen={true}/>)
+                        ReactDomUtils.render(<InboundOrderForm id={record.id} onRefresh={handleQueryPage}
+                                                               defaultOpen={true}/>)
                     }}>修改</Button>
-                    <Button type={`link`}>收货</Button>
+                    <Link to={RouteConstants.WAREHOUSE.INBOUND_ORDER.path(record.id)}><Button
+                        type={`link`}>收货</Button></Link>
                 </Space>
             }
         }
@@ -78,4 +82,4 @@ const InboundOrderPage: FC = () => {
         </Layout.Item>
     </Layout>
 }
-export default InboundOrderPage;
+export default InboundOrdersPage;

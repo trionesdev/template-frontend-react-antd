@@ -5,7 +5,7 @@ import {Button, FormItemProps, Input, message, Modal, Popconfirm, Space, Switch}
 import {ExclamationCircleFilled, MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import {PageResult} from "@apis";
 import {warehouseAreaApi} from "@apis/tenant";
-import { WarehouseAreaForm } from "./WarehouseAreaForm.tsx";
+import {WarehouseAreaForm} from "./WarehouseAreaForm.tsx";
 import _ from "lodash";
 import {WarehouseSelect} from "@app/normal/warehouse/components/warehouse-select";
 
@@ -53,7 +53,9 @@ export const WarehouseAreasPage = () => {
             width: 100,
             render: (text: boolean, record: any) => {
                 return <Switch checked={text}
-                               onChange={(checked: boolean) => {handleEnable(record.id, checked)}}/>
+                               onChange={(checked: boolean) => {
+                                   handleEnable(record.id, checked)
+                               }}/>
             }
         },
         {
@@ -132,18 +134,20 @@ export const WarehouseAreasPage = () => {
     }
 
     const searchFormItems: FormItemProps[] = [
-        {label: '库区编码', name: 'code', children: <Input type={'text'} placeholder={`请输入库区编码`} />},
-        {label: '库区名称', name: 'name', children: <Input type={'text'} placeholder={`请输入库区名称`} />},
-        {label: '所属仓库', name: 'warehouseId', children: <WarehouseSelect />},
+        {label: '库区编码', name: 'code', children: <Input type={'text'} placeholder={`请输入库区编码`}/>},
+        {label: '库区名称', name: 'name', children: <Input type={'text'} placeholder={`请输入库区名称`}/>},
+        {label: '所属仓库', name: 'warehouseId', children: <WarehouseSelect/>},
     ]
 
 
     return (
-        <Layout>
-            <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
+        <Layout direction={`vertical`} style={{gap: 4}}>
+            <Layout.Item style={{backgroundColor: 'white'}}>
                 <SearchToolbar items={searchFormItems} onSearchParamsChange={(params) => {
                     setSearchParams(params)
                 }} onReset={() => setSearchParams({})} onSearch={handleQuery}/>
+            </Layout.Item>
+            <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
                 <GridTable
                     toolbar={<TableToolbar title={
                         <Space>
