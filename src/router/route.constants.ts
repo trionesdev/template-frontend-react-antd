@@ -76,38 +76,6 @@ export namespace RouteConstants {
         }
     }
 
-    export const CUSTOMER = {
-        CUSTOMERS: {
-            ...baseConfig,
-            id: 'customers',
-            label: '客户管理',
-            path: () => "/customer/customers",
-        } as RouteObject,
-    }
-
-    export const SUPPLIER = {
-        SUPPLIERS: {
-            ...baseConfig,
-            id: 'suppliers',
-            label: '供应商管理',
-            path: () => "/supplier/suppliers",
-        } as RouteObject,
-    }
-
-    export const GOODS = {
-        GOODS: {
-            ...baseConfig,
-            id: 'goods',
-            label: '货物管理',
-            path: () => "/good/goods",
-        } as RouteObject,
-        MEASURE_UNITS: {
-            ...baseConfig,
-            id: 'measure-units',
-            label: '单位管理',
-            path: () => "/good/measure-units",
-        } as RouteObject,
-    }
 
     export const LOG = {
         OPERATION_LOGS: {
@@ -118,68 +86,6 @@ export namespace RouteConstants {
         } as RouteObject,
     }
 
-    export const WAREHOUSE = {
-        WAREHOUSES: {
-            ...baseConfig,
-            id: 'warehouses',
-            label: '仓库管理',
-            path: () => "/warehouse/warehouses",
-        } as RouteObject,
-        WAREHOUSE_AREAS: {
-            ...baseConfig,
-            id: 'warehouse-areas',
-            label: '库区管理',
-            path: () => "/warehouse/warehouse-areas",
-        } as RouteObject,
-        WAREHOUSE_LOCATIONS: {
-            ...baseConfig,
-            id: 'warehouse-locations',
-            label: '库位管理',
-            path: () => "/warehouse/warehouse-locations",
-        } as RouteObject,
-        WAREHOUSE_CONTAINERS: {
-            ...baseConfig,
-            id: 'warehouse-containers',
-            label: '托盘管理',
-            path: () => "/warehouse/warehouse-containers",
-        } as RouteObject,
-        WAREHOUSE_INBOUND_PLAN: {
-            ...baseConfig,
-            id: 'warehouse-inbound-plans',
-            label: '入库计划',
-            path: () => "/warehouse/warehouse-inbound-plans",
-        } as RouteObject,
-        WAREHOUSE_INBOUND_PLAN_NEW: {
-            ...baseConfig,
-            id: 'warehouse-inbound-plan-new',
-            label: '添加出库计划',
-            path: () => "/warehouse/warehouse-inbound-plans/new",
-        } as RouteObject,
-        WAREHOUSE_INBOUND_PLAN_EDIT: {
-            ...baseConfig,
-            id: 'warehouse-inbound-plan-edit',
-            label: '修改出库计划',
-            path: (id?:any) => `/warehouse/warehouse-inbound-plans/edit/${id || ":id"}`,
-        } as RouteObject,
-        WAREHOUSE_INBOUND_ORDER: {
-            ...baseConfig,
-            id: 'warehouse-inbound-orders',
-            label: '入库单',
-            path: () => "/warehouse/warehouse-inbound-orders",
-        } as RouteObject,
-        WAREHOUSE_OUTBOUND_PLAN: {
-            ...baseConfig,
-            id: 'warehouse-outbound-plans',
-            label: '出库计划',
-            path: () => "/warehouse/warehouse-outbound-plans",
-        } as RouteObject,
-        WAREHOUSE_OUTBOUND_ORDER: {
-            ...baseConfig,
-            id: 'warehouse-outbound-orders',
-            label: '出库单',
-            path: () => "/warehouse/warehouse-outbound-orders",
-        } as RouteObject,
-    }
 
     export const BASE = {
         CODE_FORMAT_RULES:{

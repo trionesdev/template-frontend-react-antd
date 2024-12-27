@@ -16,19 +16,7 @@ import {CountriesPage} from "@app/boss/dic/countries/page.tsx";
 import {OperationLogsPage} from "@app/normal/log/operation/page.tsx";
 import {AppLayout} from "@app/layout";
 import {CodeFormatRulesPage} from "@app/normal/base/code-format-rules/page.tsx";
-import {WarehousesPage} from "@app/normal/warehouse/warehouses/page.tsx";
-import {WarehouseAreasPage} from "@app/normal/warehouse/warehouse-areas/page.tsx";
-import {WarehouseLocationsPage} from "@app/normal/warehouse/warehouse-locations/page.tsx";
-import {WarehouseContainersPage} from "@app/normal/warehouse/warehouse-containers/page.tsx";
-import {CustomersPage} from "@app/normal/customer/customers/page.tsx";
-import {SuppliersPage} from "@app/normal/supplier/suppliers/page.tsx";
-import {GoodsPage} from "@app/normal/goods/goods/page.tsx";
-import {MeasureUnitsPage} from "@app/normal/goods/measure-units/page.tsx";
-import WarehouseOutboundOrderPage from "@app/normal/warehouse/warehouse-outbound-order/page.tsx";
-import WarehouseOutboundPlanPage from "@app/normal/warehouse/warehouse-outbound-plan/page.tsx";
-import WarehouseInboundOrderPage from "@app/normal/warehouse/warehouse-inbound-order/page.tsx";
-import WarehouseInboundPlanPage from "@app/normal/warehouse/warehouse-inbound-plan/page.tsx";
-import WarehouseInboundPlanForm from "@app/normal/warehouse/warehouse-inbound-plan/WarehouseInboundPlanForm.tsx";
+
 
 const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -56,21 +44,6 @@ const routes: RouteObject[] = [
                     {...RouteConstants.DIC.DICTIONARIES, element: <DictionariesPage/>},
                     {...RouteConstants.DIC.DISTRICTS, element: <DistrictsPage/>},
                     {...RouteConstants.DIC.COUNTRIES, element: <CountriesPage/>},
-
-                    {...RouteConstants.WAREHOUSE.WAREHOUSES, element: <WarehousesPage/>},
-                    {...RouteConstants.WAREHOUSE.WAREHOUSE_AREAS, element: <WarehouseAreasPage/>},
-                    {...RouteConstants.WAREHOUSE.WAREHOUSE_LOCATIONS, element: <WarehouseLocationsPage/>},
-                    {...RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS, element: <WarehouseContainersPage/>},
-                    {...RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN, element: <WarehouseInboundPlanPage/>},
-                    {...RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN_NEW, element: <WarehouseInboundPlanForm/>},
-                    {...RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN_EDIT, element: <WarehouseInboundPlanForm/>},
-                    {...RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_ORDER, element: <WarehouseInboundOrderPage/>},
-                    {...RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_PLAN, element: <WarehouseOutboundPlanPage/>},
-                    {...RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_ORDER, element: <WarehouseOutboundOrderPage/>},
-                    {...RouteConstants.CUSTOMER.CUSTOMERS, element: <CustomersPage/>},
-                    {...RouteConstants.SUPPLIER.SUPPLIERS, element: <SuppliersPage/>},
-                    {...RouteConstants.GOODS.GOODS, element: <GoodsPage/>},
-                    {...RouteConstants.GOODS.MEASURE_UNITS, element: <MeasureUnitsPage/>},
 
                     {...RouteConstants.LOG.OPERATION_LOGS, element: <OperationLogsPage/>},
                     {...RouteConstants.BASE.CODE_FORMAT_RULES, element: <CodeFormatRulesPage/>},

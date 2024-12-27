@@ -2,8 +2,7 @@ import {Outlet, RouteObject, useAuth, useMatches, useNavigate} from "@trionesdev
 import {Avatar, Button, Dropdown, Layout, Menu, Space, Tag} from "antd";
 import styles from "./standalone-layout.module.less"
 import {
-    ApartmentOutlined, AppstoreAddOutlined,
-    DatabaseOutlined,
+    ApartmentOutlined, DatabaseOutlined,
     DesktopOutlined, HomeOutlined,
     LogoutOutlined,
     MenuFoldOutlined, MenuUnfoldOutlined,
@@ -97,87 +96,6 @@ export const StandAloneLayout = () => {
     const [collapsed, setCollapsed] = useState(false)
 
     const menuItems: any[] = [
-        {
-            key: 'warehouse-inbound-management',
-            label: '入库管理',
-            icon: <AppstoreAddOutlined />,
-            children: [
-                {
-                    key: RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN.id,
-                    label: RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN.label,
-                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_PLAN.path!())
-                },
-                {
-                    key: RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_ORDER.id,
-                    label: RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_ORDER.label,
-                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_INBOUND_ORDER.path!())
-                },
-            ]
-        },
-        {
-            key: 'warehouse-outbound-management',
-            label: '出库管理',
-            icon: <AppstoreAddOutlined />,
-            children: [
-                {
-                    key: RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_PLAN.id,
-                    label: RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_PLAN.label,
-                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_PLAN.path!())
-                },
-                {
-                    key: RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_ORDER.id,
-                    label: RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_ORDER.label,
-                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_OUTBOUND_ORDER.path!())
-                },
-            ]
-        },
-        {
-            key: 'basic-data',
-            label: '基础数据',
-            icon: <AppstoreAddOutlined />,
-            children: [
-                {
-                    key: RouteConstants.WAREHOUSE.WAREHOUSES.id,
-                    label: RouteConstants.WAREHOUSE.WAREHOUSES.label,
-                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSES.path!())
-                },
-                {
-                    key: RouteConstants.WAREHOUSE.WAREHOUSE_AREAS.id,
-                    label: RouteConstants.WAREHOUSE.WAREHOUSE_AREAS.label,
-                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_AREAS.path!())
-                },
-                {
-                    key: RouteConstants.WAREHOUSE.WAREHOUSE_LOCATIONS.id,
-                    label: RouteConstants.WAREHOUSE.WAREHOUSE_LOCATIONS.label,
-                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_LOCATIONS.path!())
-                },
-                {
-                    key: RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS.id,
-                    label: RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS.label,
-                    onClick: () => navigate(RouteConstants.WAREHOUSE.WAREHOUSE_CONTAINERS.path!())
-                },
-                {
-                    key: RouteConstants.CUSTOMER.CUSTOMERS.id,
-                    label: RouteConstants.CUSTOMER.CUSTOMERS.label,
-                    onClick: () => navigate(RouteConstants.CUSTOMER.CUSTOMERS.path!())
-                },
-                {
-                    key: RouteConstants.SUPPLIER.SUPPLIERS.id,
-                    label: RouteConstants.SUPPLIER.SUPPLIERS.label,
-                    onClick: () => navigate(RouteConstants.SUPPLIER.SUPPLIERS.path!())
-                },
-                {
-                    key: RouteConstants.GOODS.GOODS.id,
-                    label: RouteConstants.GOODS.GOODS.label,
-                    onClick: () => navigate(RouteConstants.GOODS.GOODS.path!())
-                },
-                {
-                    key: RouteConstants.GOODS.MEASURE_UNITS.id,
-                    label: RouteConstants.GOODS.MEASURE_UNITS.label,
-                    onClick: () => navigate(RouteConstants.GOODS.MEASURE_UNITS.path!())
-                },
-            ]
-        },
         {
             key: 'org',
             label: '组织管理',
