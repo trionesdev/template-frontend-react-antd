@@ -1,18 +1,44 @@
 .signInPage{
     width: 100%;
     height: 100%;
-    .formContainer{
+    position: relative;
+    background-repeat: no-repeat;
+    .main{
         display: flex;
-        justify-content: center;
-        align-items: center;
-        .formPanel{
-            width: 400px;
-            padding: 30px 20px;
+        width: 100%;
+        height: 100%;
+        .left{
+            flex: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .title{
+                font-size: 36px;
+            }
+        }
+        .formContainer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: white;
+            width: 30%;
+            min-width: 500px;
+            .formPanel{
+                width: 400px;
+                padding: 30px 20px;
+                background-color: white;
+            }
         }
     }
+
     .footer{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         text-align: center;
         padding: 8px;
+        color: #919191;
+        font-size: 12px;
     }
 }
