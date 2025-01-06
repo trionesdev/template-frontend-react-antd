@@ -1,4 +1,4 @@
-FROM nginx:1.19.6-alpine
+FROM nginx:1.27.3-alpine
 MAINTAINER "bane" <fengxiaotx@163.com>
 ENV container docker
 ENV TZ=Asia/Shanghai
