@@ -8,7 +8,8 @@ export const SignInPage = () => {
         <div className={styles.main}>
             <div className={styles.left}>
                 <div>
-                    <div className={styles.title}>天玑·物联网平台</div>
+                    <div className={styles.title}>TrionesDev·Admin</div>
+                    <div>中台后台管理系统</div>
                 </div>
             </div>
             <div className={styles.formContainer}>

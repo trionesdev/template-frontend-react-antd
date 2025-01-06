@@ -4,10 +4,11 @@ import { generatePath, useMatches, useNavigate, useParams } from '@trionesdev/co
 import { Tag } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import _ from 'lodash';
-import { routeMatch } from '@/router';
 import { useCssInJs } from '@trionesdev/antd-react-ext';
-import { genNavTagsStyle } from '@components/nav-tags/styles.ts';
+
 import classNames from 'classnames';
+import {genNavTagsStyle} from "./styles.ts";
+import {routeMatch} from "../../router";
 
 type NavTagsProps = {}
 export const NavTags: FC<NavTagsProps> = ({}) => {

@@ -1,8 +1,8 @@
-import FieldWrapper from "../field-wrapper";
 import {Button, Flex, Modal} from "antd";
 import {FC, useEffect, useState} from "react";
 import {icons} from "./icons.tsx";
 import _ from "lodash";
+import {FieldWrapper} from "@trionesdev/antd-react-ext";
 
 type IconSelectProps = {
     value?: string
