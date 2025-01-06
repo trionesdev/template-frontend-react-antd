@@ -1,19 +1,45 @@
-import { NavRouteObject } from './types';
-import { FC, useEffect, useRef, useState } from 'react';
-import { generatePath, useMatches, useNavigate, useParams } from '@trionesdev/commons-react';
-import { Tag } from 'antd';
-import { HomeOutlined } from '@ant-design/icons';
+import {NavRouteObject} from './types';
+import {FC, useEffect, useRef, useState} from 'react';
+import {generatePath, useMatches, useNavigate, useParams} from '@trionesdev/commons-react';
+import {Tag} from 'antd';
+import {HomeOutlined} from '@ant-design/icons';
 import _ from 'lodash';
-import { useCssInJs } from '@trionesdev/antd-react-ext';
+import {useCssInJs} from '@trionesdev/antd-react-ext';
 
 import classNames from 'classnames';
 import {genNavTagsStyle} from "./styles.ts";
-import {routeMatch} from "../../router";
+import {routes} from "../../router";
+import {RouteConstants} from "../../router/route.constants.ts";
+
+
+export const routeMatch = (id: string): NavRouteObject | undefined => {
+    const pageGroupIds = [RouteConstants.USER_CENTER.LAYOUT.id]
+    const match = (id: string, routes: NavRouteObject[], parentPageRoute?: NavRouteObject): NavRouteObject | undefined => {
+        for (let i = 0; i < routes.length; i++) {
+            let pageRoute = parentPageRoute ? {...parentPageRoute} : undefined;
+            if (pageGroupIds.includes(routes[i].id || '')) {
+                pageRoute = routes[i]
+            }
+            if (routes[i].id === id) {
+                return _.assign(routes[i], {pageRoute})
+            }
+            const children = routes[i].children
+            if (children) {
+                const result = match(id, children, pageRoute)
+                if (result) {
+                    return result
+                }
+            }
+        }
+    }
+    return match(id, routes, undefined)
+}
+
 
 type NavTagsProps = {}
 export const NavTags: FC<NavTagsProps> = ({}) => {
     const params = useParams();
-    const homeRoute = { id: 'home', label: '首页', path: () => '/' }; //此处的路由对象是自己设置的，要跟路由表对应上，由于匹配是根据ID的，记得路由配置要加上id
+    const homeRoute = {id: 'home', label: '首页', path: () => '/'}; //此处的路由对象是自己设置的，要跟路由表对应上，由于匹配是根据ID的，记得路由配置要加上id
     const tagsMenuRef = useRef<any>();
     const tagsMenuWrapperRef = useRef<any>();
     const navigate = useNavigate();
@@ -30,14 +56,30 @@ export const NavTags: FC<NavTagsProps> = ({}) => {
         } else {
             const matchRoute = routeMatch(routeId);
             if (matchRoute) {
-                setRouteObjects([...routeObjects, { ...matchRoute, params }]);
+                if (matchRoute.pageRoute) {
+                    const matchPageRoute = routeObjects.find(item => item.pageRoute?.id === matchRoute.pageRoute?.id)
+                    if (matchPageRoute) {
+                        const newRouteObjects = routeObjects.map(route => {
+                            if (route.pageRoute?.id === matchPageRoute.pageRoute?.id) {
+                                return {...matchRoute, params}
+                            } else {
+                                return route;
+                            }
+                        })
+                        setRouteObjects(newRouteObjects)
+                    } else {
+                        setRouteObjects([...routeObjects, {...matchRoute, params}]);
+                    }
+                } else {
+                    setRouteObjects([...routeObjects, {...matchRoute, params}]);
+                }
                 setActiveRouteObject(matchRoute);
             }
         }
     }, [matches]);
 
     const prefixCls = `triones-nav-tags`;
-    const { wrapSSR, hashId } = useCssInJs({ prefix: prefixCls, styleFun: genNavTagsStyle });
+    const {wrapSSR, hashId} = useCssInJs({prefix: prefixCls, styleFun: genNavTagsStyle});
 
     return wrapSSR(
         <div ref={tagsMenuRef} className={classNames(prefixCls, hashId)} onWheel={(e) => {
@@ -69,7 +111,7 @@ export const NavTags: FC<NavTagsProps> = ({}) => {
                 {routeObjects.map((item: NavRouteObject) => <Tag key={item.id}
                                                                  className={item?.id === activeRouteObject?.id ? 'active-tag' : ''}
                                                                  icon={item.id == homeRoute.id ?
-                                                                     <HomeOutlined /> : false}
+                                                                     <HomeOutlined/> : false}
                                                                  closable={item.id !== homeRoute.id}
                                                                  onClose={() => {
                                                                      const newRouteObjects = routeObjects.filter(route => route.id !== item?.id);
@@ -90,7 +132,7 @@ export const NavTags: FC<NavTagsProps> = ({}) => {
                                                                      const path = _.isFunction(item.path) ? item.path() : item.path;
                                                                      navigate(generatePath(path!, item?.params));
                                                                  }}
-                >{item.label}</Tag>)}
+                >{item?.pageRoute?.label || item.label}</Tag>)}
             </div>
         </div>,
     );

@@ -17,14 +17,13 @@ import {OperationLogsPage} from "@app/normal/log/operation/page.tsx";
 import {AppLayout} from "@app/layout";
 import {CodeFormatRulesPage} from "@app/normal/base/code-format-rules/page.tsx";
 
-
-const routes: RouteObject[] = [
+export const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
 
     {
         path: () => '/', anonymous: false, element: <AppLayout/>, children: [
             {
-                path: () => '/user-center', anonymous: false, element: <UserCenterLayout/>, children: [
+                ...RouteConstants.USER_CENTER.LAYOUT, element: <UserCenterLayout/>, children: [
                     {...RouteConstants.USER_CENTER.PROFILE, element: <UserProfilePage/>},
                     {...RouteConstants.USER_CENTER.PASSWORD, element: <ChangePasswordPage/>},
                 ]
@@ -56,23 +55,7 @@ const routes: RouteObject[] = [
 
 ]
 
-export const routeMatch = (id: string): RouteObject | undefined => {
-    const match = (id: string, routes: RouteObject[]): RouteObject | undefined => {
-        for (let i = 0; i < routes.length; i++) {
-            if (routes[i].id === id) {
-                return routes[i]
-            }
-            const children = routes[i].children
-            if (children) {
-                const result = match(id, children)
-                if (result) {
-                    return result
-                }
-            }
-        }
-    }
-    return match(id, routes)
-}
+
 
 export const AppRouter = () => {
     return <RouterProvider router={createHashRouter(routes)}/>;

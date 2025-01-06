@@ -1,5 +1,6 @@
-import { RouteObject } from '@trionesdev/commons-react';
+import {RouteObject} from '@trionesdev/commons-react';
 
-export type NavRouteObject= RouteObject & {
-    params?:any
+export type NavRouteObject = RouteObject & {
+    pageRoute?: NavRouteObject
+    params?: any
 }

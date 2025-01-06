@@ -14,6 +14,12 @@ export namespace RouteConstants {
     }
 
     export const USER_CENTER = {
+        LAYOUT:{
+            ...baseConfig,
+            id: 'user-center',
+            label: '个人中心',
+            path: () => "/user-center",
+        },
         PROFILE: {
             ...baseConfig,
             id: 'user-profile',

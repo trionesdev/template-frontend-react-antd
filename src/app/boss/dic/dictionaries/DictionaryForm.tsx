@@ -49,8 +49,12 @@ export const DictionaryForm: FC<DictionaryFormProps> = ({children, defaultType, 
         }
     }, [id, open]);
 
-    return <DrawerForm open={open} trigger={children} title={`${id ? '编辑' : '新建'}字典`} form={form}
-                       formProps={{labelCol: {flex: '80px'}}} afterOpenChange={setOpen} onOk={handleSubmit}>
+    return <DrawerForm open={open} trigger={children}
+                       onTriggerClick={() => setOpen(true)}
+                       onCancel={() => setOpen(false)}
+                       onClose={() => setOpen(false)}
+                       title={`${id ? '编辑' : '新建'}字典`} form={form}
+                       formProps={{layout: 'vertical'}} afterOpenChange={setOpen} onOk={handleSubmit}>
         <Form.Item label={`字典类型`} name={`type`} required={true} initialValue={defaultType}>
             <Select options={DictionaryTypeOptions}/>
         </Form.Item>

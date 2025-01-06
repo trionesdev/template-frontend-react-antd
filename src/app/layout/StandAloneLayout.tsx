@@ -18,7 +18,12 @@ export const StandAloneLayout = () => {
     return <Layout className={styles.standaloneLayout}>
         <Layout.Sider collapsed={collapsed}>
             <div className={styles.standaloneLayoutSiderWraper}>
-                <div className={styles.logo}>TrionesDev</div>
+                <div className={styles.logo} style={{justifyContent: collapsed ? 'center' : 'normal'}}>
+                    <Space>
+                        <Avatar shape={`square`} />
+                        {!collapsed && <span>Triones Admin</span>}
+                    </Space>
+                </div>
                 <div className={styles.menu}>
                     <Menu mode="inline" theme={'dark'} items={menuItems}/>
                 </div>
@@ -29,7 +34,7 @@ export const StandAloneLayout = () => {
                 <Button type={'text'} icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
                         onClick={() => setCollapsed(!collapsed)}/>
                 <Space>
-                    <Dropdown menu={{
+                <Dropdown menu={{
                         items: [
                             {
                                 key: `profile`,

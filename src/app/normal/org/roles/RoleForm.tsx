@@ -39,7 +39,11 @@ export const RoleForm: FC<RoleFormProps> = ({children, id, onRefresh}) => {
         }
     }, [id, open])
 
-    return <DrawerForm open={open} form={form} trigger={children} title={`${id ? '修改' : '新增'}角色`}
+    return <DrawerForm open={open} form={form} trigger={children}
+                       onTriggerClick={() => setOpen(true)}
+                       onCancel={() => setOpen(false)}
+                       onClose={() => setOpen(false)}
+                       title={`${id ? '修改' : '新增'}角色`}
                        formProps={{layout: 'vertical'}} onOk={handleSubmit}
                        afterOpenChange={(o) => {
                            setOpen(o)

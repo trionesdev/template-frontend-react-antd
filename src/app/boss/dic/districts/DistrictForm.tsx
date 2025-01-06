@@ -28,7 +28,11 @@ export const DistrictForm: FC<DistrictFormProps> = ({children, id}) => {
         }
     }, [id, open])
 
-    return <DrawerForm title={`${id ? '编辑' : '新建'}地区数据`} trigger={children} open={open} form={form}
+    return <DrawerForm title={`${id ? '编辑' : '新建'}地区数据`} trigger={children}
+                       onTriggerClick={() => setOpen(true)}
+                       onCancel={() => setOpen(false)}
+                       onClose={() => setOpen(false)}
+                       open={open} form={form}
                        formProps={{labelCol: {flex: '70px'}}} afterOpenChange={setOpen}>
         <Form.Item label={`名称`} name={`name`}>
             <Input disabled={true}/>
