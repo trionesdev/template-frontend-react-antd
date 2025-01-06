@@ -9,7 +9,10 @@ server{
             try_files $uri $uri/ /index.html;
         }
 
-        location /api {
+        location /tenant-api {
+            proxy_pass $SERVER_PROXY_PASS;
+        }
+        location /boss-api/ {
             proxy_pass $SERVER_PROXY_PASS;
         }
 }

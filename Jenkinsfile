@@ -3,8 +3,8 @@ pipeline{
        node { label env.NODE }
    }
     environment {
-        IMAGE_NAME="registry-vpc.cn-shanghai.aliyuncs.com/epiboly/epiboly-base"
-        APP_NAME="triones-frontend"
+        IMAGE_NAME="registry-vpc.cn-shanghai.aliyuncs.com/epiboly/demo"
+        APP_NAME="triones-admin-frontend"
         HELM_NAME="${APP_NAME}"
         DING_DING_TOKEN="11c11816930d227dea96f6c159065e586c995c0c25412512e919206e870be527"
     }
