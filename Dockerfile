@@ -1,4 +1,4 @@
-FROM nginx:1.27.3-alpine
+FROM ccr.ccs.tencentyun.com/trionesdev/nginx:1.27.3-alpine
 MAINTAINER "bane" <fengxiaotx@163.com>
 ENV container docker
 ENV TZ=Asia/Shanghai
