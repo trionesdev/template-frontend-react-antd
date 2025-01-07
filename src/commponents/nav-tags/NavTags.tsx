@@ -45,8 +45,50 @@ export const NavTags: FC<NavTagsProps> = ({}) => {
     const navigate = useNavigate();
     const [routeObjects, setRouteObjects] = useState<NavRouteObject[]>([homeRoute]);
     const [activeRouteObject, setActiveRouteObject] = useState<NavRouteObject | undefined>(homeRoute);
-    const [translateX, setTranslateX] = useState<number>(0);
+    const [translateX, setTranslateX] = useState<any>(0);
     const matches = useMatches();
+
+    const handleWheel = (deltaY: number) => {
+        const tagsMenuEl = tagsMenuRef.current;
+        const tagsMenuWrapperEl = tagsMenuWrapperRef.current;
+        if (tagsMenuEl.clientWidth >= tagsMenuWrapperEl.clientWidth) {
+            return;
+        } else {
+            const maxTranslateX = tagsMenuWrapperEl.clientWidth - tagsMenuEl.clientWidth;
+            let nextTranslateX = translateX;
+            if (deltaY < 0) { //向左
+                if (translateX + deltaY < -maxTranslateX) {
+                    nextTranslateX = -maxTranslateX;
+                } else {
+                    nextTranslateX = translateX + deltaY;
+                }
+            } else if (deltaY > 0) { //向右
+                if (translateX + deltaY > 0) {
+                    nextTranslateX = 0;
+                } else {
+                    nextTranslateX = translateX + deltaY;
+                }
+            }
+            setTranslateX(nextTranslateX);
+
+        }
+    }
+
+    useEffect(() => {
+        console.log("useEffect translateX", translateX)
+        const tagsMenuWrapperEl = tagsMenuWrapperRef.current;
+        tagsMenuWrapperEl.style.transform = `translateX(${translateX}px)`;
+    }, [translateX]);
+
+    const handleAddNewTag = () => {
+        const tagsMenuEl = tagsMenuRef.current;
+        const tagsMenuWrapperEl = tagsMenuWrapperRef.current;
+        if (tagsMenuEl.clientWidth < tagsMenuWrapperEl.clientWidth) {
+            const maxTranslateX = tagsMenuEl.clientWidth - tagsMenuWrapperEl.clientWidth;
+            console.log("handleAddNewTag", maxTranslateX)
+            setTranslateX(maxTranslateX)
+        }
+    }
 
     useEffect(() => {
         const routeId = matches[matches.length - 1].id;
@@ -78,37 +120,38 @@ export const NavTags: FC<NavTagsProps> = ({}) => {
         }
     }, [matches]);
 
+    useEffect(() => {
+        handleAddNewTag()
+    }, [routeObjects])
+
+    useEffect(() => {
+        const tag = tagsMenuWrapperRef.current.querySelector(`#${activeRouteObject?.id}`)
+        if (tag) {
+            const tagsRect = tagsMenuRef.current.getBoundingClientRect();
+            const tagsWrapperRect = tagsMenuWrapperRef.current.getBoundingClientRect();
+            const tagRect = tag.getBoundingClientRect();
+            if (tagRect.left < tagsRect.left) {
+                setTranslateX(tagsWrapperRect.left - tagRect.left)
+            } else if (tagRect.right > tagsRect.right) {
+                setTranslateX((tagsWrapperRect.left - tagsRect.left) - (tagRect.right - tagsRect.right))
+            }
+        }
+    }, [activeRouteObject]);
+
     const prefixCls = `triones-nav-tags`;
     const {wrapSSR, hashId} = useCssInJs({prefix: prefixCls, styleFun: genNavTagsStyle});
 
     return wrapSSR(
         <div ref={tagsMenuRef} className={classNames(prefixCls, hashId)} onWheel={(e) => {
-            const tagsMenuEl = tagsMenuRef.current;
-            const tagsMenuWrapperEl = tagsMenuWrapperRef.current;
-            if (tagsMenuEl.clientWidth >= tagsMenuWrapperEl.clientWidth) {
-                return;
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                handleWheel(e.deltaX)
             } else {
-                const maxTranslateX = tagsMenuWrapperEl.clientWidth - tagsMenuEl.clientWidth;
-                let nextTranslateX = translateX;
-                if (e.deltaY < 0) { //向左
-                    if (translateX + e.deltaY < -maxTranslateX) {
-                        nextTranslateX = -maxTranslateX;
-                    } else {
-                        nextTranslateX = translateX + e.deltaY;
-                    }
-                } else if (e.deltaY > 0) { //向右
-                    if (translateX + e.deltaY > 0) {
-                        nextTranslateX = 0;
-                    } else {
-                        nextTranslateX = translateX + e.deltaY;
-                    }
-                }
-                setTranslateX(nextTranslateX);
-                tagsMenuWrapperEl.style.transform = `translateX(${nextTranslateX}px)`;
+                handleWheel(e.deltaY)
             }
-        }}>
+        }}
+        >
             <div ref={tagsMenuWrapperRef} className={classNames(`${prefixCls}-wrapper`, hashId)}>
-                {routeObjects.map((item: NavRouteObject) => <Tag key={item.id}
+                {routeObjects.map((item: NavRouteObject) => <Tag key={item.id} id={item.id}
                                                                  className={item?.id === activeRouteObject?.id ? 'active-tag' : ''}
                                                                  icon={item.id == homeRoute.id ?
                                                                      <HomeOutlined/> : false}
