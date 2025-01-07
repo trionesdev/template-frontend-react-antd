@@ -25,10 +25,10 @@ export const AccountSignIn = () => {
 
     return <Form form={form} layout={"vertical"} size={`large`}>
         <Form.Item name="account" required={true} rules={[{required: true, message: '请输入用户名'}]}>
-            <Input prefix={<UserOutlined/>} placeholder={`请输入用户名`}/>
+            <Input prefix={<UserOutlined/>} placeholder={`请输入用户名`} allowClear={true}/>
         </Form.Item>
         <Form.Item name="password" required={true} rules={[{required: true, message: '请输入密码'}]}>
-            <Input.Password prefix={<LockOutlined/>} placeholder={`请输入密码`}/>
+            <Input.Password prefix={<LockOutlined/>} placeholder={`请输入密码`} allowClear={true}/>
         </Form.Item>
         {error &&
             <Form.Item><Alert type={`error`} message={error} closable={true} onClose={() => setError('')}/></Form.Item>}
