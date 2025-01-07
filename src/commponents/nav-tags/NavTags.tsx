@@ -75,7 +75,6 @@ export const NavTags: FC<NavTagsProps> = ({}) => {
     }
 
     useEffect(() => {
-        console.log("useEffect translateX", translateX)
         const tagsMenuWrapperEl = tagsMenuWrapperRef.current;
         tagsMenuWrapperEl.style.transform = `translateX(${translateX}px)`;
     }, [translateX]);
@@ -85,7 +84,6 @@ export const NavTags: FC<NavTagsProps> = ({}) => {
         const tagsMenuWrapperEl = tagsMenuWrapperRef.current;
         if (tagsMenuEl.clientWidth < tagsMenuWrapperEl.clientWidth) {
             const maxTranslateX = tagsMenuEl.clientWidth - tagsMenuWrapperEl.clientWidth;
-            console.log("handleAddNewTag", maxTranslateX)
             setTranslateX(maxTranslateX)
         }
     }
