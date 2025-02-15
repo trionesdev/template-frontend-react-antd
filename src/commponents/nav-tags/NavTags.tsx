@@ -80,10 +80,10 @@ export const NavTags: FC<NavTagsProps> = ({}) => {
     }, [translateX]);
 
     const handleAddNewTag = () => {
-        const tagsMenuEl = tagsMenuRef.current;
-        const tagsMenuWrapperEl = tagsMenuWrapperRef.current;
-        if (tagsMenuEl.clientWidth < tagsMenuWrapperEl.clientWidth) {
-            const maxTranslateX = tagsMenuEl.clientWidth - tagsMenuWrapperEl.clientWidth;
+               const tagsMenuEl = tagsMenuRef.current;
+            const tagsMenuWrapperEl = tagsMenuWrapperRef.current;
+            if (tagsMenuEl.clientWidth < tagsMenuWrapperEl.clientWidth) {
+                const maxTranslateX = tagsMenuEl.clientWidth - tagsMenuWrapperEl.clientWidth;
             setTranslateX(maxTranslateX)
         }
     }

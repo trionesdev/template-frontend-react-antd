@@ -6,6 +6,7 @@ import {RouteConstants} from "../../router/route.constants.ts";
 import {useState} from "react";
 import NavTags from "../../commponents/nav-tags";
 import {useNavMenus} from "../../hooks/useNavMenus.tsx";
+import NavTabs from "../../commponents/nav-tabs";
 
 export const StandAloneLayout = () => {
     const navigate = useNavigate()
@@ -60,7 +61,8 @@ export const StandAloneLayout = () => {
                     </Dropdown>
                 </Space>
             </Layout.Header>
-            <NavTags/>
+            {/*<NavTags/>*/}
+            <NavTabs/>
             <Layout.Content style={{overflowY: "auto", padding: 4}}>
                 <Outlet/>
             </Layout.Content>
