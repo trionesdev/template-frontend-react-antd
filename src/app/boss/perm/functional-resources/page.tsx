@@ -2,20 +2,21 @@ import {GridTable, Layout, PageHeader} from "@trionesdev/antd-react-ext";
 import {useState} from "react";
 import {useRequest} from "ahooks";
 import {functionalResourceApi} from "@apis/boss";
-import {Button, Popconfirm, Select, Space} from "antd";
-import {RedoOutlined} from "@ant-design/icons";
-import {AppOptions, ClientTypeOptions, ResourceTypeOptions} from "@app/boss/perm/internal/perm.options.ts";
-import {ClientType, ResourceType} from "@app/boss/perm/internal/perm.enums.ts";
-import {useAppConfig} from "../../../../commponents/app-config";
-import {FunctionalResourceForm} from "@app/boss/perm/functional-resources/FunctionalResourceForm.tsx";
+import {Button, Select, Space} from "antd";
+import {EditOutlined, RedoOutlined} from "@ant-design/icons";
+import {AppOptions, ClientTypeOptions, ResourceTypeOptions} from "@app/boss/perm/shared/perm.options.ts";
+import {ClientType} from "@app/boss/perm/shared/perm.enums.ts";
+import {useAppConfig} from "@components/app-config";
 import _ from "lodash";
-import {icons} from "../../../../commponents/icon-select";
+import {icons} from "@components/icon-select";
+import {FunctionalResourceDrafts} from "@app/boss/perm/functional-resources/FunctionalResourceDrafts.tsx";
 
 export const FunctionalResourcesPage = () => {
     const appConfig = useAppConfig()
     const [appCode, setAppCode] = useState<string | undefined>(AppOptions?.[0]?.value)
     const [clientType, setClientType] = useState<ClientType | undefined>(AppOptions?.[0].clients?.[0]?.value || ClientType.PC_WEB)
     const [treeData, setTreeData] = useState<any[] | undefined>()
+    const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([])
 
     const {run: handleQuery, loading} = useRequest(() => {
         return functionalResourceApi.queryFunctionalResourceTree({
@@ -30,11 +31,32 @@ export const FunctionalResourcesPage = () => {
         }
     })
 
-    const columns = [
+    const handleExpandedAll = () => {
+        function collectParentIds(data: any[] | undefined): string[] {
+            if (_.isEmpty(data)) {
+                return []
+            }
+            const parentIds: string[] = []
+            _.forEach(data, (item: any) => {
+                parentIds.push(item.parentId)
+                if (_.isArray(item.children) && !_.isEmpty(item.children)) {
+                    const childrenParentIds = collectParentIds(item.children as any[])
+                    parentIds.push(...childrenParentIds)
+                }
+            })
+            return parentIds
+        }
+
+        setExpandedRowKeys(collectParentIds(treeData))
+    }
+
+    const columns: any[] = [
         {
             title: '类型',
             dataIndex: 'type',
-            width: 100,
+            width: 200,
+            minWidth: 200,
+            fixed: `left`,
             render: (type: string) => {
                 return ResourceTypeOptions.find(item => item.value === type)?.label
             }
@@ -42,12 +64,16 @@ export const FunctionalResourcesPage = () => {
         {
             title: '名称',
             dataIndex: 'name',
-            width: 200
+            width: 200,
+            minWidth: 200,
+            fixed: `left`,
         },
         {
             title: '图标',
             dataIndex: 'icon',
             width: 50,
+            minWidth: 50,
+            align: 'center',
             render: (icon: string) => {
                 return <>{_.get(icons, icon)}</>
             }
@@ -55,49 +81,35 @@ export const FunctionalResourcesPage = () => {
         {
             title: '标识',
             dataIndex: 'uniqueCode',
-            width: 200
+            width: 250,
+            minWidth: 250
         },
         {
             title: '描述',
-            dataIndex: 'description'
-        },
-        {
-            title: '操作',
-            dataIndex: 'id',
-            width: 180,
-            render: (id: string, record: any) => {
-                return <Space>
-                    <FunctionalResourceForm appCode={appCode} clientType={clientType} id={id} onRefresh={handleQuery}>
-                        <Button size={`small`} type={`link`}>编辑</Button>
-                    </FunctionalResourceForm>
-                    <FunctionalResourceForm appCode={appCode} clientType={clientType} parentId={id}
-                                            onRefresh={handleQuery}>
-                        <Button disabled={_.eq(record.type, ResourceType.ACTION)} size={`small`}
-                                type={`link`}>添加子项</Button>
-                    </FunctionalResourceForm>
-                    <Popconfirm title={`确定删除该资源？`}>
-                        <Button disabled={!_.isEmpty(record.children)} size={`small`} type={`link`}
-                                danger={true}>删除</Button>
-                    </Popconfirm>
-                </Space>
-            }
+            dataIndex: 'description',
+            minWidth: 200
         }
     ]
 
     return <Layout direction={`vertical`}>
         <Layout.Item>
             <PageHeader backIcon={false} title={<Space>
-                {appConfig.multiTenant &&
+                {appConfig.multiTenant && _.size(AppOptions) > 0 &&
                     <Select options={AppOptions} defaultValue={appCode} onChange={(value) => {
                         setAppCode(value)
                         setClientType(AppOptions.find(item => item.value !== value)?.clients?.[0]?.value);
                     }}/>}
-                <Select options={ClientTypeOptions}
-                        defaultValue={clientType} value={clientType}/>
+                {_.size(ClientTypeOptions) > 0 && <Select options={ClientTypeOptions}
+                                                          defaultValue={clientType} value={clientType}/>}
+                <Button onClick={handleExpandedAll}>全部展开</Button>
+                <Button onClick={() => {
+                    setExpandedRowKeys([])
+                }}>全部收起</Button>
             </Space>} extra={<Space>
                 <Button icon={<RedoOutlined/>} type={`text`} onClick={handleQuery}/>
-                <FunctionalResourceForm appCode={appCode} clientType={clientType} onRefresh={handleQuery}><Button
-                    type={`primary`}>新建功能资源</Button></FunctionalResourceForm>
+                <FunctionalResourceDrafts onRefresh={handleQuery}>
+                    <Button type={`primary`} icon={<EditOutlined/>}>编辑草稿</Button>
+                </FunctionalResourceDrafts>
             </Space>}/>
         </Layout.Item>
         <Layout.Item auto={true} style={{backgroundColor: 'white'}}>
@@ -107,8 +119,17 @@ export const FunctionalResourcesPage = () => {
                 dataSource={treeData}
                 expandable={{
                     defaultExpandAllRows: true,
-                    defaultExpandedRowKeys: ["0"],
+                    defaultExpandedRowKeys: expandedRowKeys,
+                    expandedRowKeys,
+                    onExpand: (expanded, record) => {
+                        if (expanded) {
+                            setExpandedRowKeys([...expandedRowKeys, record.id])
+                        } else {
+                            setExpandedRowKeys(expandedRowKeys.filter(item => item !== record.id))
+                        }
+                    }
                 }}
+                scroll={{x: 1000}}
                 pagination={false} loading={loading} rowKey={`id`}/>
         </Layout.Item>
     </Layout>

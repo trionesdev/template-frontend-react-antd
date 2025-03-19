@@ -4,7 +4,7 @@ import {useRequest} from "ahooks";
 import {tenantApi} from "@apis/tenant";
 import {DrawerForm} from "@trionesdev/antd-react-ext";
 import {DepartmentSelect} from "@app/normal/org/components/department-select";
-import {useAppConfig} from "../../../../../commponents/app-config";
+import {useAppConfig} from "@components/app-config";
 
 
 type TenantMemberFormProps = {

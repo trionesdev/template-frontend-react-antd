@@ -1,13 +1,13 @@
 import {DrawerForm} from "@trionesdev/antd-react-ext";
 import React, {FC, useEffect, useState} from "react";
 import {Form, Input, message, Radio} from "antd";
-import {ResourceTypeOptions} from "@app/boss/perm/internal/perm.options.ts";
+import {ResourceTypeOptions} from "@app/boss/perm/shared/perm.options.ts";
 import {FunctionalResourceSelect} from "@app/boss/perm/functional-resources/FunctionalResourceSelect.tsx";
 import {useRequest} from "ahooks";
 import {functionalResourceApi} from "@apis/boss";
-import {ClientType, ResourceType} from "@app/boss/perm/internal/perm.enums.ts";
+import {ClientType, ResourceType} from "@app/boss/perm/shared/perm.enums.ts";
 import _ from "lodash";
-import IconSelect from "../../../../commponents/icon-select";
+import IconSelect from "@components/icon-select";
 
 type FunctionalResourceFormProps = {
     children?: React.ReactElement
@@ -17,7 +17,7 @@ type FunctionalResourceFormProps = {
     parentId?: string
     onRefresh?: () => void
 }
-export const FunctionalResourceForm: FC<FunctionalResourceFormProps> = ({
+export const FunctionalResourceDraftForm: FC<FunctionalResourceFormProps> = ({
                                                                             children,
                                                                             appCode,
                                                                             clientType,
@@ -38,7 +38,7 @@ export const FunctionalResourceForm: FC<FunctionalResourceFormProps> = ({
     }, {manual: true})
 
     const {run: handleQueryResource} = useRequest(() => {
-        return functionalResourceApi.queryFunctionalResourceById(id!).then(res => {
+        return functionalResourceApi.queryFunctionalResourceDraftById(id!).then(res => {
             form.setFieldsValue(res)
         })
     }, {manual: true})
@@ -48,7 +48,7 @@ export const FunctionalResourceForm: FC<FunctionalResourceFormProps> = ({
             if (!id) {
                 Object.assign(values, {appCode, clientType})
             }
-            const request = id ? functionalResourceApi.updateFunctionalResourceById(id, values) : functionalResourceApi.createFunctionalResource(values)
+            const request = id ? functionalResourceApi.updateFunctionalResourceDraftById(id, values) : functionalResourceApi.createFunctionalResourceDraft(values)
             request.then(async () => {
                 message.success(`提交成功`)
                 onRefresh?.()
@@ -75,7 +75,10 @@ export const FunctionalResourceForm: FC<FunctionalResourceFormProps> = ({
         }
     }, [formParentId, open]);
 
-    return <DrawerForm open={open} form={form} trigger={children} title={`${id ? '编辑' : '新建'}功能权限资源`}
+    return <DrawerForm open={open} form={form} trigger={children} onTriggerClick={() => setOpen(true)}
+                       onCancel={() => setOpen(false)}
+                       onClose={() => setOpen(false)}
+                       title={`${id ? '编辑' : '新建'}功能权限资源`}
                        size={`large`}
                        formProps={{layout: 'horizontal', labelCol: {flex: '100px'}}}
                        afterOpenChange={open => {

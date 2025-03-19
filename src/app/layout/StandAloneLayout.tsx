@@ -4,9 +4,9 @@ import styles from "./standalone-layout.module.less"
 import {LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from "@ant-design/icons";
 import {RouteConstants} from "../../router/route.constants.ts";
 import {useState} from "react";
-import NavTags from "../../commponents/nav-tags";
+import NavTags from "@components/nav-tags";
 import {useNavMenus} from "../../hooks/useNavMenus.tsx";
-import NavTabs from "../../commponents/nav-tabs";
+import NavTabs from "@components/nav-tabs";
 
 export const StandAloneLayout = () => {
     const navigate = useNavigate()

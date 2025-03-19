@@ -29,6 +29,9 @@
       "@components": [
         "src/components"
       ],
+      "@components/*": [
+        "src/components/*"
+      ],
       "@app": [
         "src/app"
       ],

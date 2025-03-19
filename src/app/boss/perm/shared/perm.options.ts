@@ -1,4 +1,4 @@
-import {App, ClientType, ResourceType} from "@app/boss/perm/internal/perm.enums.ts";
+import {App, ClientType, ResourceType} from "@app/boss/perm/shared/perm.enums.ts";
 
 export const AppOptions = [
     {label: '租户端', value: App.TENANT, clients: [{label: 'PC_WEB端', value: ClientType.PC_WEB}]},

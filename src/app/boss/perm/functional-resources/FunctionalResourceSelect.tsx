@@ -21,7 +21,6 @@ export const FunctionalResourceSelect: FC<FunctionalResourceSelectProps> = ({
                             dropdownFetch={true}
                             initialValueOption={valueOption}
                             fetchAlways={true}
-                            fetchEnable={false}
                             fixedOptions={[{name: '无父级资源', id: '0'}]}
                             fetchRequest={() => {
                                 return functionalResourceApi.queryFunctionalResourceTree({

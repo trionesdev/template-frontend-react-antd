@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import {GridTable, Layout, PageHeader, TableToolbar} from "@trionesdev/antd-react-ext";
 import {Avatar, Button, message, Popconfirm, Space} from "antd";
-import OrgSelectModal from "../../../../commponents/org-select-modal";
+import OrgSelectModal from "@components/org-select-modal";
 import {PageResult} from "@apis";
 import {RoleGrantObjType} from "@app/normal/org/internal/org.enums.ts";
 import {useRequest} from "ahooks";
