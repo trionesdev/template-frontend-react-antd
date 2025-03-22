@@ -15,6 +15,7 @@
       display: flex;
       align-items: center;
       padding: 4px;
+      border-bottom-color: rgb(192, 202, 213);
     }
 
     .menu {
@@ -45,36 +46,34 @@
     border-bottom: 1px solid #0000000d;
   }
 
-  //&TagsMenu {
-  //  box-sizing: border-box;
-  //  background-color: white;
-  //  border-bottom: 1px solid #0000000d;
-  //  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
-  //  overflow-x: hidden;
-  //  flex-shrink: 0;
-  //
-  //  &Wrapper {
-  //    display: flex;
-  //    padding: 8px 4px;
-  //    width: fit-content;
-  //  }
-  //
-  //  :global {
-  //    .ant-tag {
-  //      padding: 0px 4px;
-  //      border-radius: 0;
-  //      cursor: pointer;
-  //    }
-  //
-  //    .active-tag {
-  //      background-color: #1677FF;
-  //      border: 1px solid #1677FF;
-  //      color: white;
-  //
-  //      .anticon {
-  //        color: white;
-  //      }
-  //    }
-  //  }
-  //}
+}
+
+.popover {
+  &Title {
+    padding: 12px;
+    border-bottom: 1px #F0F0F0 solid ;
+  }
+
+  &Content {
+    padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    &Inner{
+      padding-bottom: 12px;
+    }
+    &MenuItem {
+      padding-top: 6px;
+      padding-bottom: 6px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  }
+
+  :global {
+    .ant-popover-content {
+      .ant-popover-inner {
+        padding: 0px;
+      }
+    }
+  }
 }

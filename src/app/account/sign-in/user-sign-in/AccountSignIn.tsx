@@ -1,21 +1,31 @@
 import {Alert, Button, Form, Input, message} from "antd";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
-import {tenantAccountApi, tenantApi} from "@apis/tenant";
-import {useState} from "react";
+import {FC, useState} from "react";
 import {useAuth, useNavigate} from "@trionesdev/commons-react";
+import styles from "../sign-in.module.less"
+import {userAccountApi, userApi} from "@apis/backend/user";
+import {RouteConstants} from "../../../../router/route.constants.ts";
+import {tenantApi} from "@apis/tenant";
 
-export const AccountSignIn = () => {
+type AccountSignInProps = {
+    onTypeChange?: (type: string) => void;
+}
+export const AccountSignIn: FC<AccountSignInProps> = ({onTypeChange}) => {
     const navigate = useNavigate()
     const [form] = Form.useForm();
     const {setActor} = useAuth()
     const [error, setError] = useState('');
     const handleSignIn = () => {
         form.validateFields().then((values: any) => {
-            tenantAccountApi.accountSignIn(values).then(async () => {
+            userAccountApi.accountSignIn(values).then(async () => {
                 message.success('登录成功')
-                tenantApi.queryActorMember().then((actor: any) => {
+                tenantApi.findActorProfile().then((actor:any) => {
                     setActor?.(actor)
-                    navigate(`/`)
+                    if (actor?.tenantId){
+                        navigate(`/`)
+                    }else {
+                     navigate(RouteConstants.ORG.CREATE_TENANT.path())
+                    }
                 })
             }).catch((ex: any) => {
                 setError(ex.message)
@@ -33,7 +43,11 @@ export const AccountSignIn = () => {
         {error &&
             <Form.Item><Alert type={`error`} message={error} closable={true} onClose={() => setError('')}/></Form.Item>}
         <Form.Item>
-            <Button type={`primary`} block={true} onClick={handleSignIn}>登录</Button>
+            <Button className={styles.submit} type={`primary`} block={true} onClick={handleSignIn}>登录</Button>
+            <Button block={true} type={`link`} onClick={() => {
+                onTypeChange?.('sms')
+            }}>使用短信登录</Button>
         </Form.Item>
+
     </Form>
 }

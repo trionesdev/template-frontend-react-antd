@@ -5,6 +5,19 @@ import {PageQueryParams} from "@apis";
 export class TenantApi extends BaseTenantApi {
     private baseUri = '/org';
 
+    createTenant(data: any) {
+        return this.request.post(this.baseUri + '/tenants', data)
+    }
+
+    queryActorTenant() {
+        return this.request.get(this.baseUri + '/actor/tenant')
+    }
+
+    updateActorTenant(data: any) {
+        return this.request.put(this.baseUri + '/actor/tenant', data)
+    }
+
+
     createTenantMember(data: any) {
         return this.request.post(this.baseUri + '/tenant/members', data);
     }
@@ -19,6 +32,10 @@ export class TenantApi extends BaseTenantApi {
 
     queryTenantMembersPage(params: PageQueryParams) {
         return this.request.get(this.baseUri + '/tenant/member/page', {params});
+    }
+
+    findActorProfile() {
+        return this.request.get(this.baseUri + '/tenant/actor/profile');
     }
 
     queryActorMember() {

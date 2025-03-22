@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
                 <AppConfigProvider  defaultConfig={{multiTenant: false, selfHost: true}}>
                     <AuthProvider authRequest={async () => {
                         if (StorageUtils.getTrionesUserToken()) {
-                            return tenantApi.queryActorMember().then((actor: any) => {
+                            return tenantApi.findActorProfile().then((actor: any) => {
                                 return actor
                             })
                         } else {

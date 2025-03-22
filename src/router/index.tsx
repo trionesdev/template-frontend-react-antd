@@ -16,6 +16,10 @@ import {CountriesPage} from "@app/boss/dic/countries/page.tsx";
 import {OperationLogsPage} from "@app/normal/log/operation/page.tsx";
 import {AppLayout} from "@app/layout";
 import {CodeFormatRulesPage} from "@app/normal/base/code-format-rules/page.tsx";
+import MemberCenterLayout from "@app/normal/org/member-center/MemberCenterLayout.tsx";
+import MemberProfilePage from "@app/normal/org/member-center/profile/page.tsx";
+import TenantCenterLayout from "@app/normal/org/tenant-center/TenantCenterLayout.tsx";
+import TenantProfilePage from "@app/normal/org/tenant-center/profile";
 
 export const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -26,6 +30,17 @@ export const routes: RouteObject[] = [
                 ...RouteConstants.USER_CENTER.LAYOUT, element: <UserCenterLayout/>, children: [
                     {...RouteConstants.USER_CENTER.PROFILE, element: <UserProfilePage/>},
                     {...RouteConstants.USER_CENTER.PASSWORD, element: <ChangePasswordPage/>},
+                ]
+            },
+            {
+                ...RouteConstants.MEMBER_CENTER.LAYOUT, element: <MemberCenterLayout/>, children: [
+                    {...RouteConstants.MEMBER_CENTER.PROFILE, element: <MemberProfilePage/>},
+                    {...RouteConstants.MEMBER_CENTER.PASSWORD, element: <ChangePasswordPage/>},
+                ]
+            },
+            {
+                ...RouteConstants.TENANT_CENTER.LAYOUT, element: <TenantCenterLayout/>, children: [
+                    {...RouteConstants.TENANT_CENTER.PROFILE, element: <TenantProfilePage/>}
                 ]
             },
             {

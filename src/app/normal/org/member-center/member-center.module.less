@@ -1,0 +1,30 @@
+.memberCenterLayout {
+  padding: 50px;
+  &Wrapper {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    gap: 16px;
+
+    &Sider {
+      width: 250px;
+      background-color: white;
+      border-radius:8px;
+      overflow: hidden;
+      :global{
+        .ant-card {
+          .ant-card-body {
+            border-radius: 0;
+          }
+        }
+        .ant-menu{
+          border-right: 0px!important;
+        }
+      }
+    }
+
+    &Content {
+      flex: 1;
+    }
+  }
+}

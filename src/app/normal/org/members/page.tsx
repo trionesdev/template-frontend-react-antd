@@ -7,9 +7,10 @@ import {PageResult} from "@apis";
 import {tenantApi} from "@apis/tenant";
 import {ChangePasswordForm} from "@app/normal/org/members/ChangePasswordForm.tsx";
 import {TenantMemberForm} from "@app/normal/org/components/tenant-member-form";
+import {useAppConfig} from "@components/app-config";
 
 export const TenantMembersPage = () => {
-
+    const {multiTenant} = useAppConfig()
     const [pageParams, setPageParams] = useState({pageNum: 1, pageSize: 10})
     const [result, setResult] = useState<PageResult<any>>({rows: [], total: 0})
 
@@ -62,9 +63,9 @@ export const TenantMembersPage = () => {
                     <TenantMemberForm id={record.id} onRefresh={handleQuery}>
                         <Button size={`small`} type={`link`}>编辑</Button>
                     </TenantMemberForm>
-                    <ChangePasswordForm id={record.id}>
+                    {!multiTenant && <ChangePasswordForm id={record.id}>
                         <Button size={`small`} type={`link`}>修改密码</Button>
-                    </ChangePasswordForm>
+                    </ChangePasswordForm>}
                 </Space>
             }
         }

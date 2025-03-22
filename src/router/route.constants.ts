@@ -34,6 +34,27 @@ export namespace RouteConstants {
         }
     }
 
+    export const MEMBER_CENTER = {
+        LAYOUT: {
+            ...baseConfig,
+            id: 'member-center',
+            label: '员工信息',
+            path: () => "/member-center",
+        },
+        PROFILE: {
+            ...baseConfig,
+            id: 'member-profile',
+            label: '员工信息',
+            path: () => "/member-center/profile",
+        },
+        PASSWORD: {
+            ...baseConfig,
+            id: 'member-password',
+            label: '修改密码',
+            path: () => "/member-center/password",
+        }
+    }
+
     export const ORG = {
         DEPARTMENTS: {
             ...baseConfig,
@@ -99,6 +120,21 @@ export namespace RouteConstants {
             id: 'code-format-rules',
             label: '编码规则',
             path: () => "/base/code-format-rules",
+        }
+    }
+
+    export const TENANT_CENTER={
+        LAYOUT: {
+            ...baseConfig,
+            id: 'tenant-center',
+            label: '企业信息',
+            path: () => "/tenant-center",
+        },
+        PROFILE:{
+            ...baseConfig,
+            id: 'tenant-profile',
+            label: '企业信息',
+            path: () => "/tenant-center/profile",
         }
     }
 
